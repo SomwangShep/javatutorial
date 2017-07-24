@@ -1,0 +1,918 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#ClassDiagrams">Class Diagrams</a></td><td><a href="#ExtendingClasses">Extending Classes</a></td><td><a href="#ClassReusability">Class Reusability</a></td><td><a href="#ExtensionExample">Extension Example</a></td></tr>
+		<tr><td><a href="#MethodOverloadingExample">Method Overloading Example</a></td><td><a href="#OverridingaMethod">Overriding a Method</a></td><td colspan="2"><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+<h1> Chapter 14 - Prorgamming with Classes</h1>
+<p>
+	Classes allow programmers to organize code.  A program split into separate class files is more manageable.  Each class defines a type of object, and all the specific details about the object (variables) and ways to manipulate the object (methods) are contained in a single structure.
+</p>
+<h3>Example Program – Teams</h3>
+<p>
+	Let’s build a program that holds information about software development teams.  Each team will have one manager, and any number of programmers.
+</p>
+<p>For each programmer, we want to store:</p>
+<ul>
+	<li>The programmer’s name</li>
+	<li>An employee number</li>
+	<li>The programmer’s primary programming language</li>
+</ul>
+<p>For each manager, we want to store:</p>
+<ul>
+	<li>The manager’s name</li>
+	<li>An employee number</li>
+	<li>The manager’s management level</li>
+</ul>
+<p>
+	We can make separate classes, called Programmer and Manager, to represent the two types of employee.   All three pieces of data will be required by the constructor so each new object is complete.  We will add methods to get all three value, as well as methods to set a programmer’s primary language and a manager’s level.  We will not add methods to set the name and employee numbers, so they can not be changed.
+</p>
+<p>
+	Next, we can write a Team class to hold and manipulate the Programmers and Managers as a special purpose list type of structure.  The Team class will need:
+</p>
+<ul>
+	<li>A Manager</li>
+	<li>An array of Programmers</li>
+</ul>
+<p>
+	We will write a method that allows us to add Programmers to the array, and a method that returns a string containing all of the programming languages known by the team.
+</p>
+<table>
+	<tr><th>Programmer</th></tr>
+	<tr><td>
+		- String employeeName;<br/>
+		- int employeeNumber;<br/>
+		- String primaryLanguage;<br/>
+	</td></tr>
+	<tr><td>
+		+ Programmer(String name, int number, String language)<br/>
+		+ String getName()<br/>
+		+ int getNumber()<br/>
+		+ String getLanguage()<br/>
+		+ void setLanguage(String language)<br/>
+	</td></tr>
+</table>
+<!-- ------------------------------------------------------- -->
+<br/>
+<table>
+	<tr><th>Manager</th></tr>
+	<tr><td>
+		- String employeeName;<br/>
+		- int employeeNumber;<br/>
+		- int ManagementLevel;<br/>
+	</td></tr>
+	<tr><td>
+		+ Manager(String name, int number, int level)<br/>
+		+ String getName()<br/>
+		+ int getNumber()<br/>
+		+ int getLevel()<br/>
+		+ void setLevel(int level)<br/>
+	</td></tr>
+</table>
+<!-- ------------------------------------------------------- -->	
+<br/>
+<table>
+	<tr><th>Team</th></tr>
+	<tr><td>
+		- Manager teamManager;<br/>
+		- Programmer[] programmers;<br/>
+	</td></tr>
+	<tr><td>
+		+ Team(Manager manager)<br/>
+		+ void addProgrammer(Programmer newProgrammer)<br/>
+		+ String listLanguages()<br/>
+	</td></tr>
+</table>	
+<p>
+	Once these classes have been defined, we can write programs that use them.  The TeamTester program creates two teams, each containing a manager and three programmers.  The program then prints a list of the languages known by each team.
+</p>
+<p style="text-align: center;"><%= image_tag "c14_p3.jpg"%></p>
+
+<h3>Source Code for the TeamTester Program</h3>
+
+<pre>
+public class TeamTester
+{
+	public static void main(String[] args)
+	{
+		Programmer programmer1 = new Programmer("Bob Bobson", 42326, "Java");
+		Programmer programmer2 = new Programmer("Stan Stanley", 37457, "C++");
+		Programmer programmer3 = new Programmer("Pat Patterson", 85554, "Python");
+		Programmer programmer4 = new Programmer("Frank Franklestien", 36757, "Java");
+		Programmer programmer5 = new Programmer("Betty Bettyman", 96745, "SQL");
+		Programmer programmer6 = new Programmer("Phil Philweather", 65375, "Fortran");
+
+		Manager manager1 = new Manager("Harry Harrison", 54454, 3);
+		Manager manager2 = new Manager("Jeff Jefferson", 52743, 2);
+
+		Team team1 = new Team(manager1);
+		team1.addProgrammer(programmer1);
+		team1.addProgrammer(programmer3);
+		team1.addProgrammer(programmer5);
+
+		Team team2 = new Team(manager2);
+		team2.addProgrammer(programmer2);
+		team2.addProgrammer(programmer4);
+		team2.addProgrammer(programmer6);
+
+		System.out.println("Team 1 knows the following languages:");
+		System.out.println(team1.listLanguages());
+
+		System.out.println("Team 2 knows the following languages:");
+		System.out.println(team2.listLanguages());
+	}
+}</pre>
+<pre>
+public class Programmer
+{
+	private String employeeName;
+	private int employeeNumber;
+	private String primaryLanguage;
+
+	public Programmer(String name, int number, String language)
+	{
+		employeeName = name;
+		employeeNumber = number;
+		primaryLanguage = language;
+	}
+
+	public String getName()
+	{
+		return employeeName;
+	}
+
+	public int getNumber()
+	{
+		return employeeNumber;
+	}
+
+	public String getLanguage()
+	{
+		return primaryLanguage;
+	}
+
+	public void setLanguage(String language)
+	{
+		primaryLanguage = language;
+	}
+}</pre>
+<pre>
+public class Manager
+{
+	private String employeeName;
+	private int employeeNumber;
+	private int managementLevel;
+
+	public Manager(String name, int number, int level)
+	{
+		employeeName = name;
+		employeeNumber = number;
+		managementLevel = level;
+	}
+
+	public String getName()
+	{
+		return employeeName;
+	}
+
+	public int getNumber()
+	{
+		return employeeNumber;
+	}
+
+	public int getLevel()
+	{
+		return managementLevel;
+	}
+
+	public void setLevel(int level)
+	{
+		managementLevel = level;
+	}
+}</pre>
+<pre>
+public class Team
+{
+	private Manager teamManager;
+	private Programmer[] programmers = new Programmer[0];
+
+	public Team(Manager manager)
+	{
+		teamManager = manager;
+	}
+
+	public void addProgrammer(Programmer newProgrammer)
+	{
+		Programmer[] newArray = new Programmer[programmers.length+1];
+		for(int i = 0; i < programmers.length; i++)
+		{
+			newArray[i] = programmers[i];
+		}
+		newArray[programmers.length] = newProgrammer;
+		programmers = newArray;
+	}
+
+	public String listLanguages()
+	{
+		String languages = "";
+		for(int i = 0; i < programmers.length; i++)
+		{
+			languages = languages + programmers[i].getLanguage() + "\n";
+		}
+		return languages;
+	}
+}</pre>
+
+<h2 id="ClassDiagrams">
+	Class Diagrams
+</h2>
+<p>
+	When programs use multiple classes, it can become difficult to keep track of the way in which the classes are connected.  A class diagram is a visual representation of the program structure.  Each class is represented by a box containing the name and type of all variables, and signatures for all methods.  
+</p>
+<p>
+	The class boxes are connected with lines showing which classes hold objects of other classes.  Numbers are placed near the lines indicating the number of objects.  An asterisk (*) is used to indicate many objects (an unspecified and possibly unbounded number).
+</p>
+<p>
+	Our TeamTester example uses three class aside from the class containing the main() method; Team, Programmer, and Manager.  One Team has one manager.  One Team has many Programmers.
+</p>
+<h4>Class Diagram for the TeamTester Classes</h4>
+<p style="text-align: center;"><%= image_tag "c14_p7.jpg"%></p>
+<h2 id="ExtendingClasses">
+	Extending Classes
+</h2>
+<p>
+	Looking at the Programmer and Manager classes, we might notice that some of the variables and methods are common to both.  It may seem unnecessary to have this duplicate code, and it is.  Java allows for the extension of classes.  This means we can create new classes that extend existing classes.  A class can only extend one other class.
+</p>
+<p>
+	The existing class is called the super class or the parent class.  The new class that extends the existing class is called the sub class or child class.  When a sub class extends a super class, the sub class inherits all of the variables and methods contained in the super class.
+</p>
+<p>
+	Let’s create a parent class called Employee.  This class will contain all of the variables and methods that are common to both Programmer and Manager.
+</p>
+<!-- ------------------------------------------------------------- -->
+<table>
+	<tr><th>Employee</th></tr>
+	<tr><td>
+		- String employeeName;<br/>
+		- int employeeNumber;
+	</td></tr>
+	<tr><td>
+		+ Employee(String name, int number)<br/>
+		+ String getName()<br/>
+		+ int getNumber()
+	</td></tr>
+</table>
+<!-- ------------------------------------------------------------- -->
+<br/>
+<table>
+	<tr><th>Programmer   <small><em>extends Employee</em></small></th></tr>
+	<tr><td>
+		- String primaryLanguage;
+	</td></tr>
+	<tr><td>
+		+ Programmer(String name, int number, String language)<br/>
+		+ String getLanguage()<br/>
+		+ void setLanguage(String language)
+	</td></tr>
+</table>
+<!-- ------------------------------------------------------------- -->
+<br/>
+<table>
+	<tr><th>Manager   <small><em>extends Employee</em></small></th></tr>
+	<tr><td>
+		- int ManagementLevel;
+	</td></tr>
+	<tr><td>
+		+ Manager(String name, int number, int level)<br/>
+		+ int getLevel()<br/>
+		+ void setLevel(int level)
+	</td></tr>
+</table>
+<p>
+	Extension is shown in a class diagram with an arrow pointing from the sub class to the super class.
+</p>
+<p style="text-align: center;"><%= image_tag "c14_p9.jpg"%></p>
+<p>The diagram above shows that:</p>
+<ul>
+	<li>A Team HAS 1 Manager</li>
+	<li>A Team HAS many Programmers</li>
+	<li>A Manager IS AN Employee</li>
+	<li>A Programmer IS AN Employee.</li>
+</ul>
+<p>
+	In a class diagram, a solid line depicts a “HAS A” relationship.  A solid arrow depicts an “IS A” relationship.
+</p>
+<p>
+	Below is the rewritten code containing and extending the Employee class.  
+</p>
+<pre>
+public class Employee
+{
+	private String employeeName;
+	private int employeeNumber;
+
+	public Employee(String name, int number)
+	{
+		employeeName = name;
+		employeeNumber = number;
+	}
+
+	public String getName()
+	{
+		return employeeName;
+	}
+
+	public int getNumber()
+	{
+		return employeeNumber;
+	}
+}</pre>
+<p>
+	To extend a class, the keyword <code>extends</code> is used in the first line of the class definition.  Also, note the use of the super() method in the Programmer and Manager constructors.  This method calls the constructor of the super class, and must be on the first line of the constructor for the sub class.
+</p>
+<pre>
+public class Programmer extends Employee
+{
+	private String primaryLanguage;
+
+	public Programmer(String name, int number, String language)
+	{
+		super(name, number);
+		primaryLanguage = language;
+	}
+
+	public String getLanguage()
+	{
+		return primaryLanguage;
+	}
+
+	public void setLanguage(String language)
+	{
+		primaryLanguage = language;
+	}
+}</pre>
+<pre>
+public class Manager extends Employee
+{
+	private int managementLevel;
+
+	public Manager(String name, int number, int level)
+	{
+		super(name, number);
+		managementLevel = level;
+	}
+
+	public int getLevel()
+	{
+		return managementLevel;
+	}
+
+	public void setLevel(int level)
+	{
+		managementLevel = level;
+	}
+}</pre>
+<p>
+	The original TeamTester program will still work with these changes.  As another test, to illustrate a point, let’s rewrite the main TeamTester program.  We will create a new Programmer object, and call the getName() method on it.
+</p>
+<pre>
+public class TeamTester
+{
+	public static void main(String[] args)
+	{
+		Programmer programmer1 = new Programmer("Bob Bobson", 42326, "Java");
+		System.out.println(programmer1.getName());
+	}
+}</pre>
+<p>Now, if we run this TeamTester program, we get the following output:</p>
+<p style="text-align: center;"><%= image_tag "c14_p11.jpg"%></p>
+<p>
+	This may not seem surprising, but it is interesting.  We are calling the method getName() on an object of the Programmer class.  But the programmer class definition does not have a method called getName().  However, the programmer class <code>extends</code> the Employee class, which does have a getName() method.  The Programmer class inherits the method.  It is exactly as if the Employee variables and methods were typed into the Programmer code invisibly.  We can’t see the code, but it is there.
+</p>
+<p>
+	Placing this common code in a super class helps us to organize our code.  Also, if we make changes to the super class, the changes are reflected in all its sub classes.
+</p>
+
+<h2 id="ClassReusability">
+	Class Reusability
+</h2>
+<p>
+	Object oriented code is organized in class files, and each class contains the state and behavior of a type of object.  This makes it easy to write a class definition that can be used again and again in different programs.  For example, the String class is used to represent text sequences in many programs.
+</p>
+<h4>Program Example – ScheduleTester</h4>
+<p>
+	We can use our Programmer, Manager, and Team classes in more complicated programs.  Let’s create two new classes called Appointment and Schedule.
+</p>
+<p>
+	The Appointment class needs to hold:
+</p>
+<ul>
+	<li>One Team</li>
+	<li>A room number</li>
+	<li>A start time</li>
+	<li>An end time</li>
+</ul>
+<p>
+	The times will be represented with a double using military hours.  So, 9:00 am would be entered as 9.  9:30 am would be entered as 9.5.  4:30 pm would be entered as 16.5.  It is an odd convention, but it keeps the example simple.
+</p>
+<p>
+	We will include a constructor that sets all of the variables, a method to return the assigned Team, and a method that allows us to check any particular appointment to see if it meets certain criteria, specifically, is it in a particular room at a particular time.
+</p>
+<p>
+	The Schedule class holds an array of Appointment objects.  It has a method that adds appointments to the schedule, and one that searches through all of the appointments looking for one that matches a given time and room.
+</p>
+<p style="text-align: center;"><%= image_tag "c14_p13.jpg"%></p>
+<pre>
+public class Appointment
+{
+	private Team team;
+	private int roomNumber;
+	private double startTime;
+	private double endTime;
+
+	public Appointment(Team t, int room, int start, int end)
+	{
+		team = t;
+		roomNumber = room;
+		startTime = start;
+		endTime = end;
+	}
+
+	public Team getTeam()
+	{
+		return team;
+	}
+
+	public boolean hasAppointment(int room, double time)
+	{
+		if(time >= startTime && time < endTime && room == roomNumber)
+		{
+			return true;
+		}
+		return false;
+	}
+}</pre>
+<pre>
+public class Schedule
+{
+	private Appointment [] appointments = new Appointment[0];
+
+	public void addAppointment(Appointment newAppointment)
+	{
+		Appointment[] newArray = new Appointment[appointments.length+1];
+		for(int i = 0; i < appointments.length; i++)
+		{
+			newArray[i] = appointments[i];
+		}
+		newArray[appointments.length] = newAppointment;
+		appointments = newArray;
+	}
+
+	public String checkRoom(int room, double time)
+	{
+		for(int i = 0; i < appointments.length; i++)
+		{
+			if(appointments[i].hasAppointment(room, time))
+			{
+				String s = appointments[i].getTeam().listLanguages();
+return "The room will have programmers for:\n" + s;
+			}
+		}
+		return "The room is free at that time";
+	}
+}</pre>
+
+<p>
+	Our test program, ScheduleTester, will create 6 Programmer objects and 2 Manager objects.  Then it will create two Team objects and put one manager and three programmers in each.
+</p>
+<p>
+	Next, we will create a new Schedule object, and add 4 Appointment objects to it.
+</p>
+<pre>
+Team	Room	From		To     .
+team1	15		9:00 am	10:00 am 		new Appointment(team1, 15, 9, 10)
+team1	17		1:00 pm	3:00 pm 		new Appointment(team1, 17, 13, 15)
+team2	17		9:00 am	10:00 am 		new Appointment(team2, 17, 9, 10)
+team2	15		2:00 pm	5:00 pm 		new Appointment(team2, 15, 14, 17)</pre>
+
+<p>Finally, we’ll check the room 15 at 9:30 and at noon.</p>
+<pre>
+schedule.checkRoom(15, 9.5)
+schedule.checkRoom(15, 12)</pre>
+<p style="text-align: center;"><%= image_tag "c14_p16.jpg"%></p>
+<pre>
+public class ScheduleTester
+{
+	public static void main(String[] args)
+	{
+		Programmer programmer1 = new Programmer("Bob Bobson", 42326, "Java");
+		Programmer programmer2 = new Programmer("Stan Stanley", 37457, "C++");
+		Programmer programmer3 = new Programmer("Pat Patterson", 85554, "Python");
+		Programmer programmer4 = new Programmer("Frank Franklestien", 36757, "Java");
+		Programmer programmer5 = new Programmer("Betty Bettyman", 96745, "SQL");
+		Programmer programmer6 = new Programmer("Phil Philweather", 65375, "Fortran");
+
+		Manager manager1 = new Manager("Harry Harrison", 54454, 3);
+		Manager manager2 = new Manager("Jeff Jefferson", 52743, 2);
+
+		Team team1 = new Team(manager1);
+		team1.addProgrammer(programmer1);
+		team1.addProgrammer(programmer3);
+		team1.addProgrammer(programmer5);
+
+		Team team2 = new Team(manager2);
+		team2.addProgrammer(programmer2);
+		team2.addProgrammer(programmer4);
+		team2.addProgrammer(programmer6);
+
+		Schedule schedule = new Schedule();
+		schedule.addAppointment(new Appointment(team1, 15, 9, 10));
+		schedule.addAppointment(new Appointment(team1, 17, 13, 15));
+		schedule.addAppointment(new Appointment(team2, 17, 9, 10));
+		schedule.addAppointment(new Appointment(team2, 15, 14, 17));
+
+		System.out.println(<strong>schedule.checkRoom(15, 9.5)</strong>);
+		System.out.println(<strong>schedule.checkRoom(15, 12)</strong>);
+	}
+}</pre>
+<h3>Example Design – Darts</h3>
+<p>
+	The Darts program puts 20 random prizes on the board worth $4 each.  Then the user puts 5 darts on the board.  The program awards the player with the total winnings after all 5 darts are thrown.
+</p>
+<p style="text-align: center;"><%= image_tag "c14_p17.jpg"%></p>
+<p>The program uses two classes; GridPoint, and PointList.</p>
+<p>
+	Each Gridpoint object represents one point on a two dimensional surface.  The class has two variables, x and y.  The class has two constructors; one that requires two arguments to set the position of the point, the other requires no arguments and puts the point at a default position of 0, 0.  The class also contains methods to get and set the position.
+</p>
+
+<div class="container-fluid2">
+  <div class="row">
+    <div class="col-sm-6">
+    	<table>
+    		<tr><th>GridPoint</th></tr>
+    		<tr><td>
+					- int x<br/>
+					- int y<br/>
+    		</td></tr>
+    		<tr><td>
+					+ GridPoint()<br/>
+					+ GridPoint(int xVal, int yVal)<br/>
+					+ int getX()<br/>
+					+ int getY()<br/>
+					+ void setX(int xVal)<br/>
+					+ void setY(int yVal)
+    		</td></tr>    		
+    	</table>
+    </div>
+    <div class="col-sm-6" >
+    	<p style="text-align: center;"><%= image_tag "c14_p18.jpg"%></p>
+    </div>
+  </div>
+</div>
+
+<p>
+	Methods related to a collection of points are in the PointList class.  They allow us to add points to the list, compare two lists, and draw a picture with the points in the list. 
+</p>
+<table>
+	<tr><th>PointList</th></tr>
+	<tr><td>
+		- GridPoint[] point
+	</td></tr>
+	<tr><td>
+		+ PointList()<br/>
+		+ void addPoint(int x, int y)<br/>
+		- boolean contains(int x, int y)<br/>
+		+ int countMatches(PointList list)<br/>
+		+ void drawGrid(char marker)
+	</td></tr>    		
+</table>
+<p>
+	The drawGrid() method requires one argument, a char.  This is the character that should be used for drawing points (X or $).
+</p>
+<p>
+	The main() method in another class creates one object of the PointList class to hold the prizes, and another PointList object to hold the player’s darts.  The main() method calls methods on these PointList objects to keep track of the game.
+</p>
+
+<h4>Example Program – HigherCard</h4>
+<p>
+	It would be very convenient to write card programs if we had classes for Card and Deck.  We could write a HighCard game like this:
+</p>
+<pre>
+public class HighCard
+{
+	public static void main(String[] args)
+	{
+		<strong>Deck deck = new Deck();</strong>
+		<strong>deck.shuffle();</strong>
+		<strong>Card playerCard = deck.drawCard();</strong>
+		<strong>Card computerCard = deck.drawCard();</strong>
+
+		System.out.println("Player gets a " + <strong>playerCard.getName());</strong>
+		System.out.println("Computer gets a " + <strong>computerCard.getName());</strong>
+
+		if(<strong>playerCard.getValue() > computerCard.getValue()</strong>)
+		{
+			System.out.println("\nYou Win!!!");
+		}
+		else
+		{
+			System.out.println("\nYou Didn't Win!!!");
+		}
+	}
+}</pre>
+<div class="container-fluid2">
+  <div class="row">
+    <div class="col-sm-6" >
+		<table>
+			<tr><th>Card</th></tr>
+			<tr><td>
+				- int n
+			</td></tr>
+			<tr><td>
+				+ Card(int number)<br/>
+				+ int getValue()<br/>
+				+ String getName()<br/>
+				- int getNumber()
+			</td></tr>    		
+		</table>
+    </div>
+    <div class="col-sm-6" >
+ 		<table>
+			<tr><th>Deck</th></tr>
+			<tr><td>
+				- Card[] cards
+			</td></tr>
+			<tr><td>
+				+ Deck()<br/>
+				+ void shuffle()<br/>
+				+ Card drawCard()
+			</td></tr>    		
+		</table>
+    </div>
+  </div>
+</div>
+
+<h2 id="ExtensionExample">
+	Extension Example
+</h2>
+<p>
+	Suppose we want a program that stores information about the people in an elementary school.  We need to store different information for different types of people, so we'll represent each type of person with a class.  Each class has a private variable for each piece of information to be stored, and public methods to get and set this information.
+</p>
+
+<div class="container-fluid2">
+  <div class="row">
+    <div class="col-sm-6" >
+ 		<table>
+			<tr><th>Student</th></tr>
+			<tr><td>
+				- int schoolID<br/>
+				- int height<br/>
+				- int gradeLevel<br/>
+				- String[] grades
+			</td></tr>
+			<tr><td>
+				+ Student()<br/>
+				+ int get schoolID ()<br/>
+				+ int getHeight()<br/>
+				+ int getGradeLevel()<br/>
+				+ String[] getGrades()<br/>
+				+ void set schoolID (int id)<br/>
+				+ void setHeight(int newHeight)<br/>
+				+ void setGradeLevel(int level)<br/>
+				+ void addGrade(String grade)
+			</td></tr>    		
+		</table>
+    </div>
+    <div class="col-sm-6" >
+ 		<table>
+			<tr><th>Teacher</th></tr>
+			<tr><td>
+				- int schoolID<br/>
+				- int height<br/>
+				- double salary<br/>
+				- String[] courses
+			</td></tr>
+			<tr><td>
+				+ Teacher()<br/>
+				+ int get schoolID ()<br/>
+				+ int getHeight()<br/>
+				+ double getSalary()<br/>
+				+ String[] getCourses()<br/>
+				+ void set schoolID (int id)<br/>
+				+ void setHeight(int newHeight)<br/>
+				+ void setSalary(double amount)<br/>
+				+ void addCourse(String course)
+			</td></tr>    		
+		</table>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-sm-6" >
+ 		<table>
+			<tr><th>Secretary</th></tr>
+			<tr><td>
+				- int schoolID<br/>
+				- int height<br/>
+				- double salary<br/>
+				- String department
+			</td></tr>
+			<tr><td>
+				+ Secretary()<br/>
+				+ int get schoolID ()<br/>
+				+ int getHeight()<br/>
+				+ double getSalary()<br/>
+				+ String getDepartment()<br/>
+				+ void set schoolID (int id)<br/>
+				+ void setHeight(int newHeight)<br/>
+				+ void setSalary(double amount)<br/>
+				+ void setDepartment(String d)
+			</td></tr>    		
+		</table>
+    </div>
+    <div class="col-sm-6" >
+ 		<table>
+			<tr><th>Custodian</th></tr>
+			<tr><td>
+				- int schoolID<br/>
+				- int height<br/>
+				- double salary<br/>
+				- int floor
+			</td></tr>
+			<tr><td>
+				+ Custodian()<br/>
+				+ int get schoolID ()<br/>
+				+ int getHeight()<br/>
+				+ double getSalary()<br/>
+				+ int getFloor()<br/>
+				+ void set schoolID (int id)<br/>
+				+ void setHeight(int newHeight)<br/>
+				+ void setSalary(double amount)<br/>
+				+ void setFloor(int newFloor)
+			</td></tr>    		
+		</table>
+    </div>
+  </div>
+  
+</div>
+
+<p>
+	All four of these classes have variables for schoolID and height.  We can pull out this common code and put it all in a new class called Person.
+</p>
+<p style="text-align: center;"><%= image_tag "c14_p21.jpg"%></p>
+<p>
+	Now we have much less code because all of the duplicate code has been collected into one place.
+	<br/>Taking the idea of extension one step further, we could make a class called Employee to represent employees.  Code common to Teacher, Secretary, and Custodian could go in this class.
+</p>
+
+<p style="text-align: center;"><%= image_tag "c14_p22.jpg"%></p>
+
+<p>
+	Student extends Person, so we can call methods of the Person class on a Student object.  Employee also extends Person, so Employee also inherits the variables and methods from Person.  Custodian extends Employee, so we can call methods from Employee or Person on a Custodian object.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	Custodian larry = new Custodian();
+
+	larry.setFloor(2);
+	larry.setSalary(40000);
+	larry.setAge(42);
+}</pre>
+<h2 id="MethodOverloadingExample">
+	Method Overloading Example
+</h2>
+
+<p>
+	The Custodian class has a method for setting the floor, which requires an int.  Suppose we want to be able to put in either an int, or a String with a number in it, like "1", "2", or "3".  We can write two versions of the setFloor() method.  One takes an int, and one takes a String.  The proper method will always be called based on the type of the argument.  We overload methods in a class when we want the method to behave in multiple ways.
+</p>
+<pre>
+public void setFloor(int newFloor)
+{
+	floor = newFloor;
+}
+
+public void setFloor(String newFloor)
+{
+	floor = Integer.ParseInt(newFloor);
+}</pre>
+<p>In the above example, we overloaded the setFloor() method.</p>
+
+<h2 id="OverridingaMethod">
+	Overriding a Method
+</h2>
+<p>
+	Suppose that while teacher and secretary salaries are normally yearly, the custodian salaries are listed on a monthly basis.  If we write a new setSalary() method in Custodian, it will replace the setSalary() method in the Employee class.  This is called overriding a method.  We override a method when we are extending a class, but want to change the functionality of a method.
+</p>
+<pre>
+public void setSalary(double amount)
+{
+	salary = amount * 12;
+}</pre>
+<p>
+	To do this, we need to make the salary variable in the Employee class protected rather than private.  This is the same as private, except subclasses can use the variable.
+</p>
+<pre>protected double salary;</pre>
+<p>
+	You can also extend classes in the JDK.  For example, the following class, RandomDie extends the java.util.Random class.  This means it inherits everything in the Random class.  Anything you can do with a Random object, you can do with a RandomDie object.
+</p>
+<p>
+	Notice that the nextInt() method is not called on an object, but as a method within the same class.
+</p>
+
+<pre>
+import java.util.Random;
+
+<h4>public class RandomDie extends Random</h4>
+{
+	private int sides = 6;
+
+	public void setSides(int s)
+	{
+		sides = s;
+	}
+
+	public int roll()
+	{
+		return nextInt(sides)+1;
+	}
+}
+
+
+
+
+<h4>public class RandomTest</h4>
+{
+	public static void main(String[] args)
+	{
+		RandomDie die = new RandomDie();
+		System.out.println("You rolled a " + die.roll());
+		System.out.println("You rolled a " + die.roll());
+		System.out.println("You rolled a " + die.roll());
+
+		die.setSides(20);
+		System.out.println("You rolled a " + die.roll());
+		System.out.println("You rolled a " + die.roll());
+		System.out.println("You rolled a " + die.roll());
+	}
+}</pre>
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<p>Complete the Darts program started in this chapter.</p>
+	<p>Complete the HigherCard program started in this chapter.</p>
+	<br/><h4>Blackjack</h4>
+	<p>
+		The player gets two cards and sees them both.
+		<br/>The house gets two cards.  The player sees the second.
+		<br/>The player may hit (take more cards) up to 5.
+		<br/>The house will hit until the hand is worth 17 or more.
+	</p>
+	<p>
+		The hands are scored as follows:
+		<br/>Aces are worth 1 or 11, whichever is better.
+		<br/>Face cards are worth 10.
+		<br/>Other cards are worth the card number.
+		<br/>The hand is worth the sum of the cards in it.
+		<br/>Either player "busts" if the hand goes over 21.
+		<br/>Highest score under 22 wins.
+	</p>
+	<br/><h4>BattleShip</h4>
+	<p>
+		The BattleShip program plays a game of battle ship.  A basic game might have 2 ships on a 5 x 5 grid.
+	</p>
+	<div class="codeblock2">
+Welcome to BattleShip!!!
+You get to command 1 Carrier(4 spaces) and 1 Sub(3 spaces)
+
+  A B C D E
+  ----------
+1|          |
+2|          |
+3|          |
+4|          |
+5|          |
+  ----------
+Enter coordinates for sub:72
+Please enter a valid point, like B3.
+
+Enter coordinates for sub:a1
+Enter coordinates for sub:a2
+Enter coordinates for sub:a3
+
+Enter coordinates for carrier:b2
+Enter coordinates for carrier:b3
+Enter coordinates for carrier:b4
+Enter coordinates for carrier:b5
+
+  A B C D E
+  ----------
+1|O         |
+2|O O       |
+3|O O       |
+4|  O       |
+5|  O       |
+  ----------
+	</div>
+	
+</div>

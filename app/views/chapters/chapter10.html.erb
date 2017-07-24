@@ -1,0 +1,840 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#File">File</a></td><td><a href="#ReadingTextFiles">Reading Text Files</a></td><td><a href="#ParsingFormattedData">Parsing Formatted Data</a></td><td><a href="#WritingTextFiles">Writing Text Files</a></td><td><a href="#PrintWriter">PrintWriter</a></td></tr>
+		<tr><td><a href="#FileUtilityPrograms">File Utility Programs</a></td><td colspan="2"><a href="#DataStoragePrograms">Data Storage Programs</a></td><td colspan="2"><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 10 - Text Files</h1>
+  <p>
+  	A text file is a sequence of characters stored on the computer's hard drive.  A java program can read from text files and use the contents of a text file as input data.  This allows programs to work with large amounts of data.  A Java program can also write a text file and save it on the hard drive.  This is how programs store data we entered when the program exits so it is available the next time the program is run.  File manipulation is often referred to as file input/output, or file IO.   A file on the computer can be represented as an object of the File class.  This File object can then be used to read from an actual file, or to write to an actual file.
+  </p>
+  <h2 id="File">
+  	File (java.io.File) 
+  </h2>
+  <p>
+  	Objects of the File class are used to represent files and directories (folders) within the computer file system.  Creating a new File object does not create a new file on the computer.  The File object represents a file which may or may not exist.
+  </p>
+  <h3>Constructor</h3>
+  <pre>File(String pathname)</pre>
+  <h3>Methods</h3>
+  <pre>
+boolean delete()
+boolean exists()
+String getName()
+String getPath()
+boolean isDirectory()
+boolean isFile()
+String[] list()
+File[] listFiles()
+boolean mkdir()</pre>
+<p>
+	The pathname of a file includes the location of the file as well as the name of the file.  The pathname may have an absolute path, or a relative path.  An absolute path always starts with a drive root.  The example below shows a file named "data.txt".  The file is in a directory called "TextFiles", which is in a directory called "JavaProjects", which is on the C drive.
+</p>
+<pre>C:\JavaProjects\TextFiles\data.txt</pre>
+<p>
+	To create a new file object that fits this description, we put the absolute path in quotes as the argument to the constructor.  Note that we must use a double backslash for each backslash because the backslash is the escape character.
+</p>
+<pre>File inputFile = new File("C:\\JavaProjects\\TextFiles\\data.txt");</pre>
+<p>
+	A relative path starts with a file or directory name.  It describes a path to the file from the location of the program.  If our program were saved in <code>"C:\JavaProjects"</code>, the relative path to the file would be <code>"TextFiles\data.txt"</code>.  On the other hand, if the Program is saved in the "TextFiles" directory, the relative path to the text file would be <code>"data.txt"</code>
+</p>
+
+<h3>Methods</h3>
+<h4>boolean delete()</h4>
+<p>
+	This method deletes the file if it exists.  If the file is a directory, the directory must be empty or it can not be deleted.  The method returns true if the deletion was successful.
+</p>
+
+<h4>boolean exists()</h4>
+<p>
+	This method returns true if the file or directory described by the File object exists.
+</p>
+
+<h4>String getName()</h4>
+<p>This method returns a String containing the name of the File.</p>
+
+<h4>String getPath()</h4>
+<p>This method returns a String containing the path of the File.</p>
+
+<h4>boolean isDirectory()</h4>
+<p>This method returns true if the File is a directory.</p>
+
+<h4>boolean isFile()</h4>
+<p>This method returns true if the File is a file (not a directory).</p>
+
+<h4>String[] list()</h4>
+<p>
+	If the File is a directory, this method returns a String array containing the names (not paths) of all files in the directory.  If the File is not a directory, null is returned.
+</p>
+
+<h4>File[] listFiles()</h4>
+<p>
+	If the File is a directory, this method returns a File array containing the Files in the directory.  If the File is not a directory, null is returned.
+</p>
+
+<h4>boolean mkdir()</h4>
+<p>This method creates the directory described by the File object.</p>
+
+<p>
+	The FileLister program below reads the contents of the current directory and prints the names of the files inside.  The program then creates a new directory, and prints the contents of the directory again.  
+</p>
+<pre>
+import java.io.File;
+
+public class FileLister
+{
+	public static void main(String[] args)
+	{
+		<strong>// Make new File object to represent current directory</strong>
+		File directory = new File(".");
+
+		<strong>// Get a list of all the file names</strong>
+		String[] filenames = directory.list();
+
+		<strong>// List files in directory</strong>
+		System.out.println("The directory contains:\n");
+		for(int i = 0; i < filenames.length; i++)
+		{
+			System.out.println(filenames[i]);
+		}
+
+		<strong>// Make a new File object to represent new sub directory</strong>
+		System.out.println("\n\nLet's make a new directory.");
+		File newDirectory = new File("NewDirectory");
+
+		<strong>// Turn new File object into a directory</strong>
+		newDirectory.mkdir();
+
+		<strong>// Get a list of all files</strong>
+		File[] files = directory.listFiles();
+
+		<strong>// List files in directory
+		// Print true for directory, false for file</strong>
+		System.out.println("The directory contains:\n");
+		System.out.println("File Name            Directory\n");
+		for(int i = 0; i < files.length; i++)
+		{
+			System.out.print(files[i].getName() + "     "); 
+			System.out.println(files[i].isDirectory());
+		}
+	}
+}</pre>
+<p style="text-align: center;"><%= image_tag "c10_p3.jpg"%></p>
+
+<h2 id="ReadingTextFiles">
+	Reading Text Files
+</h2>
+<p>
+	We have used objects of the Scanner class to read text from the keyboard.  If the input argument to the Scanner constructer is a File object, the Scanner will read text from the File.
+</p>
+<p>Suppose we have a file called "text.txt" as shown below.</p>
+<p style="text-align: center;"><%= image_tag "c10_p4.jpg"%></p>
+<p>
+	The program below is saved in the same directory as the text file.  That means the relative pathname for the text file is simply the name of the file.  The program reads one line from the file, and prints the line to the console.  Since the file might not exist, an exception could be thrown by the Scanner constructor.  This exception is handled by declaring that main() throws an exception.
+</p>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+
+public class TextReader
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("text.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		String text = fileScanner.nextLine();
+		System.out.println(text);
+	}
+}</pre>
+<p style="text-align: center;"><%= image_tag "c10_p4_02.jpg"%></p>
+<h3>Scanner Methods</h3>
+<pre>
+String next()
+double nextDouble()
+int nextInt()
+String nextLine()</pre>
+<p>
+	The methods above can be used to read text from a file just as they read text from the keyboard.  After each read, a marker remembers the file position so that the next read continues from the same place.  
+</p>
+<p>
+	The methods below are particularly useful when dealing with files.  They do not read anything from the file.  They check to see if there is something to read.  Each method returns true if there is appropriate text to read in the file.
+</p>
+<pre>
+boolean hasNext()
+boolean hasNextDouble()
+boolean hasNextInt()
+boolean hasNextLine()</pre>
+<p>
+	The example program below uses the hasNextLine() method to read all the lines from an input file and print them to the console.  The while loop continues to run as long as there is a next line.
+</p>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+
+public class TextReader
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("text.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		<strong>while(fileScanner.hasNextLine())</strong>
+		{
+			String text = fileScanner.nextLine();
+			System.out.println(text);
+		}
+	}
+}</pre>
+<p>
+	For some programs, all that is required is to read the file contents into a single string.  This can be done using String concatenation to join each line to the text that has been read in so far.
+</p>
+<pre>text = text + fileScanner.nextLine()</pre>
+<h2 id="ParsingFormattedData">
+	Parsing Formatted Data
+</h2>
+<p>
+	When the data for a programming problem appear in a file, they often must be parsed properly before the program can use them.  Parsing means to find each value, and store it as its proper type.  Consider the example below.
+</p>
+<p>A text file contains some number of integers.</p>
+<p style="text-align: center;"><%= image_tag "c10_p6.jpg"%></p>
+<p>
+	The program must read the values and calculate the sum of the values.  Regardless of whether the values are on the same line or separate lines, we can use the hasNextInt() method to read in all of the values.
+</p>
+<pre>
+public class FileSummer
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("data.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		int sum = 0;
+
+		while(fileScanner.hasNextInt())
+		{
+			sum = sum + fileScanner.nextInt();
+		}
+
+		System.out.println("The sum is " + sum);
+	}
+}</pre>
+<p style="text-align: center;"><%= image_tag "c10_p6_02.jpg"%></p>
+<p>
+	If a file contains different types of data, parsing becomes more complicated.  As a second example, suppose a file contains a list of names and race times.
+</p>
+<p style="text-align: center;"><%= image_tag "c10_p7.jpg"%></p>
+<p>
+	The program needs to read in the race data, and decide who has the shortest time.  As a first step, the program might store the file data in arrays.  The Race1 program creates two arrays; a String array for the names, and a double array for the times.  Since we don't know how many lines of data are in the file, the arrays are created with a size of 100, and the program keeps count of the number of lines read.  For each line, the program reads and stores one name and one time in the arrays.
+</p>
+<pre>
+public class Race1
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("race.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		int racers = 0;
+		String[] name = new String[100];
+		double[] time = new double[100];
+
+		while(fileScanner.hasNext())
+		{
+			name[racers] = fileScanner.next();
+			time[racers] = fileScanner.nextDouble();
+			racers++;
+		}
+
+		for(int i = 0; i < racers; i++)
+		{
+			System.out.println(name[i] + " " + time[i]);
+		}
+	}
+}</pre>
+<p>
+	After the file is parsed, the stored values are printed.  This loop was added to test the parsing, and would be removed when the program is complete.
+</p>
+<p>
+	The Race2 program uses a different parsing approach.  Each line is read in as a whole.  Then the line is parsed into arrays using the split method.
+</p>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+
+public class Race2
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("race.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		String[] name = new String[100];
+		double[] time = new double[100];
+		String text = "";
+		int count = 0;
+		<strong>
+		while(fileScanner.hasNextLine())
+		{
+			text = fileScanner.nextLine();
+			name[count] = text.split(" ")[0];
+			time[count] = Double.parseDouble(text.split(" ")[1]);
+			count++;
+		}</strong>
+
+		for(int i = 0; i < count; i++)
+		{
+			System.out.println(name[i] + time[i]);
+		}
+	}
+}</pre>
+<p>
+	Notice the use of code cramming in the line below.
+</p>
+<pre>time[count] = Double.parseDouble(text.split(" ")[1]);</pre>
+<p>
+	This line could have been separated into several as shown below.
+</p>
+<pre>
+	String temp = text.split(" ")[1];
+	time[count] = Double.parseDouble(temp);</pre>
+<p>Again, the amount of code to cram is a matter of taste.</p>
+<p>
+	The Race3 program uses another approach.  First, the entire file is read into a single String.  A comma is placed after each line as they are read in to keep them separated.  Then the String is parsed into arrays using the String method split().  Then that array is parsed into properly sized arrays using the substring() method.
+</p>
+<pre>
+public class Race3
+{
+	public static void main(String[] args) throws Exception
+	{
+		File inputFile = new File("race.txt");
+		Scanner fileScanner = new Scanner(inputFile);
+		String text = "";
+		<strong>
+		while(fileScanner.hasNextLine())
+		{
+			text = text + fileScanner.nextLine() + ",";
+		}</strong>
+
+		<strong>String[] line = text.split(",");</strong>
+		String[] name = new String[line.length];
+		double[] time = new double[line.length];
+		int space = 0;
+		<strong>
+		for(int i = 0; i < line.length; i++)
+		{
+			space = line[i].indexOf(" ");
+			name[i] = line[i].substring(0, space);
+			time[i] = Double.parseDouble(line[i].substring(space+1));
+		}</strong>
+
+		for(int i = 0; i < line.length; i++)
+		{
+			System.out.println(name[i] + time[i]);
+		}
+	}
+}</pre>
+<p>
+	The split() method breaks the string back into lines, while creating a new String array that is the proper size.  
+</p>
+<pre>String[] line = text.split(",");</pre>
+<p>
+	Then a for loop breaks each line into a name and a time using substring().  The time portion is converted to a double.  The values are stored in arrays that are the proper size.
+</p>
+<pre>
+for(int i = 0; i < line.length; i++)
+{
+	space = line[i].indexOf(" ");
+	name[i] = line[i].substring(0, space);
+	time[i] = Double.parseDouble(line[i].substring(space+1));
+}</pre>
+
+<h2 id="WritingTextFiles">
+	Writing Text Files
+</h2>
+<p>
+	Text can be written to a file in much the same way it is printed to the console.  To write to the console, we call the print() and println() methods on the object System.out.  These same methods can be called on an object of the PrintWriter class.  When a PrintWriter is used to write to a file, any existing text in the file is deleted.
+</p>
+<h3 id="PrintWriter">
+	PrintWriter (java.io.PrintWriter)
+</h3>
+<h4>Constructors</h4>
+<pre>
+PrintWriter(File outputFile)
+PrintWriter(String pathname)</pre>
+<h4>Methods</h4>
+<pre>
+close()
+print()
+println()</pre>
+<p>
+	The PrintWriter class has a constructor that takes a File object, just like the Scanner class.  There is also a PrintWriter constructor that takes a String containing the name of the file.
+</p>
+<mark><strong>close()</strong></mark>
+<p>
+	The Java program does not actually write the text to the file until the close method is called on the PrintWriter object.  If you forget to call close() when you are done writing, you will get an empty file.
+</p>
+<mark><strong>print()</mark></strong>
+<p>
+	The print() method prints the argument to the File object given to the constructor when the PrintWriter was created.  The print() method will convert many types of arguments to Strings before printing; including ints, doubles, chars, and booleans.  As always, string concatenation may be used.
+</p>
+<mark><strong>println()</mark></strong>
+<p>
+	This method is identical to the print() method, except it adds a newline character to the file after printing the argument.
+</p>
+<p>
+	The example below creates a new PrintWriter, and writes a line of text to the file.
+</p>
+<pre>
+import java.io.PrintWriter;
+
+public class TextFile
+{
+	public static void main(String[] args) throws Exception
+	{
+		<strong>PrintWriter file = new PrintWriter("newfile.txt");
+		file.println("This is the text in the file.");
+		file.close();</strong>
+	}
+}</pre>
+<p>
+	The Movies program, shown below lets a user enter movie names.  When the user quits, the movie data are written to a file.  
+</p>
+<pre>
+import java.util.Scanner;
+import java.io.PrintWriter;
+
+public class Movies
+{
+	public static void main(String[] args) throws Exception
+	{
+		Scanner keys = new Scanner(System.in);
+		<strong>PrintWriter file = new PrintWriter("movies.txt");</strong>
+		String input = "";
+
+		while(!input.equals("done"))
+		{
+			System.out.print("Enter a movie or done to quit: ");
+			input = keys.nextLine();
+			if(!input.equals("done"))
+			{
+				<strong>file.println(input);</strong>
+			}
+		}
+		file.close();
+
+		System.out.println("Your movies have been saved.");
+	}
+}</pre>
+<h2 id="FileUtilityPrograms">
+	File Utility Programs
+</h2>
+<p>
+	Programs can do powerful and useful things when using file input and output together.  Although real programs are not so easily categorized, we'll discuss two types of programs that use file I/O for the purposes of explanation and assignments; file utility programs, and data storage programs.
+</p>
+<p>
+	File utility programs open a file, and generate a new file, or perhaps replace the old version of the file with the new.  The example below simply makes a copy of a file.  The original file must be in the same directory as the program, and named "Original.txt".  A copy named "Copy.txt" will be created.
+</p>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+import java.io.PrintWriter;
+
+public class Copier
+{
+    public static void main(String[] args)throws Exception
+    {
+        File inFile = new File("Original.txt");
+        Scanner readIn = new Scanner(inFile);
+        File outFile = new File("Copy.txt");
+        PrintWriter writeOut = new PrintWriter(outFile);
+		<strong>
+        while(readIn.hasNextLine())
+        {
+            writeOut.println(readIn.nextLine());
+        }</strong>
+        writeOut.close();
+    }
+}</pre>
+<p>
+	The TextReplacer program asks the user for the name of an input file and an output file.  The user can enter relative or absolute paths.  The program also asks the user for a string of text that should be replaced, and a new string of text to replace it with.  A new file is created, and saved in the proper location.
+</p>
+<h3>Example Program – TextReplacer</h3>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+import java.io.PrintWriter;
+
+public class TextReplacer
+{
+	public static void main(String[] args) throws Exception
+	{
+		<strong>// Make Variables</strong>
+		Scanner keys = new Scanner(System.in);
+		String inputFileName = "";
+		String outputFileName = "";
+		String fileText = "";
+		String oldText = "";
+		String newText = "";
+
+		<strong>// Get User Input</strong>
+		System.out.print("Enter the input file name: ");
+		inputFileName = keys.nextLine();
+		System.out.print("Enter the output file name: ");
+		outputFileName = keys.nextLine();
+		System.out.print("Enter the text to replace: ");
+		oldText = keys.nextLine();
+		System.out.print("Enter the new text: ");
+		newText = keys.nextLine();
+
+		<strong>// Make New Scanner</strong>
+		Scanner inFile = new Scanner(new File(inputFileName));
+
+		<strong>// Read In File</strong>
+		while(inFile.hasNextLine())
+		{
+			fileText = fileText + inFile.nextLine() + "\n";
+		}
+
+		<strong>// Replace Text</strong>
+		fileText = fileText.replaceAll(oldText, newText);
+
+		<strong>// Write File</strong>
+		PrintWriter outFile = new PrintWriter(outputFileName);
+		outFile.print(fileText);
+		outFile.close();
+	}
+}</pre>
+<h2 id="DataStoragePrograms">
+	Data Storage Programs
+</h2>
+<p>
+	Data storage programs use file I/O for persistence.  That is, we want our data to be stored even when the program isn't running and the computer is shut down.  Data storage programs use a text file as a database, and the program is a simple database management system.
+</p>
+<p>
+	The MovieRating program allows the user to enter movie titles and give each movie a rating.  Each time the user quits the data are written to the file.  When the program is reopened, if the data file ("moviefile.txt") already exists, the movies from the file are read in.  The user can opt to view the currently stored movies, or add a new one.
+</p>
+<h3>MovieRating</h3>
+<pre>
+import java.util.Scanner;
+import java.io.File;
+import java.io.PrintWriter;
+
+public class MovieRating
+{
+	public static void main(String[] args) throws Exception
+	{
+		Scanner keys = new Scanner(System.in);
+		File dataFile = new File("moviefile.txt");
+		String[] movie = new String[100];
+		double[] rating = new double[100];
+		int movies = 0;
+		String input = "";
+		String line = "";
+
+		System.out.println("***** Movie Ratings *****\n\n");
+
+		<strong>// Read Data From File if it exists</strong>
+		if(dataFile.exists())
+		{
+			Scanner inFile = new Scanner(dataFile);
+			while(inFile.hasNextLine())
+			{
+				line = inFile.nextLine();
+				String[] part = line.split(";");
+				movie[movies] = part[0];
+				rating[movies] = Double.parseDouble(part[1]);
+				movies++;
+			}
+		}
+		<strong>// Main Loop</strong>
+		while(!input.equals("q"))
+		{
+			System.out.println("\n\nWould you like to:");
+			System.out.println("(a) add a movie");
+			System.out.println("(v) view movie ratings");
+			System.out.println("(q) quit");
+			System.out.print(">");
+			<strong>input = keys.nextLine();</strong>
+
+			<strong>// Add a Movie</strong>
+			if(input.equals("a"))
+			{
+				System.out.print("Enter movie title: ");
+				movie[movies] = keys.nextLine();
+				System.out.print("How many stars? ");
+				rating[movies] =Double.parseDouble(keys.nextLine());
+				movies++;
+			}
+
+			<strong>// View Movies</strong>
+			if(input.equals("v"))
+			{
+				System.out.println("Movie          Rating");
+				for(int i = 0; i < movies; i++)
+				{
+					System.out.println(movie[i] + "   " + rating[i]);
+				}
+			}
+		}// End Loop
+
+		<strong>// Save Data To File</strong>
+		PrintWriter outFile = new PrintWriter(dataFile);
+		for(int i = 0; i < movies; i++)
+		{
+			outFile.println(movie[i] + ";" + rating[i]);
+		}
+		outFile.close();
+
+		System.out.println("Your movies have been saved.");
+	}
+}</pre>
+
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<p>
+		These programs should work for any input file that fits the description, not just the example input given.  You should create your own input files for testing.
+	</p>
+	<br/>
+	<h4>Reversed</h4>
+	<p>
+		The input file contains a message, but the entire message has been reversed.  Your program must correct the problem, and restore the original message.
+	</p>
+	<p>Input</p>
+	<div class="codeblock2">.maps dna egasuas sgge maps eht evah ll'I</div>
+	<p>Output</p>
+	<p>I'll have the spam eggs sausage and spam.</p>
+	<br/>
+	<h4>Backwards</h4>
+	<p>
+	The input file contains a text message, but the order of the characters in the words has been reversed.  Your program must reverse each word to restore the original message.
+	</p>
+	<br/>
+	<p>Input</p>
+	<div class="codeblock2">
+temoC, ti speek eht htaed rats naelc.
+temoC denrut retsam adoY neerg.
+	</div>
+	<p>Output</p>
+	
+	Comet, it keeps the death star clean.
+	<br/>Comet turned master Yoda green.
+	<br/><br/>
+	<h4>StickyBits</h4>
+	<p>
+	The input file contains a text message, but some of the characters have been repeated.  Your program must remove any consecutive duplicate characters.
+	</p>
+	<p>Input</p>
+	<div class="codeblock2">TThiiiiiiiiiiiiiis   iiiiiiiiiis aa ttttttttttesssstt.....</div>
+	<br/>
+	<p>Output</p>
+	
+	<p>This is a test.</p>
+	<br/>
+	<h4>Temperature</h4>
+	<p>
+		The input file contains a list of environments.  Each line has a line number, and two temperatures; one for day and one for night.  Animals require a temperature between 200 and 400 kelvins.  Plants need a temperature between 270 and 490 kelvins.  Your program must determine if any of the environments are suitable for both plants and animals.
+	</p>
+	<p>Input</p>
+	<div class="codeblock2">
+1 358 239
+2 426 273
+3 392 272
+4 498 193
+	</div>
+	<p>Output</p>
+<p>3</p>
+<br/>
+<h4>Trajectory</h4>
+<p>
+	You are launching cannon balls with your new cannon ball launcher.  As each ball launches, you can measure the velocity and the angle.  The distance traveled is given by:
+</p>
+<p>d = 0.2 V<sup>2</sup>sinθcosθ </p>	
+<p>
+	where V is the initial velocity of the cannon ball, and θ is the angle of the launch.
+	The input file is a list of cannon ball launch data.  Each line contains a cannon ball number, initial velocity (in ft/s), and an angle.  You must write a program that will list the cannon balls in order of distance, and give the distance for each.
+</p>	
+<p>Input</p>	
+<div class="codeblock2">
+1 17 28
+2 24 84
+3 16 44
+
+</div>	
+
+<p>Output</p>
+
+Cannon ball 3 26 feet<br/>
+Cannon ball 1 24 feet<br/>
+Cannon ball 2 12 feet
+<br/><br/>
+<h4>TriangleArea</h4>
+<p>The area of a triangle is given by given by Hero’s formula:</p>
+<p>Area = sqrt[ s(s-a)(s-b)(s-c) ]</p>	
+<p>where a, b, and c are the lengths of the three sides, and s = (a + b + c)/2</p>
+<p>
+	The input file is a list of triangle dimensions.  Each line has a line number, and measurements for the three lengths a, b, and c.  Your program must find the triangle with an area closest to 530.
+</p>
+<p>Input</p>
+<div class="codeblock2">
+1 15 17 12
+2 62 53 24
+3 25 51 43
+4 54 36 86
+5 23 16 24
+	
+</div>
+<p>Output</p>
+
+3
+<br/><br/>
+<h4>SoilSampler</h4>
+<p>
+	The input file contains a list of soil samples.  Each line has a sample number, the sample mass, and the amounts of carbon, calcium, and radon.  Your program must determine if one of the samples has the following qualities:
+</p>
+<p>
+	Carbon: between 13% and 18% of the sample mass<br/>
+	Calcium: between 3% and 8% of the sample mass<br/>
+	Radon: between 7% and 32% of the sample mass
+</p>	
+<p>Input </p>
+<div class="codeblock2">
+1 3.4 1.8 0.4 0.2
+2 10 1.5 0.7 2.0
+3 5.2 2.3 0.1 2.2
+
+</div>
+<p>Output</p>
+2
+
+<br/><br/>
+<h4>Directions</h4>
+<p>
+	The input file has a list of compass directions (N, S, E, W).  Each item in the list represents one step in that direction.  Your program must find the ending position given that the starting position is (0, 0).
+</p>
+
+<p>Input</p>
+
+<div class="codeblock2">E E E S
+
+</div>
+
+<p>Output</p>
+3, -1
+
+<br/><br/>
+<h4>Robot</h4>
+<p>
+	The input file is a list of instructions for a robot to follow.  Each instruction is either F (Forward), R (Turn Right), or L (Turn Left).  A Forward instruction makes the robot move one step in the direction it is facing.  The Turn instructions make the robot turn 90 degrees (R is clockwise, L is counter-clockwise).  Given that the robot starts at (0, 0) facing the positive x axis (to the right), your program must calculate the robot's ending position.
+</p>
+
+<p>Input</p>
+
+<div class="codeblock2">F F L F L F
+
+</div>
+
+<p>Output</p>
+(1, 1)
+<br/><br/>
+<h4>Terrain</h4>
+<p>
+	The input file has multiple lines representing a map.  Each line has a line number, a space, and a sequence of numbers.  Lower numbers represent areas of easy passage.  The addition of all digits gives a score for how difficult it would be to pass through that row.  Your program must find the line of easiest passage.
+</p>
+<p>Input</p>
+<div class="codeblock2">
+1 8764358709873487847568745
+2 8787875682479834756984756
+3 8947659843756984375698347
+4 6584687436587346598734659
+5 5412456341251432543254133
+6 8723469758374659873465987
+7 3246598273465873465987436
+8 5872346958743658734695827
+9 3469582374695873246985742
+10 3698576349875623948756923
+11 8476598324765982347659823
+12 4765987546982734569872349
+
+</div>
+<p>Output</p>
+5
+<br/><br/>
+<h4>Points</h4>
+<p>
+	The input file is a grid containing zeros and non-zero digits.  The program must find all of the non-zero digits, square each, and add the square to a total.
+</p>
+<p>Input</p>
+<div class="codeblock2">00000000000000000000000000000
+00000003000000000000000000000
+00000000000000000000000000000
+00000000000000000000000000000
+00000000400000000000000000000
+00000000000000000000000000000
+00000000000000000000000200000
+00000000000000000000000000000
+00000000000000000000000000000
+00000000000000200000000000000
+00000000000000000000000000000
+
+</div>	
+<p>Output</p>
+33
+</div>
+
+<div><!-- FileUtilityPrograms -->
+	<h3>File Utility Programs</h3>
+	<br/><h4>SentenceSeparator</h4>
+	<p>
+		This program reads a text file, and writes a new text file using the original text, but with a line break at the end of every sentence.  For the purposes of this assignment, a sentence ends whenever a period (.), exclamation point (!), or question mark (?) is encountered.
+	</p>
+	<br/><h4>KeywordSearcher</h4>
+	<p>
+		The user enters a file name and one or more search terms which may contain spaces.  The program reads the file and counts the number of times each search term appears.  The user may choose a case sensitive or not case sensitive search.
+	</p>
+	<br/><h4>Encrypter</h4>
+	<p>
+		This program reads a file, encodes the message, and writes an encoded file.  The program can also decode a file that it has encoded.  You are free to create your own encoding/decoding algorithm.  
+	</p>
+
+</div>
+
+<div><!-- DataStoragePrograms -->
+	<h4>Data Storage Programs</h4>
+	<br/><h3>Books</h3>
+	<p>
+		This program stores information about books.  For each book, the program stores the title, author, number of pages, year published, and a summary.  The user can view all books, add information about a new book, or delete a book.
+	</p>
+	<br/><h3>ClubMembers</h3>
+	<p>
+		This program keeps track of the members in a club.  For each member, the program stores the member's name, rank (as a String), and what they currently owe for dues.  The user can view all members, add a new member, update a member's rank or dues, or remove the member.
+	</p>
+	<br/><h4>Inventory1</h4>
+	<p>
+		The Inventory1 program keeps track of the items in a candy store.  The store stocks 5 items.  A text file keeps track of the quantity and price.  For example, the store might have the following:
+	</p>
+	<div class="codeblock2">
+Item				Quantity	Price
+Lollipop 				5			0.49
+Gum							10		0.99
+Caramel					25		0.05
+Fudge						8			1.09
+Chocolate Bar		4			1.25
+	</div>
+	<p>
+		The user can view the inventory, or make changes.  The user can change the quantity of any item, or the price, but not the item name.
+	</p>
+	<br/><h4>Inventory2</h4>
+	<p>
+		The Inventory2 program keeps track of the items in a candy store.  A text file keeps track of the item names, quantities and prices.  For example, the store might have the following:
+	</p>
+	<div class="codeblock2">
+Item					Quantity	Price
+Lollipop 				5				0.49
+Chocolate Bar		4				1.25
+	</div>
+	<p>
+		The user can view the inventory, or make changes.  The user can change the quantity of any item, or the price, or the item name.  The user can add new items, or delete items
+	</p>
+	<br/><h4>Dungeon2</h4>
+	<p>
+		Make a dungeon game that allows users to create a new character, which is saved in a text file.  The player can save and continue a game.  The monster stats are stored in another text file (a configuration file) so that the game can be easily modified.
+	</p>
+	
+</div>

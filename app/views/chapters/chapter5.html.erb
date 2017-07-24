@@ -1,0 +1,416 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#InputValidation">Input Validation</a></td><td><a href="#SolvingLoopProblems">Solving Loop Problems</a></td><td><a href="#FlowDiagrams">Flow Diagrams</a></td><td><a href="#Worksheet7">Worksheet 7: While Loops</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 5 - While Loops </h1>
+  <p>
+  	A <code>while</code> loop is a repetition structure.  It causes a block of code to run again and again as long as some condition is true.  The condition is placed in parentheses after the word <code>while</code>.  In the example below, the condition will always be <code>true</code>, so the line of code inside the braces will repeat until the program is terminated.
+  </p>
+  <pre>
+while(1 == 1)
+{
+	System.out.println("And I'll say it again,");
+}</pre>
+  <p style="text-align: center;"><%= image_tag "c5_p1.jpg"%></p>
+  <p>
+  	Equivalently, we could have used true as a condition.
+  </p>
+  <pre>
+while(true)
+{
+	System.out.println("And I'll say it again,");
+}</pre>
+  <p>
+  	Note that a semicolon is <strong>not</strong> placed after the <code>while</code> statement.  The while statement only affects the next thing that follows it. We want that next thing to be a block of code in braces.  If a semicolon is put after the while statement, the semicolon will be seen as the next thing.  Everything before the semicolon (nothing) will repeat again and again forever.  The block with the print statement will never be reached.
+  </p>
+  <pre>
+while(true);    <strong>Don't do this</strong>
+{
+	System.out.println("And I'll say it again,");
+}</pre>
+  <p>
+  	A loop that never ends is often called an "infinite loop", and is usually considered undesirable, especially if it doesn't do anything to indicate it is running.  Usually, the loop is designed so that something happens inside changing the condition, and ending the loop.  
+  </p>
+  <pre>
+int x = 1;
+<strong>while(x < 6)</strong>
+{
+	System.out.println("Counting, " + x);
+	x = x + 1;
+}</pre>
+  <p>
+  	In the example above, x is initialized to 1.  When the loop is reached for the first time, the condition is <strong>true</strong>.  1 is less than 6.  The block inside the <strong>while</strong> braces runs printing the line
+  </p>
+  <pre>
+Counting, 1</pre>
+  <p>
+  	and incrementing the value of x to 2.  When the closing brace is reached, the <strong>while</strong> condition is checked again.  Since it is still <strong>true</strong> (2 is less than 6), the block runs again.
+  </p>
+  <p style="text-align: center;"><%= image_tag "c5_p2.jpg"%></p>
+	<p>
+		The fifth time the block runs, "Counting, 5" is printed, and x is incremented from 5 to 6.  When the closing brace of the <code>while</code> loop is reached, the condition is <code>false</code>.  6 is not less than 6.  The loop ends, and the program continues.
+	</p>
+	<p>
+		The <code>while</code> loop condition is checked before each pass through the loop, including the first.  
+	</p>
+	<p>
+		The <code>while</code> loop is particularly useful if we don't know in advance how many times the loop will repeat.  The following program plays a coin flip game with the user.  After each game, the user is asked to play again.  If the answer is not "y", the program ends.
+	</p>
+	<pre>
+import java.util.Scanner;
+
+public class CoinFlip
+{
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		<strong>String playAgain = "y";</strong>
+		String guess;
+
+		<strong>while(playAgain.equals("y"))</strong>
+		{
+			System.out.println("I flip it, you call it.");
+			System.out.println("h for heads, t for tails.");
+			guess = in.nextLine();
+
+			if(guess.equals("h"))
+			{
+				System.out.println("You lose.  It was tails.");
+			}
+			else
+			{
+				System.out.println("You lose.  It was heads.");
+			}
+
+			System.out.println("Play again? (y or n)");
+			<strong>playAgain = in.nextLine();</strong>
+		}
+	}
+}</pre>
+	<p>
+		When the program starts, the String variable <code>playAgain</code> is initialized to "y".  As long as this is <code>true</code>, the <code>while</code> loop will repeat.  At the end of each game, the user is asked to play again.  If the user types anything but "y", the <code>while</code> loop will end.  This loop might run once, or thousands of times depending on the user.  
+	</p>
+	<p>
+		As with <code>if</code> structures, <code>while</code> loops can be nested inside each other.  The inner loop will run through all of its repetitions for each pass of the outer loop.
+	</p>
+	<pre>
+int cards;
+while(playAgain.equals("y"))
+{
+	cards = 0;
+	while(cards < 5)
+	{
+		cards = cards + 1;
+	}
+}</pre>
+	<p>
+		The <code>break</code> statement causes the current loop to exit immediately.  The program continues after the loop.  Note that a <code>break</code> statement is used within a loop.  It can not be used to exit an <code>if</code> or <code>else</code> block outside of a loop.
+	</p>
+	<pre>
+int x = 0;
+while(true)
+{
+	x = x + 1;
+	if(x > 25)
+	{
+		<strong>break;</strong>
+	}
+}
+System.out.println("x exceeds 25");</pre>
+	<p>
+		If used in nested loops, the break statement only exits the innermost loop.  There are times when the break statement is particularly convenient, but the preferred method of exiting a loop is to build the exit condition into the design of the loop.
+	</p>
+	
+	<h2 id="InputValidation">
+		Input Validation
+	</h2>
+	<p>
+		A common use of a <code>while</code> loop is to validate user input.  Suppose we ask the user to enter a positive integer.  If the user enters a negative number, the program should complain and ask the user to enter a positive number again.  This way, we make sure we have good data before we start using it.
+	</p>
+	<p>
+		The following code requires that the user enter a positive integer before moving on.
+	</p>
+	<pre>
+int x = -1;
+Scanner in = new Scanner(System.in);
+
+<strong>while(x < 0)</strong>
+{
+	System.out.println("Please enter a positive integer.");
+	x = in.nextInt();
+}
+
+System.out.println("Yes " + x + " is positive.");</pre>
+	<p>
+		Since x is initialized to -1 (less than 0), the <code>while</code> loop will execute the first time it is reached.  After each run through the loop, the condition is checked again.  If the user has entered a positive number, the condition x < 0 will be <code>false</code>, and the loop will not run again.  The program continues.	
+	</p>
+	<p>
+		As a second example of user input validation, suppose we have a game program that asks the user to play again, and expects either "y" or "n" as a response.  We would like the program to check this input, and require the user to enter one of the two possible choices.
+	</p>
+	<pre>
+System.out.println("Play again? (y or n)");
+playAgain = in.nextLine();
+
+while( <strong>!(playAgain.equals("y") || playAgain.equals("n")) )</strong>
+{
+	System.out.println("Please enter y or n.");
+	playAgain = in.nextLine();
+}</pre>
+	<p>
+		The <code>while</code> loop will repeat as long as the condition is <code>true</code>, and exit when the condition is <code>false</code>.  We need a condition that will be true for bad inputs, and false for good inputs (y or n).  Consider the condition below.
+	</p>
+	<pre>
+playAgain.equals("y") || playAgain.equals("n")</pre>
+	<p>
+		This is <code>true</code> if the user entered y or n (a good input) and <code>false</code> otherwise, which is exactly the opposite of what we want.  If we use the NOT operator on the entire condition, it will do what we wish.
+	</p>
+	<pre>
+!(playAgain.equals("y") || playAgain.equals("n"))</pre>
+	
+	<h2 id="SolvingLoopProblems">
+		Solving Loop Problems
+	</h2>
+	<p>
+		What is the output of this block of code?
+	</p>
+	<pre>
+int i = 0;
+int x = 2;
+
+while (i <= 4)
+{
+    i++;
+    x = x * 2;
+}
+
+System.out.println("i = " + i);
+System.out.println("x = " + x);</pre>
+	<p>
+		For problems involving loops, it is often useful to make a table showing the values of the variable after each pass through the loop.  For the problem above, we want to repeat the loop until i is no longer less than or equal to 4.
+	</p>
+	<table class="customers">
+		<tr><th>When</th><th>i</th><th>x</th></tr>
+		<tr><td>Initially</td><td>0</td><td>2</td></tr>
+		<tr><td>After first pass</td><td>1</td><td>4</td></tr>
+		<tr><td>After second pass</td><td>2</td><td>8</td></tr>
+		<tr><td>After third pass</td><td>3</td><td>16</td></tr>
+		<tr><td>After fourth pass</td><td>4</td><td>32</td></tr>
+		<tr><td>After fifth pass</td><td>5</td><td>64</td></tr>
+	</table>
+	<p>
+		After the loop completes for the fifth time, i is 5, which is not less than or equal to 4.  The loop ends, and the answer is:
+	</p>
+	<pre style="color:blue;">
+i = 5
+x = 64</pre>
+	
+	<h2 id="FlowDiagrams">
+		Flow Diagrams
+	</h2>
+	<p>
+		A <code>while</code> loop can be depicted by a flow diagram in much the same way as an <code>if/else</code> structure.  A diamond shape is used to represent the <code>while</code> condition.  The diamond has a <code>true</code> branch and a <code>false</code> branch.  The <code>true</code> branch leads to the code block and loops back to the diamond.  The false branch exits the loop.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c5_p7.jpg"%></p>
+<!-- ========Worksheet and AssignmentPrograms================= -->
+<div id="Worksheet7">
+	<h3>Worksheet 7: While Loops</h3>
+	<ol>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = 10;
+int i = 5;
+
+while (i <= 7)
+{
+    if(x > 0)
+    {
+        i++;
+        x = x - 3;
+    }
+}
+
+System.out.println("x = " + x);
+System.out.println("i = " + i);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int y = -2;
+int i = -4;
+
+while (i > -9)
+{
+    i--;
+    y = y + i;
+}
+
+System.out.println("y = " + y);
+System.out.println("i = " + i);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int a = 12;
+int j = 0;
+
+while (j < 10)
+{
+    j = j + 2;
+    a = a – 3 + j;
+}
+
+System.out.println("a = " + a);
+System.out.println("j = " + j);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int i = 0;
+int z = 0;
+
+while(z < 12)
+{
+	z = z + 3;
+	i = i + 3;
+	if(i > 4)
+	{
+		i = i – 2;
+	}
+	else
+	{
+		i = i + 1;
+	}
+}
+
+System.out.println("i = " + i);
+System.out.println("z = " + z);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = 1;
+int y = -1;
+int i = 1;
+int j = 4;
+
+while (i < 5)
+{
+    i = i + 2;
+    x = i - 1;
+    j = 4;
+    
+    while (j < 6)
+    {
+        j++;
+        x = x + 2;
+        y = x + 3;
+        x = y - 2;
+    }
+}
+
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+			</div>
+		</li>		
+	</ol>
+	<p>
+		6 – 10.  Draw flow diagrams for the five programs above.
+	</p>
+</div>
+
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<h4>Adder</h4>
+	<p>
+		This program prompts the user to enter values (doubles).  The user can enter any number of values.  The user can stop entering values by typing 0.  The program then adds up all the numbers entered and displays the sum.
+	</p>Sample Run:
+	<div class="codeblock2">
+Enter a number (0 to quit):
+<strong>2.1</strong>
+Enter a number (0 to quit):
+<strong>3.4</strong>
+Enter a number (0 to quit):
+<strong>4.2</strong>
+Enter a number (0 to quit):
+<strong>0</strong>
+
+The sum of the numbers entered is 9.7.
+	</div>
+	
+	<br/>
+	<h4>WordAdder</h4>
+	<p>
+		This program allows the user to enter words.  Each word is followed by pressing the Enter key.  When the user types "done", the program lists all the words typed with spaces between.
+	</p>Sample Run:
+	<div class="codeblock2">
+Please enter a word (type done when finished):
+<strong>this</strong>
+Please enter a word (type done when finished):
+<strong>is</strong>
+Please enter a word (type done when finished):
+<strong>a</strong>
+Please enter a word (type done when finished):
+<strong>test</strong>
+Please enter a word (type done when finished):
+<strong>done</strong>
+
+You typed:
+this is a test
+	</div>
+	
+	<h4>NumberFinder</h4>
+	<p>
+		This program prompts the user for a number.  It then counts up until it finds the next number that is evenly divisible by 37.
+	</p>Sample Run:
+<div class="codeblock2">
+Please enter a number:
+<strong>546</strong>
+The next number that is evenly divisible by 37 is 555.
+</div>
+<br/>
+<h4>BoatBuilder</h4>
+<p>
+	This program sells the user a boat.  There are 3 boat sizes; small medium, and large.  For an extra fee, a motor can be attached.  Oars cost extra.  After seeing the final price, including a 12% fancy tax, the user can opt to build another boat, or quit.  The program checks user inputs, to make sure they are valid.  You may assume the user will enter the right data type (int, String,…).
+</p>Sample Run:
+<div class="codeblock2">
+Hi!  Welcome to BoatBuilder.  We're ready to build your boat.
+What size boat would you like?
+(1) Small $537.00
+(2) Medium $1243.00
+(3) Large $2422.00
+<strong>4</strong>
+Please enter a number from 1 to 3.
+<strong>1</strong>
+Small it is.
+Would you like a motor for $400.00? (y or n)
+<strong>bunnies!!!!</strong>
+Please enter y or n.
+<strong>y</strong>
+All right.  We'll have that motor installed right away.
+How many oars would you like? ($50.00 each)
+<strong>-27</strong>
+Please enter a positive integer.
+<strong>2</strong>
+We'll put 2 oars in your boat.
+
+Your total, with fancy tax, comes to: $1161.44
+
+Would you like to build another boat? (y or n)
+...
+</div>
+	<br/>
+	<h4>LoanCalculator</h4>
+	<p>
+		This program calculates the monthly payment for a loan.  The user enters the amount that will be borrowed, and the amount that will be paid each month.  The program calculates the number of years and months it will take to repay the loan, and the total amount paid including interest.  For each month money is still owed, the program adds 0.5% interest to the current balance, then subtracts the monthly payment.
+	</p>Sample Run:
+	<div class="codeblock2">
+Loan Calculator
+How much money would you like to borrow? <strong>50000</strong>
+How much will you pay back each month? <strong>800</strong>
+Your loan will take 6 years and 4 months to pay back.
+You will have paid a total of $60800.0
+But you get $699.0756382470654 back because you overpaid.
+	</div>
+	
+</div>

@@ -1,0 +1,660 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#GlobalVariables">Global Variables</a></td><td><a href="#ClassDiagrams">Class Diagrams</a></td><td><a href="#StructuringPrograms">Structuring Programs</a></td><td><a href="#trycatchBlocks">try/catch Blocks</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 12 - Programming with Methods</h1>
+  <p>This chapter contains the following sections:</p>
+  <ul class="text-primary">
+  	<li>Global Variables</li>
+	<li>Class Diagrams</li>
+	<li>Structuring Programs</li>
+	<li>Example – Dungeon </li>
+	<li>Example – HighCard</li>
+	<li>try / catch Blocks</li>
+	<li>Example – SearchAndReplace </li>
+  </ul>
+  <p>
+  	Methods allow programmers to organize code.  This makes the code easier to write, test, and modify.  There are two obvious situations in which methods are useful; grouping related code, and grouping repeated code.
+  </p>
+  <h3>Related Code</h3>
+<p>
+	A block of code that is intended to serve a single purpose can be placed in a method to isolate it from other parts of the program.  This makes it easy to test.  Once the method has been tested sufficiently, it can be called from other methods without concern for the code inside.
+</p>
+<p>
+	For example, suppose you want to shuffle a deck of cards.  You have code to pick random numbers and check to see if that card has already been used.  Rather than put this code right in the middle of the game, it could go in a separate method called shuffleDeck().
+</p>
+
+<h3>Repeated Code</h3>
+<p>
+	If a block of code will be called multiple times in the program, it makes sense to put that code in a method.  Not only can the code be tested easily and modified conveniently, this use of methods eliminates duplicate code.
+</p>
+<p>
+	Suppose you are writing a dungeon game.  At each combat turn, the player can fight, cast a spell, or run away.  If we define methods called fight(), cast() and retreat(), we can call them from the main game structure as needed.
+</p>
+
+<h2 id="GlobalVariables">
+	Global Variables
+</h2>
+<p>
+	A global variable, or <code>class</code> variable, is created outside of any method.  The variable has global scope, or <code>class</code> scope.  That means all of the methods in the <code>class</code> can see and use the variable.  The variable is shared by the whole class.
+</p>
+<pre>
+public class Globals
+{
+	<strong>private static int x = 0;</strong>
+
+	public static void main(String[] args)
+	{
+		System.out.println(x);
+		setXToOne();
+		System.out.println(x);
+		setXToZero();
+		System.out.println(x);
+	}
+
+	private static void setXToOne()
+	{
+		<strong>x = 1;</strong>
+	}
+
+	private static void setXToZero()
+	{
+		<strong>x = 0;</strong>
+	}
+}</pre>
+<p>
+	In the example above, x is a global variable.  The methods setXToOne() and setXToZero() have no arguments and <code>return</code> no values.  They change the value of the global variable when called.
+</p>
+<p>
+	In this example, the variable is also declared as <code>static</code> because <code>static</code> methods can only see <code>static</code> variables.  The variable is declared as <code>private</code> because it is not used by methods outside of the Globals <code>class</code>.  Although <code>public</code> global variables are allowed, it is good programming practice to declare all global variables to be private.
+</p>
+<p>
+	If a local variable is created inside a method that has the same name as a global variable, only the local variable will be seen within that method.  The global variable will be hidden from the method.  It's generally a bad idea to give a local variable the same name as a global variable.  It is easy to forget, and think the method is using the global <code>variable</code>.
+</p>
+
+<h2 id="ClassDiagrams">
+	Class Diagrams
+</h2>
+<p>
+	A <code>class</code> diagram uses a box to represent the global variables and the methods in the <code>class</code>.  The box consists of three compartments.  The first compartment holds the name of the class.  
+</p>
+<p>
+	The second compartment contains descriptions of the global variables.  A minus sign (-) denotes <code>private</code> variables, and a plus sign (+) denotes <code>public</code>.  The type and name are listed, as well as the word <code>static</code>, if the variable is <code>static</code>.  Default values may be given.  The variable description looks a lot like the variable declaration in a program.
+</p>
+<p>
+	The third compartment lists descriptions of the methods.  Each description contains the same information as the method signature.  Plus (+) and minus (-) signs are used to mark <code>public</code> and <code>private</code> methods.
+</p>
+<p>
+	The box below represents the Globals class shown above.
+</p>
+
+<table>
+	<tr><th>Globals</th></tr>
+	<tr><td>- static int x = 0</td></tr>
+	<tr><td>+ static void main(String[] args) <br/> - static void setXToOne() </br > - static void setXToZero()</td></tr>
+</table>
+
+<h2 id="StructuringPrograms">
+	Structuring Programs
+</h2>
+
+<p>
+	Usually, one method is used as the main block or loop of the program.  It is often convenient to use the main() method.  Other methods are written to handle major jobs within the program.  Global variables are used to store information used by the whole program.
+</p>
+<p>We will look at three examples:</p>
+<ul>
+	<li>A program that plays a dungeon game</li>
+	<li>A program that plays a card game</li>
+	<li>A program that reads and searches files</li>
+</ul>
+<h4>Example – Dungeon</h4>
+<p>
+	A simple dungeon program might use global variables to store the players hit points, potions and gold.  The program could have methods that modify these values according to the actions the player takes.
+</p>
+
+<table>
+	<tr><th>Dungeon</th></tr>
+	<tr><td>- static int hitPoints = 100<br/>
+			- static int gold = 0<br/>
+			- static int potions = 2;<br/>
+	</td></tr>
+	<tr><td>
+		+ static void main(String[] args)<br/>
+		- static int generateMonster()<br/>
+		- static String getMonsterName(int monster)<br/>
+		- static void fightMonster(int monster)<br/>
+		- static void retreat()<br/>
+		- static void usePotion()<br/>
+	</td></tr>
+</table>
+<p>We’ll represent the monsters using <code>ints</code>.</p>
+<ol>
+	<li>– Skeleton</li>
+	<li>– Zombie</li>
+	<li>– Demon</li>
+	<li>– Dragon</li>
+</ol>
+<p>A typical run of the program might look like this:</p>
+<p style="text-align: center;"><%= image_tag "c12_p4.jpg"%></p>
+<p>
+	This makes the main method fairly simple.  The rest of the program code is isolated in separate methods.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	Scanner in = new Scanner(System.in);
+	String choice;
+
+	for(int i = 0; i < 10; i++)
+	{
+		int monster = <strong>generateMonster();</strong>
+		String name = <strong>getMonsterName(monster);</strong>
+		if(monster == 0)
+		{
+			System.out.println("You snuck closer to the exit");
+		}
+		else
+		{
+			System.out.println("You've encountered a " + name);
+			System.out.print("Do you want to (f)ight, or (r)un away?");
+			choice = in.next();
+			if(choice.equals("f"))
+			{
+				boolean battleResult = <strong>fightMonster(monster);</strong>
+				if( battleResult == false)
+				{
+					break;
+				}
+			}
+			if(choice.equals("r"))
+			{
+				<strong>retreat();</strong>
+			}
+		}
+		System.out.print("You have " + hitPoints + " hit points, ");
+		System.out.print(gold + " gold, ");
+		System.out.println("and " + potions + " potions.");
+
+		System.out.println(" (t)ake another step, or (u)se potion?");
+		choice = in.next();
+		while(choice.equals("u"))
+		{
+			<strong>usePotion();</strong>
+			System.out.println("(u)se potion, or(t)ake another step?");
+			choice = in.next();
+		}
+	}
+	System.out.println("You escaped with " + gold + " gold.");
+}</pre>
+<h3>Example – HighCard</h3>
+<p>
+	The HighCard program uses one global array of 52 ints to represent the 52 cards in a deck.  Methods are used to do things such as shuffle the array, draw a card from the deck, or get the name of a card, such as “King of Spades”.
+</p>
+<table>
+	<tr><th>HighCard</th></tr>
+	<tr><td>- static int[] cards</td></tr>
+	<tr><td>
+		+ static void main(String[] args)<br/>
+		- static void shuffleCards()<br/>
+		- static int drawCard()<br/>
+		- static String getName(int n)<br/>
+		- static int getValue(int n)<br/>
+		- static void declareWinner(int p, int c)<br/>
+	</td></tr>
+</table>
+<p>
+	Each element in the array represents a card in the deck.  The numbers in the array have a value between 0 and 51 to represent the different cards as shown below.
+</p>
+<table>
+	<tr><td>0 – Ace of Hearts</td><td>13 – Ace of Spades</td><td>26 – Ace of Clubs</td><td>39 – Ace of Diamonds</td></tr>
+	<tr><td>1 – 2 of Hearts</td><td>14 – 2 of Spades</td><td>27 – 2 of Clubs</td><td>40 – 2 of Diamonds</td></tr>
+	<tr><td>2 – 3 of Hearts</td><td>15 – 3 of Spades</td><td>28 – 3 of Clubs</td><td>41 – 3 of Diamonds</td></tr>
+	<tr><td>3 – 4 of Hearts</td><td>16 – 4 of Spades</td><td>29 – 4 of Clubs</td><td>42 – 4 of Diamonds</td></tr>
+	<tr><td>4 – 5 of Hearts</td><td>17 – 5 of Spades</td><td>30 – 5 of Clubs</td><td>43 – 5 of Diamonds</td></tr>
+	<tr><td>5 – 6 of Hearts</td><td>18 – 6 of Spades</td><td>31 – 6 of Clubs</td><td>44 – 6 of Diamonds</td></tr>
+	<tr><td>6 – 7 of Hearts</td><td>19 – 7 of Spades</td><td>32 – 7 of Clubs</td><td>45 – 7 of Diamonds</td></tr>
+	<tr><td>7 – 8 of Hearts</td><td>20 – 8 of Spades</td><td>33 – 8 of Clubs</td><td>46 – 8 of Diamonds</td></tr>
+	<tr><td>8 – 9 of Hearts</td><td>21 – 9 of Spades</td><td>34 – 9 of Clubs</td><td>47 – 9 of Diamonds</td></tr>
+	<tr><td>9 – 10 of Hearts</td><td>22 – 10 of Spades</td><td>35 – 10 of Clubs</td><td>48 – 10 of Diamonds</td></tr>
+	<tr><td>10 – Jack of Hearts</td><td>23 – Jack of Spades</td><td>36 – Jack of Clubs</td><td>49 – Jack of Diamonds</td></tr>
+	<tr><td>11 – Queen of Hearts</td><td>24 – Queen of Spades</td><td>37 – Queen of Clubs</td><td>50 – Queen of Diamonds</td></tr>
+	<tr><td>12 – King of Hearts</td><td>25 – King of Spades</td><td>38 – King of Clubs</td><td>51 – King of Diamonds</td></tr>
+</table>
+<p>
+	A card is drawn for the player and for the computer.  Whoever has the higher value card wins.  Aces are worth 1.  Jacks, Queens, and Kings are worth 11, 12, and 13 respectively.
+</p>
+<p style="text-align: center;"><%= image_tag "c12_p7.jpg"%></p>
+<p>
+	The main() method holds the basic structure of the game and calls the other methods to perform necessary tasks.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	int playerCard = -1;
+	int computerCard = -1;
+
+	System.out.println("Time for High Card!!!!!");
+	System.out.println("Just let me shuffle the cards");
+	<strong>shuffleCards();</strong>
+	System.out.println("\nAnd we'll deal a card for you.");
+	playerCard = <strong>drawCard();</strong>
+	System.out.print("Player gets a " + <strong>getName(playerCard));</strong>
+	System.out.println(" worth " + <strong>getValue(playerCard));</strong>
+	System.out.println("\nAnd one for me.");
+	computerCard = <strong>drawCard();</strong>
+	System.out.print("Computer gets a " + <strong>getName(computerCard));</strong>
+	System.out.println(" worth " + <strong>getValue(computerCard));</strong>
+	System.out.println("\nAnd the winner is...");
+	<strong>declareWinner(playerCard, computerCard);</strong>
+	System.out.println("\nThanks for playing.");
+}</pre>
+
+<h2 id="trycatchBlocks">
+	try/catch Blocks
+</h2>
+<p>
+	When a method call <code>throws</code> an Exception, it must be handled properly before the compiler will accept the program.  The Exception may be <code>re-thrown</code> to the next method until it is <code>thrown</code> by main() and printed to the console.  An alternative to <code>throwing</code> an Exception is to catch the Exception.
+</p>
+<p>First, the statement that might <code>throw</code> the Exception is put inside a <code>try</code> block.</p>
+<pre>
+try
+{
+	Scanner in = new Scanner(file);
+}</pre>
+<p>The <code>try</code> block must be followed by a <code>catch</code> block.</p>
+<pre>
+catch(Exception e)
+{
+	e.printStackTrace();
+}</pre>
+<p>
+	If an error is encountered inside the <code>try</code> block, the block will end immediately, and the <code>catch</code> block will run.  After that, the program will continue to run if it is able to.  It is the programmer's job to add code to see that the program doesn't continue as if the Exception had not occurred.  For example, if a file is not opened properly, the program should not start reading from it.
+</p>
+<p>
+	Exception is a <code>class</code>, like String, Random, and Scanner.  When the program encounters an error, an Exception object is created.  The <code>catch</code> block catches that object, and we can call methods on it.  The printStackTrace() method of the Exception <code>class</code> prints a stack trace to the console.  This is the type of error message we normally see.
+</p>
+<p>
+	For example, if we try to call charAt() on a String, and use a negative index, we might see a message like the one below.
+</p>
+<pre>
+	fileText.charAt(-1);
+
+
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+        at java.lang.String.charAt(String.java:687)
+        at SearchAndReplace.readFile(SearchAndReplace.java:76)
+        at SearchAndReplace.main(SearchAndReplace.java:27)</pre>
+<p>
+	We see this message because the people who wrote the charAt() method in the String class used the printStackTrace() method.
+</p>
+<p>
+	Try / catch blocks are useful for method definitions that call methods with checked exceptions.  Rather than <code>throw</code> the exception, the method can deal with the exception and print an error message.
+</p>
+<p>
+	The following method, readFile(), takes a file name as an argument.  The method opens the file, reads all of the text in the file into a string, and returns the string.  If the file can not be read, and error message is printed for the user so they can check the location of the file.
+</p>
+<pre>
+private static String readFile(String fileName)
+{
+	String fileText = "";
+	System.out.println("Reading file: " + fileName);
+	File file = new File(fileName);
+	try
+	{
+		Scanner in = new Scanner(file);
+		while(in.hasNextLine())
+		{
+			fileText = fileText + in.nextLine() + "\n";
+		}
+		System.out.println("File read.\n");
+	}
+	catch(Exception e)
+	{
+		System.out.println(“File not found.”);
+	}
+	return fileText;
+}</pre>
+<h3>Example – SearchAndReplace</h3>
+<p>
+	The SearchAndReplace program opens text files, searches the file for text Strings, and replaces the text with new text.  It uses no global variables.  The main() method runs a loop.  Depending upon the user’s choices, the other methods are called.
+</p>
+<table>
+	<tr><th>SearchAndReplace</th></tr>
+	<tr><td><br/></td></tr>
+	<tr><td>
++ static void main(String[] args)<br/>
+- static int showMenu()<br/>
+- static String readFile(String fileName)<br/>
+- static void showFile(String text)<br/>
+- static int searchFile(String text, String searchString)<br/>
+- static String replaceString(String text, String sOld, String sNew)<br/>
+- static void writeFile(String fileName, String text)
+	</td></tr>
+</table>
+
+<h3>Sample Run:</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4"><p>
+			What would you like to do?<br/>
+			1 Open a File<br/>
+			2 View File<br/>
+			3 Search File<br/>
+			4 Replace Words<br/>
+			5 Save File<br/>
+			6 Quit<br/>
+			1
+			</p>
+			<p>
+			Enter filename:<strong>Rinkitink.txt</strong><br/>
+			Reading file: Rinkitink.txt<br/>
+			File read.<br/>
+			</p></div>
+    <div class="col-sm-4"><p>
+			What would you like to do?<br/>
+			1 Open a File<br/>
+			2 View File<br/>
+			3 Search File<br/>
+			4 Replace Words<br/>
+			5 Save File<br/>
+			6 Quit<br/>
+			2
+			</p>
+			<p>
+			"What! Up that steep hill?" cried the goat. "Get off my back at once,
+			Rinkitink, or I won't budge a step."
+			</p>
+			<p>
+			"But--consider, Bilbil," remonstrated the King. "How am I to get up that
+			hill unless I ride?"
+			</p></div>
+    <div class="col-sm-4"><p>
+			What would you like to do?<br/>
+			1 Open a File<br/>
+			2 View File<br/>
+			3 Search File<br/>
+			4 Replace Words<br/>
+			5 Save File<br/>
+			6 Quit<br/>
+			3
+			</p>
+			<p>
+			Enter a search word or phrase:hill<br/>
+			The search term appears at index 68.<br/>
+			</p>
+			</div>
+		</div>
+  <div class="row">
+    <div class="col-sm-6"><p>
+    	<hr>
+			What would you like to do?<br/>
+			1 Open a File<br/>
+			2 View File<br/>
+			3 Search File<br/>
+			4 Replace Words<br/>
+			5 Save File<br/>
+			6 Quit<br/>
+			4
+			</p>
+			<p>
+			Enter the term to replace:hill<br/>
+			Enter the new term:mountain<br/>
+			The text has been replaced.<br/>
+			</p>
+			</div>
+    <div class="col-sm-6"><p>
+    	<hr>
+			What would you like to do?<br/>
+			1 Open a File<br/>
+			2 View File<br/>
+			3 Search File<br/>
+			4 Replace Words<br/>
+			5 Save File<br/>
+			6 Quit<br/>
+			2
+			</p>
+			<p>
+			"What! Up that steep mountain?" cried the goat. "Get off my back at once,
+			Rinkitink, or I won't budge a step."
+			</p>
+			<p>
+			"But--consider, Bilbil," remonstrated the King. "How am I to get up that
+			mountain unless I ride?"
+			</p></div>
+  </div>  
+</div>
+<p>
+	Again, the main() method is fairly simple as much of the functionality is kept in the other methods.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	Scanner keyboard = new Scanner(System.in);
+	int menuChoice = 0;
+	String search = "";
+	String replace = "";
+	int index = -1;
+	String fileName = "";
+	String fileText = "";
+
+	while(menuChoice != 6)
+	{
+		menuChoice = <strong>showMenu();</strong>
+
+		// Open File
+		if(menuChoice == 1)
+		{
+			System.out.print("\nEnter filename:");
+			fileName = keyboard.nextLine();
+			fileText = <strong>readFile(fileName);</strong>
+		}
+
+		// View File
+		if(menuChoice == 2)
+		{
+			<strong>showFile(fileText);</strong>
+		}
+
+		// Search File
+		if(menuChoice == 3)
+		{
+			System.out.print("Enter a search word or phrase:");
+			search = keyboard.nextLine();
+			index = <strong>searchFile(fileText, search);</strong>
+			if(index == -1)
+			{
+				System.out.println("The search term was not in the file.\n");
+			}
+			else
+			{
+				System.out.println("It appears at index " + index + ".\n");
+			}
+		}
+
+		// Replace Text
+		if(menuChoice == 4)
+		{
+			System.out.print("Enter the term to replace:");
+			search = keyboard.nextLine();
+			System.out.print("Enter the new term:");
+			replace = keyboard.nextLine();
+			fileText = <strong>replaceString(fileText, search, replace);</strong>
+		}
+
+		// Save File
+		if(menuChoice == 5)
+		{
+			System.out.print("Enter file name:");
+				fileName = keyboard.nextLine();
+			<strong>writeFile(fileName, fileText);</strong>
+		}
+	}
+}</pre>
+
+<!-- ========Worksheet and AssignmentPrograms================= -->
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<br/><h4>MethodDungeon</h4>
+	<p>Complete the Dungeon using the main() method given in this chapter.</p>
+	<br/><h4>FancyMethodDungeon</h4>
+	<p>
+	Write a dungeon game like the one described in this chapter, but with added features, such as:
+	<br/>Items that can be found and increase damage or armor
+	<br/>Spells that can be cast on enemies
+	<br/>A configuration file that stores monster names and stats that the program reads
+	<br/>A configuration file with a map requiring the player to choose n, s, e, or w
+	<br/>Races or classes a player can choose at the start of a game
+	</p>
+	<br/><h4>HighCard</h4>
+	<p>Complete the HighCard program using the main() method given in this chapter.</p>
+	<br/><h4>SearchAndReplace</h4>
+	<p>
+		Complete the SearchAndReplace program using the main() method given in this chapter.
+	</p>
+	<br/><h4>BlackJack</h4>
+	<p>
+		This game allows the user to play any number of hands.  Game play proceeds as follows:
+	</p>
+	<p>
+The player gets two cards and sees them both.
+<br/>The house gets two cards.  The player sees the second.
+<br/>The player may hit (take more cards) up to 5.
+<br/>The house will hit until the hand is worth 17 or more.
+	</p>
+	<p>
+The hands are scored as follows:
+<br/>Aces are worth 1 or 11, whichever is better.
+<br/>Face cards are worth 10.
+<br/>Other cards are worth the card number.
+<br/>The hand is worth the sum of the cards in it.
+<br/>Either player "busts" if the hand goes over 21.
+<br/>Highest score under 22 wins.
+	</p>
+	<p>Sample Run</p>
+<!----------------------------->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6" >
+      <pre>
+Time for BlackJack!!!!!
+It's $1 per game.  We'll give you $10 to start with.
+
+
+Shuffling the cards...
+
+Two cards for the player
+5 of Clubs
+4 of Diamonds
+Your hand is worth 9
+
+Two cards for the dealer
+So far, the dealer has a 9 of Clubs showing.
+
+Would you like to hit or stay? (h or s)<strong>h</strong>
+
+You now have:
+5 of Clubs
+4 of Diamonds
+9 of Spades
+Your hand is worth 18
+
+Would you like to hit or stay? (h or s)<strong>s</strong>
+
+Dealer has:
+9 of Clubs
+Queen of Diamonds
+
+Dealer's hand is worth 19
+
+Dealer stays.
+
+Dealer wins!
+Your current score is $9
+Play again? (y or n)<strong>y</strong>
+
+
+Shuffling the cards...
+
+Two cards for the player
+8 of Hearts
+6 of Diamonds
+Your hand is worth 14
+
+Two cards for the dealer
+So far, the dealer has a 4 of Spades showing.
+
+Would you like to hit or stay? (h or s)<strong>h</strong>
+
+You now have:
+8 of Hearts
+6 of Diamonds
+Ace of Clubs
+Your hand is worth 15
+      </pre>
+    </div>
+    <div class="col-sm-6" >
+      <pre>
+Would you like to hit or stay? (h or s)<strong>h</strong>
+
+You now have:
+8 of Hearts
+6 of Diamonds
+Ace of Clubs
+9 of Diamonds
+Busted!!!
+
+Dealer has:
+4 of Spades
+9 of Spades
+
+Dealer's hand is worth 13
+
+Dealer stays.
+
+Dealer wins!
+Your current score is $8
+Play again? (y or n)<strong>y</strong>
+
+
+Shuffling the cards...
+
+Two cards for the player
+Jack of Hearts
+4 of Spades
+Your hand is worth 14
+
+Two cards for the dealer
+So far, the dealer has a 7 of Hearts showing.
+
+Would you like to hit or stay? (h or s)<strong>h</strong>
+
+
+You now have:
+Jack of Hearts
+4 of Spades
+7 of Clubs
+Your hand is worth 21
+
+Would you like to hit or stay? (h or s)<strong>s</strong>
+
+Dealer has:
+7 of Hearts
+Queen of Hearts
+
+Dealer's hand is worth 17
+
+Dealer stays.
+
+Player wins!
+Your current score is $9
+Play again? (y or n)<strong>n</strong>
+
+Thank you.  Come again.
+      </pre>
+    </div>
+  </div>
+</div>
+<!----------------------------->
+	
+</div>

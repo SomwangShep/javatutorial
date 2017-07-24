@@ -1,0 +1,821 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#RelationalOperators">Relational Operators</a></td><td><a href="#ComparingStrings">Comparing Strings</a></td><td><a href="#LogicalOperators">Logical Operators</a></td><td><a href="#TheORoperator">The || operator (OR)</a></td><td><a href="#TheNOToperator">The ! operator (NOT)</a></td></tr>
+		<tr><td><a href="#Conditions">Conditions</a></td><td><a href="#OrderofOperations">Order of Operations</a></td><td><a href="#IfStatements">If Statements</a></td><td><a href="#ElseStatements">Else Statements</a></td><td><a href="#NestedIfStatements">Nested If Statements</a></td></tr>
+		<tr><td colspan="2"><a href="#Worksheet4">Worksheet 4: Conditions</a></td><td colspan="2"><a href="#Worksheet5">Worksheet 5: If Statements</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 3 – If Statements </h1>
+  <p >
+    An <code>if</code> statement is a way to make a program execute code conditionally.  That means if some condition is met, the code will run.  If the condition is not met, the code will not run.  An <code>if</code> statement begins with the word if followed by a condition in parentheses.  A code block enclosed in curly braces follows the condition.
+  </p>
+  <pre>
+if(x > 5)
+{
+	System.out.println("x is greater than 5");
+}</pre>
+  <p>
+    The Budget program in the last chapter subtracts a person's expenses from their paycheck and displays the money remaining.  If the expenses are greater than the paycheck, the money remaining will be negative.  It would be nice if the program could react differently in that case.
+  </p>
+  <pre>
+money = pay - car - rent - electricity - food;
+
+System.out.println("You have $" + money + " left.");
+<strong>
+if(money < 0)
+{
+	System.out.println("You're in trouble!!");
+}</strong></pre>
+  
+  <p style="text-align: center;"><%= image_tag "c3_p1.jpg"%></p>
+  <p>
+    An <code>if</code> statement controls the code that follows it.  If the condition in the if statement is true, the code will run.  A condition (or Boolean expression), is an expression that is equal to true or false.  A simple condition can be made using relational operators.
+  </p>
+  <h2 id="RelationalOperators">
+    Relational Operators
+  </h2>
+  <pre style="color:blue">
+>		Is Greater Than
+<		Is Less Than
+>=		Is Greater Than Or Equal To
+<=		Is Less Than Or Equal To
+==		Is Equal To
+!=		Is Not Equal To</pre>
+  <p>
+    There are six relational operators.  These operators compare two numbers (two <code>ints</code> or two doubles</code>).  The result of these comparisons will always be either true or false.  Notice that the "is equal to" operator uses two equal signs (==).  A single equal sign is an assignment operator(=), which will not compare two numbers.    
+  </p>
+  <p>
+    A condition might use constants.
+  </p>
+  <p class="centerBlue">
+    <code>3 < 4		( 3 Is Less Than 4)</code>
+  </p>
+  <p>
+    The condition above is <code>true</code> because 3 is less than 4.
+  </p>
+  <p>
+    The condition can use variables.  In the example below, x = 3, and y = 4.
+  </p>
+  <p class="centerBlue">
+    <code>x > y		(x Is Greater Than y)</code>
+  </p>
+  <p>
+    This condition is false.  3 is not greater than 4.
+  </p>
+  <p>
+    The relational operators compare numbers, so expressions using mathematical operators can be used.
+  </p>
+  <p class="centerBlue">
+    <code>x – 3 <= 2 + y / 4</code>
+  </p>  
+  
+  <h2 id="ComparingStrings">
+    Comparing Strings
+  </h2>
+  <p>
+    The relational operators only compare numbers.  You must compare Strings using the equals() method.  Suppose we have the following two String variables:
+  </p>
+  <pre>
+String word1 = "apples";
+String word2 = "oranges";</pre>
+  <p>
+    The line below will result in a false, because the two Strings are not the same.
+  </p>
+  <pre>
+word1.equals(word2) => false</pre>
+  <h2 id="LogicalOperators">
+    Logical Operators
+  </h2>
+  <p>
+    Logical operators are used for <code>boolean</code> values.  The result of these operations is always a <code>true</code> or a <code>false</code>.
+  </p>
+  <h3>
+    The && operator (AND)
+  </h3>
+  <p>
+    The && operator is also called the AND operator.  If the operand on both sides of the AND are <code>true</code>, the result of the AND operation will be <code>true</code>.  However, if either operand is <code>false</code>, the result will be <code>false</code>.
+  </p>
+  <pre>
+false && false => false
+false && true  => false
+true  && false => false
+true  && true  => true</pre>
+  <p>
+    The AND operator has the same meaning in Java as in common speech. 
+  </p>
+  <p class="centerBlue">
+    Your car will start if the battery is charged AND it has gas.
+  </p>
+  <p>
+    The only time the car will start is when both operands are <code>true</code>.  If either or both are <code>false</code>, the car will not start.
+  </p>
+  
+  <h2 id="TheORoperator">
+    The || operator (OR)
+  </h2>
+  <pre>
+false || false  => false
+false || true   => true
+true  || false  => true
+true  || true	=> true</pre>
+  <p>
+    Once again, the word OR has the same meaning in Java as in common speech.
+  </p>
+  <p class="centerBlue">
+    You'll be in trouble if your brakes fail OR if your wheels fall off.
+  </p>
+  <p>
+    You will be in trouble if either operand is <code>true</code>.  You will only be safe if both operands are <code>false</code>.
+  </p>
+  <h2 id="TheNOToperator (NOT)">
+    The ! operator (NOT)
+  </h2>
+  <p>
+    The NOT operator only uses one operand. If the value following the NOT operator is <code>true</code>, the result of the operation is <code>false</code>.  If the value following the NOT operator is <code>false</code>, the result of the operation is <code>true</code>.
+  </p>
+  <pre>
+!false => true 
+!true => false</pre>
+  
+  <h2 id="Conditions">
+    Conditions
+  </h2>
+  <p>
+    A condition is an expression that is equal to <code>true</code> or <code>false</code>.  A condition can involve multiple logical operators.
+  </p>
+  <p class="centerBlue">
+    true || !false && false || !true
+  </p>
+  <p>
+    Parentheses can be used to force the normal order of operations.  Operations inside parentheses are always done before those outside.
+  </p>
+  <p class="centerBlue">
+    !(true && !false) && (false || true)
+  </p>
+  <p>
+    The operands involved in a condition can be any constant, variable, or expression that results in a value of <code>true</code> or <code>false</code>.  This includes <code>boolean</code> variables, as well as relational expressions, and String comparisons.
+  </p>
+  <pre>
+boolean b = true;
+int x = 5;
+String s = "Pie";
+
+b || x + 2 < 7 && s.equals("Yummy")</pre>
+  <h2 id="OrderofOperations">
+    Order of Operations
+  </h2>
+  <p>
+    When a program resolves a condition, it performs operations in the following order:
+  </p>
+  <pre class="preBlue">
+Replace variables
+Evaluate methods
+NOT operators   !
+Multiplications and divisions   *, /, %
+Additions and subtractions   +, -
+Comparisons   <, <=, >, >=, ==, !=
+AND operators   &&
+OR operators   ||</pre>
+  <h3>
+    Example:
+  </h3>
+  <pre>
+int x = 3;
+boolean b = false;
+String s = “Hi”;
+
+x + 1 > 0 &&   b   || !s.equals(“Hi”)</pre>
+  <P>
+    Showing the program operation in steps:
+  </P>
+  <pre>
+  3 + 1 > 0 && false || !s.equals(“Hi”)	// Variables
+  3 + 1 > 0 && false || !true				// Methods
+  3 + 1 > 0 && false || false				// NOT
+    4   > 0 && false || false				// Addition
+      true  && false || false				// Comparison
+           false     || false				// AND
+                   false     				// OR</pre>
+  <p>
+    Note that the AND operations are always done before the OR operations.
+  </p>
+  
+  <h2 id="IfStatements">
+    If Statements
+  </h2>
+  <p>
+    An <code>if</code> statement is a control structure.  It decides if the block of code following it will run or not.  A semicolon is not used after an <code>if</code> statement.  An <code>if</code> statement consists of the word <code>if</code>, followed by a condition enclosed in parentheses.  If the condition is <code>true</code>, the code following the <code>if</code> statement will run.  If the condition is <code>false</code>, the code following the <code>if</code> statement will be skipped, and execution will continue.  Curly braces ({}) are used to specify the "block of code" associated with the <code>if</code> statement.
+  </p>
+  <pre>
+<strong>if(x < 5)
+{
+	y = y * 2;
+	x = 5;
+}</strong>
+System.out.println("y = " + y);</pre>
+  
+  <p>
+    If the value of the variable x is less than 5, y will be doubled, and x will be set to 5.  If x is not less than 5 (x is greater than 5 or equal to 5), the values of x and y will not change.  Either way, the value of y is printed.
+    <br/>If curly braces are not used, only the line following the <code>if</code> statement is controlled by it.
+  </p>
+  <pre>
+<strong>if(x < 5)
+	y = y * 2;</strong>
+x = 5;
+System.out.println("y = " + y);</pre>
+  <p>
+    The use of curly braces for all <code>if</code> statements is recommended, even if the code block contains only one line.  The braces make the code more readable.  They also make it less likely that you will introduce an error later if code is added.
+  </p>
+  <pre>
+<strong>if(x < 5)
+{
+	y = y * 2;
+}</strong>
+x = 5;
+System.out.println("y = " + y);</pre>
+  <p>
+    Note that indentation is used to indicate levels within the program structure.  This whitespace is ignored by the compiler, but its use is important to make programs more readable.
+  </p>
+  
+  <h2 id="ElseStatements">
+    Else Statements
+  </h2>
+  <p>
+    An <code>else</code> statement can follow any <code>if</code> statement.  The else statement is optional.  You can use an <code>if</code> statement without an <code>else</code> statement.  However, you can not use an <code>else</code> statement without an <code>if</code> statement.  The <code>else</code> statement must immediately follow the closing brace of the <code>if</code> code block.
+  </p>
+  <pre>
+if(x < 5)
+{
+	y = y * 2;
+	x = 5;
+}
+<strong>else
+{
+	y = y * 3;
+	x = 10;
+}</strong>
+System.out.println("y = " + y);</pre>
+  <p>
+    If the condition inside the <code>if</code> statement is <code>true</code>, the code block following the if statement runs, and the code block following the <code>else</code> statement is skipped. If the condition is <code>false</code>, the code block following the <code>if</code> statement is skipped, and the code block following the <code>else</code> runs.  Note that exactly one of the two blocks will always run.  Even if a variable values change within the <code>if</code> block, once the <code>if</code> block runs, the <code>else</code> block will not.
+  </p>
+  <p>
+    Once the <code>if</code> or <code>else</code> block runs once, the program continues to execute.  The <code>if</code> statement is not a repetition structure.  It will not repeat the code multiple times.  
+  </p>
+  <h3>
+    Example Program – PetShop
+  </h3>
+  <p>
+    In this example, the user chooses a type of pet to purchase (fish or cat), and the user decides how many to buy.  The program sets the price per pet based on the type of pet chosen.  Only 5 of each pet are available, so if the customer asks for more than 5, they only get 5.
+  </p>
+  <p>
+    Ordering two cats
+  </p>
+  <p style="text-align: center;"><%= image_tag "c3_p7.jpg"%></p>
+  <p>
+    Ordering seven fish
+  </p>
+  <p style="text-align: center;"><%= image_tag "c3_p7_02.jpg"%></p>
+  <pre>
+import java.util.Scanner;
+
+public class PetShop
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		String pet = "";
+		double price = 0.0;
+		int number = 0;
+
+		System.out.println("^_^  Welcome to PetShop  ^_^\n");
+		System.out.print("Would you like a fish or a cat? ");
+		pet = keyboard.next();
+
+		<strong>if(pet.equals("fish"))</strong>
+		{
+			System.out.println("Our fish are $2.00 each.");
+			price = 2;
+		}
+
+		<strong>if(pet.equals("cat"))</strong>
+		{
+			System.out.println("Our cats are $10.00 each.");
+			price = 10;
+		}
+
+		System.out.print("How many would you like? ");
+		number = keyboard.nextInt();
+
+		<strong>if(number <= 5)</strong>
+		{
+			System.out.println("Okay " + number + " it is.");
+			price = price * number;
+		}
+		<strong>else</strong>
+		{
+			System.out.println("Sorry.  We only have 5.");
+			price = price * 5;
+		}
+
+		System.out.println("That comes to $" + price);
+	}
+}</pre>
+  <p>
+    In the PetShop example program, the user is asked to enter a String.  If the String is equal to "fish", only the first if statement runs, setting the price to $2.00.  If the String is equal to "cat", the first if statement does not run, but the second one does, setting the price to $10.00.
+  </p>
+  <pre>
+pet = keyboard.next();
+
+<strong>if(pet.equals("fish"))</strong>
+{
+	System.out.println("Our fish are $2.00 each.");
+	price = 2;
+}
+
+<strong>if(pet.equals("cat"))</strong>
+{
+	System.out.println("Our cats are $10.00 each.");
+	price = 10;
+}</pre>
+  <p>
+    If the user input is equal to something other than "fish" or "cat", neither if statement will run, and the price will remain at $0.00.  Notice that the Strings are compared using the equals() method, not with the == operator, which only works for numbers.
+  </p>
+  <p>
+    Next, the user is asked how many pets are being purchased.  If the user chooses to buy 5 or fewer pets, the price is multiplied by the number of pets.  If the user asks for more than 5 pets, the program apologizes for the shortage and charges the user for 5 pets.
+  </p>
+  <pre>
+number = keyboard.nextInt();
+
+<strong>if(number <= 5)</strong>
+{
+	System.out.println("Okay " + number + " it is.");
+	price = price * number;
+}
+<strong>else</strong>
+{
+	System.out.println("Sorry.  We only have 5.");
+	price = price * 5;
+}</pre>
+  <p>
+    Either the block of code following the <code>if</code> will run, or the block of code following the <code>else</code> will run.
+  </p>
+  
+  <h2 id="NestedIfStatements">
+    Nested If Statements
+  </h2>
+  <p>
+    An <code>if</code> statement can be placed inside the code block of another <code>if</code> statement, or inside an <code>else</code> code block.  This is called nesting. Statements can be nested many levels deep.
+  </p>
+  <p>
+    The code below prints a message <code>if</code> the variables x and y are both positive.
+  </p>
+  <pre>
+if(<strong>x >= 0</strong>)
+{
+	if(<strong>y >= 0</strong>)
+	{
+		System.out.println("Both numbers are positive.");
+	}
+}</pre>
+  <p>
+    The message only prints <code>if</code> both if conditions are <code>true</code>.  We could get the same functionality using an AND operator.
+  </p>
+  <pre>
+if(<strong>x >= 0 && y >= 0</strong>)
+{
+	System.out.println("Both numbers are positive.");
+}</pre>
+  <h3>
+    Example Program – Quadrants
+  </h3>
+  <p>
+    This program asks the user for an x value and a y value, and tells the user which quadrant the point is in.
+  </p>
+  <p style="text-align: center;"><%= image_tag "c3_p10.jpg"%></p>
+  <pre>
+import java.util.Scanner;
+
+public class Quadrants
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int x = 0;
+		int y = 0;
+
+		System.out.print("Enter x coordinate: ");
+		x = keyboard.nextInt();
+		System.out.print("Enter y coordinate: ");
+		y = keyboard.nextInt();
+
+
+		<strong>if(y > 0)	</strong>
+		{
+			System.out.println("It's on the top");
+				<strong>if(x > 0)	</strong>
+			{
+				System.out.println("It's in Quadrant 1");
+			}
+				<strong>else	</strong>
+			{
+				System.out.println("It's in Quadrant 2");
+			}
+		}
+			<strong>else	</strong>
+		{
+			System.out.println("It's on the bottom");
+			<strong>if(x > 0)	</strong>
+			{
+				System.out.println("It's in Quadrant 4");
+			}
+				<strong>else	</strong>
+			{
+				System.out.println("It's in Quadrant 3");
+			}
+		}
+	}
+}</pre>
+
+<!-- ========Workshet and AssignmentPrograms================= --> 
+<div id="Worksheet4">
+  <h4>Worksheet 4: Conditions</h4>
+  <ol>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+boolean flag = true;
+int y = -5;
+int z = -2;
+
+y == z || flag && b
+      </div>
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+int y = 0;
+
+-5 <= y || (check || false)
+      </div>      
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean flag = false;
+int x = -4;
+int y = -1;
+
+!(flag || x < y)
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+boolean flag = true;
+
+(check || false) || !check && false && flag
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = true;
+int x = 3;
+
+x >= 5 || b && 1 > -x
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+int x = 2;
+int y = -2;
+
+b && !b || !b && (x >= y && -2 >= y)
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+int y = 2;
+int z = 1;
+
+-4 == y && !(y > z && 0 < 3) && true && !check
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = true;
+boolean b = true;
+boolean flag = true;
+
+!(!check && flag) && !check && b
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean flag = true;
+int x = 5;
+
+false && 2 != x && false || flag && true
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+boolean flag = true;
+int x = -4;
+int y = -3;
+int z = -2;
+
+z != z && b && x != y || flag
+      </div>    
+    </li>
+  </ol>
+  
+</div>
+
+<div id="Worksheet5">
+  <h4>Worksheet 5: If Statements</h4>
+  <ol>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -3;
+int y = -1;
+
+if(y > 0)
+{
+    y = x - 1;
+}
+else
+{
+    if(y <= 4 || x == -2)
+    {
+        x = y + 2;
+        y = y - 2;
+    }
+    else
+    {
+        y = y - 2;
+        System.out.println("May the force be with you");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -2;
+int y = 2;
+
+if(x >= -2)
+{
+    x = x – 2;
+    if(y <= 2 && x < -3)
+    {
+        y = x + 3;
+    }
+    else
+    {
+        System.out.println("Waffles are tasty");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y)        
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -1;
+int y = 1;
+
+if(x > 4 && x == -3)
+{
+    if(x < 4 || x < 3)
+    {
+        x = x - 2;
+        y = 2;
+    }
+}
+else
+{
+    y = y + 1;
+    if(x < -3 || y > -2)
+    {
+        x = y - 1;
+        y = -2;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 4;
+int y = 2;
+
+if(x != 2)
+{
+    if(x <= 3)
+    {
+        x = -2;
+        y = 2;
+    }
+    else
+    {
+        x = x - 2;
+        y = y + 1;
+    }
+    x = x + 2;
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 5;
+int y = 0;
+
+if(y == 5 || y > -2)
+{
+    x = x + 3;
+    System.out.println("I am Roger the Shrubber");
+}
+else
+{
+    if(y == 0 && x >= 3)
+    {
+        x = -1;
+        System.out.println("I'll buy that for a dollar");
+    }
+    else
+    {
+        x = x - 3;
+        y = y - 1;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 3;
+int y = 2;
+
+if(y >= -5 && y >= -3)
+{
+    if(y != 2)
+    {
+        x = -3;
+    }
+    else
+    {
+        x = -1;
+        y = x - 3;
+    }
+}
+else
+{
+    x = x + 3;
+    y = 3;
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 2;
+int y = 1;
+
+if(y != 5)
+{
+    if(y != 1 || y < -2)
+    {
+        x = y - 3;
+        y = 2 + x;
+    }
+    y = y + 2;
+}
+else
+{
+    if(y >= 3)
+    {
+        x = -3;
+        y = 2;
+    }
+    else
+    {
+        y = x + 2;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -4;
+int y = 1;
+
+if(x != -4 || x < 1)
+{
+    if(x < -4)
+    {
+        x = -2;
+        System.out.println("What would Kirk do?");
+    }
+    else
+    {
+        x = y + 1;
+        y = x + 1;
+        System.out.println("What would Picard do?");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>    
+  </ol>
+  
+</div>
+
+<div id="AssignmentPrograms">
+  <h3>Assignment Programs</h3>
+  <h4>EvenOrOdd</h4>
+  <p>
+    This program asks the user to enter a number.  The program determines whether the number is even or odd, and displays the result.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Please enter a number: 7
+The number 7 is odd.
+  </div>
+  
+  <h4>RightTriangleTester</h4>
+  <p>
+    This program asks the user to enter the lengths for the three sides of a triangle.  The program determines whether or not the triangle is a right triangle or not.  The program asks the user for the lengths of a, b, and c, where c is the longest side.  Recall that for any right triangle a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Enter the length of side a: <strong>3</strong>
+Enter the length of side b: <strong>4</strong>
+Enter the length of side c: <strong>5</strong>
+Yes.  That is a right triangle.
+  </div>
+  
+  <h4>Grader</h4>
+  <p>
+    This program asks the user for 5 exam grades.  It then calculates the average and assigns a letter grade.  The program assigns an A to any grade 90 or above, a B to any grade 80 to 90, and so on.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Enter grade for Exam 1: <strong>75</strong>
+Enter grade for Exam 2: <strong>85</strong>
+Enter grade for Exam 3: <strong>75</strong>
+Enter grade for Exam 4: <strong>65</strong>
+Enter grade for Exam 5: <strong>75</strong>
+
+Your grade is a C.
+  </div>
+  
+  <h4>TelephoneCall</h4>
+  <p>The cost to call some location is calculated as follows.</p>
+  $1.50 - Connection and first 3 minutes<br/>
+  $0.75 - for each additional minute during the day<br/>
+  $0.30 - for each additional minute at night.<br/>
+  <p>Write a program that asks the user if the call is a day or night call, and for how many minutes the call will last.  The program calculates the cost for the call.</p>
+  <br/>Sample Run:
+  
+  <div class="codeblock2">
+This is the Operator.
+Will this be a day or night call? (d or n): <strong>d</strong>
+For how many minutes will the call last?: <strong>13</strong>
+
+Your call will cost $9.0
+  </div>
+  <h4>PostOffice </h4>
+  <p>Write a program that calculates postage.  The program asks the user if the package is staying in state (yes or no).  The program also asks the user the weight of the package (in pounds), and priority (1, 2, or 3).  The program calculates and displays the cost for shipping.</p>
+  Shipping in state is <br/>
+  $5 per pound at priority 1<br/>
+  $3 per pound at priority 2<br/>
+  $1 per pound at priority 3<br/>
+  <p>Out of state shipping is double.</p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Welcome to the Post Office!
+
+Will your package be staying in state? (yes or no)
+no
+Enter the weight in pounds: 23
+Choose a priority. (1, 2, 3): 2
+
+Thank you.
+Your package will cost $138.0 to ship.
+  </div>
+
+  
+</div>
+  

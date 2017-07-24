@@ -1,0 +1,825 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#MethodDefinitionsandMethodCalls">Method Definitions and Method Calls</a></td><td><a href="#MethodSignatures">Method Signatures</a></td><td colspan="2"><a href="#MethodsWithNoArgumentsOrReturnValues">Methods With No Arguments Or Return Values</a></td></tr>
+		<tr><td><a href="#MethodsWithReturnValues">Methods With Return Values</a></td><td><a href="#MethodsWithArguments">Methods With Arguments</a></td><td><a href="#CallingMethods">Calling Methods</a></td><td><a href="#DefiningMethods">Defining Methods</a></td></tr>
+		<tr><td><a href="#ProgramStructure">Program Structure</a></td><td><a href="#ThemainMethod">The main() Method</a></td><td><a href="#DefiningMethodsWorksheet">Defining Methods Worksheet</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 11 - Defining Methods</h1>
+  <p>This chapter contains the following sections:</p>
+  <ul class="text-primary">
+  	<li>Method Definitions and Method Calls</li>
+	<li>Method Signatures</li>
+	<li>Methods With No Arguments Or Return Values</li>
+	<li>Methods With <code>Return</code> Values</li>
+	<li>Methods With Arguments</li>
+	<li>Calling Methods</li>
+	<li>Defining Methods</li>
+	<li>Program Structure</li>
+	<li>The main() Method</li>
+  </ul>
+  <p>
+  	A method definition is a block of code with a name. Our programs so far have only used one method definition called main().  A <code>class</code> can contain other method definitions that are called by main(), or by each other.  Method definitions are little functional blocks a programmer uses to organize a program.  
+  </p>
+  <p style="text-align: center;"><%= image_tag "c11_p1.jpg"%></p>
+  <h3>Example Program – Methods</h3>
+  <p>
+  	The program below calculates the square of the number entered by the user.  The functionality of the program is divided into four methods.  The main method calls these methods as needed.
+  </p>
+  <ul class="text-primary" style="list-style-type:none">
+  	<li>printWelcome()</li>
+	<li>getUserInput()</li>
+	<li>square()</li>
+	<li>printOutput()</li>
+  </ul>
+  <pre>
+import java.util.Scanner;
+
+public class Methods
+{
+   public static void main(String[] args)
+   {
+      int number = 0;
+      int squaredNumber = 0;
+
+      <strong>printWelcome();</strong>
+      number = <strong>getUserInput();</strong>
+      squaredNumber = <strong>square(number);</strong>
+      <strong>printOutput(number, squaredNumber);</strong>
+   }
+
+   <strong>private static void printWelcome()</strong>
+   {
+      System.out.println("***** Number Squarer!! *****");
+      System.out.println("Give me a number, and I'll Square it!\n");
+   }
+
+   <strong>private static int getUserInput()</strong>
+   {
+      Scanner in = new Scanner(System.in);
+      int n = 0;
+      System.out.print("Enter an integer:");
+      n = in.nextInt();
+      return n;
+   }
+
+   <strong>private static int square(int n)</strong>
+   {
+      int nSquared = n * n;
+      return nSquared;
+   }
+
+   <strong>private static void printOutput(int a, int b)</strong>
+   {
+      System.out.println("\n" + a + " squared is " + b);
+   }
+}</pre>
+<p style="text-align: center;"><%= image_tag "c11_p3.jpg"%></p>
+<h3 id="MethodDefinitionsandMethodCalls">
+	Method Definitions and Method Calls
+</h3>
+<p>A method definition is a block of code that has a name.</p>
+<pre>
+private static void printWelcome()
+{
+  System.out.println("***** Number Squarer!! *****");
+  System.out.println("Give me a number, and I'll Square it!\n");
+}</pre>
+<p>A method call is a statement that executes the method definition.</p>
+<pre>printWelcome();</pre>
+<p>At times, both method calls and method definitions are referred to simply as "methods".</p>
+<h3 id="MethodSignatures">
+	Method Signatures
+</h3>
+<p>Every method definition starts with a method signature.</p>
+<p style="text-align: center;"><%= image_tag "c11_p3_02.jpg"%></p>
+<p>
+	A method can be <code>public</code> or <code>private</code>.  <code>Private</code> methods can only be called from within the same <code>class</code>.  A method only needs to be <code>public</code> if it will be called from outside the <code>class</code>.  The methods in this program are all called from inside the class so they are all declared <code>private</code>.  If a method is not declared to be <code>public</code> or <code>private</code>, it becomes <code>public</code> by default.
+</p>
+<br/>
+<p>
+	<code>Static</code> methods are called without creating <code>new</code> objects.  Within a <code>class static</code> methods can only call other <code>static</code> methods.  Since the methods in this program are all called from main(), which is <code>static</code>, they are all <code>static</code> as well.
+</p>
+<br/>
+<p>
+	Values are <code>returned</code> using the <code>return</code> keyword.  The <code>return</code> type always directly precedes the method name in the method signature.  
+</p>
+<br/>
+<p>
+	If a method does not <code>return</code> a value, a type of <code>void</code> is specified.  Otherwise, the type of value that will be <code>returned</code> must be specified.
+</p>
+<br/>
+<p>
+	A method that has a <code>return</code> type other than <code>void</code> must <code>return</code> a value, and the value must be of the proper type.  A method can only <code>return</code> one value.
+</p>
+<br/>
+<p>
+	Every method has a name that identifies it uniquely within a <code>class</code>.  The names for methods follow the same rules for naming variables.  
+</p>
+<br/>
+<p>The first character must be a letter.  Other characters may be numbers.  </p>
+<br/>
+<p>Spaces and other characters may not be used.  </p>
+<br/>
+<p>
+	Both uppercase and lowercase are acceptable, but method names are case sensitive, so printOutput() and Printoutput() are two different method names.  
+</p>
+<br/>
+<p>
+	By convention, method names start with a lowercase letter, and the first letter of each word should be capitalized.  
+</p>
+<h2 id="MethodsWithNoArgumentsOrReturnValues">
+	Methods With No Arguments Or Return Values
+</h2>
+<p>
+	The printWelcome() method doesn't require any input arguments, and doesn't <code>return</code> anything.  
+</p>
+<pre>
+private static void printWelcome()
+{
+  System.out.println("***** Number Squarer!! *****");
+  System.out.println("Give me a number, and I'll Square it!\n\n");
+}</pre>
+<h2 id="MethodsWithReturnValues">
+	Methods With Return Values
+</h2>
+<p>
+	The getUserInput() method doesn't require any input arguments, but it does <code>return</code> a value.
+</p>
+<pre>
+<strong>private static int getUserInput()</strong>
+{
+  Scanner in = new Scanner(System.in);
+  int n = 0;
+  System.out.print("Enter an integer:");
+  n = in.nextInt();
+  return n;
+}</pre>
+<p>
+	The method signature says the method will <code>return</code> an <code>int</code>.  A <code>new</code> Scanner object is created and used to get an integer from the keyboard.  The <code>int</code> is <code>returned</code> with the statement:
+</p>	
+<pre>return n;</pre>
+<p>
+	When the method is called from main(), the code inside the method definition runs, and the method call is replaced by the <code>return</code> value, which is assigned to the variable <code>number</code>.
+</p>
+<p style="text-align: center;"><%= image_tag "c11_p5.jpg"%></p>  
+<br/>
+<p>
+	When a <code>return</code> statement is encountered in a method, the method immediately exits, and <code>returns</code> to the calling method.  
+</p>
+<br/>
+<p>
+	A method can contain multiple <code>return</code> statements.  The first one encountered will end the method execution and cause it to <code>return</code>.  
+</p>
+<br/>
+<p>
+	A method that has a <code>return</code> type of void can still use the <code>return</code> keyword to force an exit from the method much as the <code>break</code> keyword ends a loop.
+</p>
+<br/>
+<p>
+	A method can only <code>return</code> one value.  If the <code>return</code> type is not a primitive type, the value returned is actually a pointer to the <code>returned</code> object.  That means a new String or an array can be created inside a method and <code>returned</code>.  
+</p>
+<br/>
+<p>
+	The method shown below creates a <code>new</code> array of 5 <code>ints</code>, initializes the elements to 5, and <code>returns</code> the array.  Note that the method signature <code>return</code> type is <code>int[]</code>.  In the main method, a reference variable is created for the <code>int</code> array, but an array is not created.  The reference variable is assigned to the array object created in and <code>returned</code> by the method definition.
+</p>
+<pre>
+	public static void main(String[] args)
+{
+	int[] value;
+
+	value = makeArray();
+	…
+}
+
+private static int[] makeArray()
+{
+	int[] a = new int[5];
+	for(int i = 0; i < a.length; i++)
+	{
+		a[i] = 5;
+	}
+	return a;
+}</pre>
+
+<h3 id="MethodsWithArguments">
+	Methods With Arguments
+</h3>
+<pre>
+private static int square(<strong>int n</strong>)
+{
+  int nSquared = n * n;
+  return nSquared;
+}</pre>
+<p>
+	The method signature defines the type of the argument (int) and the name to be used within the method (n).  Inside the method, this name can be used just as any other variable.  However, the variable has "method scope", or "local scope".  It can only be seen from within its own method.  Methods can use their own variables without interference, even if the variables have the same names.
+</p>
+<br/>
+<p>
+	When a primitive is passed to a method, the value is passed, but any changes made to that number, once it enters the method, are not reflected in the original variable.
+</p>
+<br/>
+<p>
+	The following program creates an int called x and initializes it to 10.  The value of x is printed.  The value is passed to a method, which increments it to 11.  This value is printed.  When the method returns, the value of x is printed again.  It is still 10.
+<br/>
+<pre>
+public static void main(String[] args)
+{
+	int x = 10;
+	System.out.println(x);
+	
+	method(x);
+	System.out.println(x);
+}
+
+private static void method(int y)
+{
+	y = y + 1;
+	System.out.println(y);
+}</pre>
+<p style="text-align: center;"><%= image_tag "c11_p7.jpg"%></p>
+<br/>
+<p>
+	On the other hand, if the argument is not a primitive type, a pointer or reference to the original object is passed to the method.  That means any changes made to the passed object will be seen in the original object in main().  
+</p>
+<br/>
+<p>
+	The following program creates an array in the main() method.  The values of the array elements are printed.  The array is passed to a second method, which changes the values.  When the method returns, the array values are printed again.  We see that the values have all changed in the original array.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	int[] value = {3, 7, 2};
+	for(int i = 0; i < value.length; i++)
+	{
+		System.out.println(value[i]);
+	}
+	
+	doubler(value);
+
+	for(int i = 0; i < value.length; i++)
+	{
+		System.out.println(value[i]);
+	}
+}
+
+private static void doubler(int[] a)
+{
+	for(int i = 0; i < a.length; i++)
+	{
+		a[i] = a[i] * 2;
+	}
+}</pre>
+<p style="text-align: center;"><%= image_tag "c11_p8.jpg"%></p>
+
+<h3 id="CallingMethods">
+	Calling Methods
+</h3>
+<p>
+	If the method creates a <code>new</code> object, the object is lost if it is not returned and assigned to a variable.  Most String methods do not alter the existing String object they are called on, but <code>return</code> a new object that is assigned to a reference variable.
+</p>
+<pre>newSentence = sentence.trim();</pre>
+<p>
+	The <code>returned</code> object might be assigned to the same reference variable if the old data are no longer needed.
+</p>
+<pre>sentence = sentence.trim();</pre>
+<p>
+	The trim() method in the String <code>class</code>, for example, does not alter the existing String object <code>sentence</code>.  It creates a <code>new</code> String object that has no whitespace on the ends, and <code>returns</code> it.  The reference variable must be assigned to the <code>return</code> value.  
+</p>
+<br/>
+<p>
+	A method that changes the length of an array must create a <code>new</code> array and <code>return</code> a reference to the <code>new</code> array, since the length of the original array cannot change.  
+</p>
+<br/>
+<p>
+	The lengthDoubler() method below takes an <code>int</code> array, and <code>returns</code> a <code>new</code> array with the same values, but twice the length.  The <code>new</code> elements are left at the default value of 0.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	int[] value = {3, 7, 2};
+	value = lengthDoubler(value);
+
+	for(int i = 0; i < value.length; i++)
+	{
+		System.out.println(value[i]);
+	}
+}
+
+private static int[] lengthDoubler(int[] a)
+{
+	int[] b = new int[a.length * 2];
+	for(int i = 0; i < a.length; i++)
+	{
+		b[i] = a[i];
+	}
+	return b;
+}</pre>
+<p style="text-align: center;"><%= image_tag "c11_p10.jpg"%></p>
+<p>
+	A method can have multiple arguments.  The printOutput() method has two arguments.
+</p>
+<pre>
+private static void printOutput(int a, int b)
+{
+  System.out.println("\n" + a + " squared is " + b);
+}</pre>
+<p>
+	In the method signature argument list, the two arguments are separated by a comma.  For each argument, the type is specified as well as the local name.  In this case, both arguments are of the same type, but a method's arguments can be of different types, and a method may have any number of arguments.  When the method is called, values are placed in the parentheses, and each separated by a comma.
+</p>
+<pre>printOutput(number, squaredNumber);</pre>
+<p>Types are not included in a method call as they are in a method signature.</p>
+<h3 id="DefiningMethods">
+	Defining Methods
+</h3>
+<p>Consider the following task:</p>
+<p>Write the definition for the following method: </p>
+<pre>
+private static double distance(double rate, double time) 
+// Returns distance where distance = rate x time</pre>
+<p>
+	The method signature provides the argument names.  All that remains is to write the body of the method definition.  The distance() method should multiply the input arguments, and <code>return</code> the product.  The product must be a <code>double</code>, since that is the specified <code>return</code> type.
+</p>
+<pre>
+private static double distance(double rate, double time) 
+{
+	double product = rate * time;
+	return product;
+}</pre>
+<p>
+	Next, the method must be tested by using it as part of a program.  The following program tests the distance() method.
+</p>
+<pre>
+public class DistanceTest
+{
+	public static void main(String[] args)
+	{
+		double r = 5;
+		double t = 7;
+		double d = distance(r, t);
+		System.out.println("d = " + d);
+	}
+	private static double distance(double rate, double time) 
+	{
+		double product = rate * time;
+		return product;
+	}
+}</pre>
+
+<h2 id="ProgramStructure">
+	Program Structure
+</h2>
+<p>
+	Methods are used to split a program into functional parts.  The example program at the beginning of this chapter uses methods to separate the program into four parts.
+</p>
+<ul>
+	<li>Print the welcome message</li>
+	<li>Get user input</li>
+	<li>Perform a calculation</li>
+	<li>Print output</li>
+</ul>
+<pre>
+<strong>printWelcome();</strong>
+number = <strong>getUserInput();</strong>
+squaredNumber = <strong>square(number);</strong>
+<strong>printOutput(number, squaredNumber);</strong></pre>
+<p>
+	This separation makes it easy to create the program in smaller steps.  The methods can be written and tested separately.  Once they are complete, we can use them in the main method without thinking about the code inside, or how they work.  Programming on different "levels" like this is important when working on larger programs.  It also makes it easier to debug the program if has errors.
+</p>
+<p>
+	As another example of splitting a program into parts, consider the following program that generates addition problems.
+</p>
+<pre>
+import java.util.Scanner;
+import java.util.Random;
+
+public class MathQuiz
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int level = 0;
+		int answer = 0;
+		int solution = 0;
+
+		System.out.println("Time for a math question.");
+		System.out.print("What level of difficulty would you like? ");
+		level = keyboard.nextInt();
+		System.out.println("Okay, here's your question.\n");
+		solution = <strong>generateAddition(level);</strong>
+		answer = keyboard.nextInt();
+		<strong>checkAnswer(answer, solution);</strong>
+	}
+
+	<strong>private static int generateAddition(int level)</strong>
+	{
+		Random r = new Random();
+		int max = (int)Math.pow(10, level);
+		int a = r.nextInt(max) + 1;
+		int b = r.nextInt(max) + 1;
+		System.out.print("What is " + a + " + " + b + "? ");
+		int sum = a + b;
+		return sum;
+	}
+
+	<strong>private static void checkAnswer(int x, int y)</strong>
+	{
+		if(x == y)
+		{
+			System.out.println("Yes.  That is correct.\n");
+		}
+		else
+		{
+			System.out.println("Sorry.  That's not quite right.\n");
+		}
+	}
+}</pre>
+<p>
+	The main() method asks the user to choose a difficulty level.  Then it calls the generateAddition() method, which generates a random question, prints it to the console, and returns the solution.  The main() method then gets an answer from the user, and calls the checkAnswer() method, passing it the user's answer, as well as the correct solution returned by the generateAddition() method.
+</p>
+<pre>
+solution = <strong>generateAddition(level);</strong>
+answer = keyboard.nextInt();
+<strong>checkAnswer(answer, solution);</strong></pre>
+<p>The generateAddition() method takes one argument of type <code>int</code>.</p>
+<pre>private static int generateAddition(int level)</pre>
+<p>
+	This argument represents the level of difficulty for the question to be generated.  The method uses the following rules:
+</p>
+<p>
+Each question has two operands.<br/>
+The operands are <code>ints</code>.<br/>
+Both operands will have <code>level</code> digits.<br/>
+An asterisk (*) is placed between the operands.
+</p>
+<p>
+	There are many ways such a method could be written.  In this example, a variable called <code>max</code> is created to represent the highest number that can be generated as an operand.  This variable is set using the Math.pow() method, since 102 is 10, 103 is 100, and 104 is 1000.
+</p>
+<pre>int max = (int)Math.pow(10, level);</pre>
+<p>
+	Next, two random numbers are generated with the maximum number defined above.
+</p>
+<pre>
+int a = r.nextInt(max) + 1;
+int b = r.nextInt(max) + 1;</pre>
+<p>The question is printed.  Then, the solution is calculated, and returned.</p>
+<pre>
+System.out.print("What is " + a + " + " + b + "? ");
+int sum = a + b;
+return sum;</pre>
+<p>
+	Note that while the variable holding the solution is called <code>sum</code> in the generateAddition() method, a different variable name, <code>solution</code>, is used to receive the <code>return</code> value in main().  The two variables could have the same name.  They are independent.  
+</p>
+<p>
+	Also, notice that the input argument, <code>level</code>, has the same name in main() and generateAddition().  Once again, these variables are independent, and do not have to have the same name.
+</p>
+<p>
+	When the checkAnswer() method is called from main(), the variable names used for arguments are <code>answer</code> and <code>solution</code>.
+</p>
+<pre>checkAnswer(answer, solution);</pre>
+<p>
+	But in the checkAnswer() method, the variables are given the names <code>x</code> and <code>y</code>.  Since the variables in a method have local scope, they are only seen from within the method they are created in.  The variables <code>x</code> and <code>y</code> are given the values passed in as arguments, but the variables themselves are created in the checkAnswer() method, so they can only be seen in that method. 
+</p>
+<pre>
+private static void checkAnswer(int x, int y)
+{
+	if(x == y)
+	{
+		System.out.println("Yes.  That is correct.\n");
+	}
+	else
+	{
+		System.out.println("Sorry.  That's not quite right.\n");
+	}
+}</pre>
+<p>
+	  Trying to use a variable from another method is an error.
+</p>
+<pre>
+public static void main(String[] args)
+{
+	int <code>level</code> = 0;
+	int answer = 0;
+
+	<code>x</code> = level;				<span style="color:red;">// This is an error</span>
+	answer = <code>number</code>; 	<span style="color:red;">// This is an error</span>
+}
+
+private static void checkAnswer(int x, int y)
+{
+	int <code>number</code> = 0;
+
+	number = <code>level</code>;		<span style="color:red;">// This is an error</span>
+}</pre>
+
+<h2 id="ThemainMethod">
+	The main() Method
+</h2>
+
+<p>
+	We're finally ready to explain the method signature for main() that we took on faith at the beginning of this book.
+</p>
+<pre>public static void main(String[] args)</pre>
+
+	<mark><strong>public</strong></mark> – The main method is called from outside the class.  It is not called from another method in the file.  It is called by the operating system when the program starts.  The main() method is declared public because if it were private, the operating system could not call it to start the program.
+<p>
+	<mark><strong>static</strong></mark> – A static method can be called without first creating an object.  The operating system does not create any Java objects.  It needs to simply call a method that is not connected to any particular object, and that is what static methods are for.
+</p>
+<p>
+	<mark><strong>void</strong></mark> – The main method does not return a value, so its return type is void.
+</p>
+<p>
+	<mark><strong>main</strong></mark> – main is the name of the method.  Most of the time you can name a method anything you choose.  However, to start a program, the operating system will look for a method named main() in the class file you are trying to run.  So the starting point, or entry point, of every Java application has to be in a method called main().
+</p>
+<p>
+	<mark><strong>String[] args</strong></mark> – Methods can have input arguments, and main allows an optional String array.  This is used when you start a Java program from the command prompt.  If you add arguments (Strings without spaces) after the name of the file, they will be available to the program.  
+</p>
+<pre>java ShowArgs OneArgument 245</pre>
+<p>
+	The program below prints any arguments given to it at startup.  There is nothing special about the name args.  You can use any name you like for input arguments.
+</p>
+<pre>
+public class ShowArgs
+{
+	public static void main(<strong>String[] arguments</strong>)
+	{
+		for(int i = 0; i < <strong>arguments.length</strong>; i++)
+		{
+			System.out.println("Argument: " + <strong>arguments[i]</strong>);
+		}
+	}
+}</pre>
+<p style="text-align: center;"><%= image_tag "c11_p15.jpg"%></p>
+<h2 id="DefiningMethodsWorksheet">
+	Defining Methods Worksheet
+</h2>
+<p>Write definitions for the following methods.</p>
+<p>
+	You may use the test program given below.  Notice that methods have already been put in the test program to print arrays of ints and doubles since these are tasks that are required often in this program.  Add your method definitions at the bottom, but inside the class.  As you finish writing methods, comment out unneeded portions of main() to test only the new method.  When complete, the program should run and test all of the methods you wrote.
+</p>
+<ul class="text-primary">
+	<li>private static double force(double mass, double acceleration) 
+	<strong>// Returns force where force = mass x acceleration</strong></li> 
+	
+	<li>private static int getMin(int[] intArray) 
+	<strong>// Returns the lowest value in the array</strong></li> 
+
+	<li>private static double sum(double[] array) 
+	<strong>// returns the sum of all elements</strong> </li>
+	
+	<li>private static boolean areEqual(int[] a, int[]b) 
+	<strong>// returns true if all elements are equal</strong> </li>
+	
+	<li>private static double[] sort(double[] array) 
+	<strong>// Returns an array sorted low to high</strong> </li>
+	
+	<li>private static int countWords(String inString) 
+	<strong>// counts the words in a string</strong> </li>
+	
+	<li>private static double averageWordLength(String string) 
+	<strong>// Returns the average length of the words in the string</strong> </li>
+	
+	<li>private static String removeDigits(String text) 
+	<strong>// removes all numbers from a string</strong></li>
+</ul>
+
+<pre>
+public class MethodTester
+{
+	public static void main(String[] args)
+	{
+		int[] a = {5, 12, 3, 8, 27};
+		int[] b = {5, 12, 3, 8, 27};
+		int[] c = {12, 27, 3, 8, 5};
+		double[] d = {2.1, 4.1, 3.1, 1.1};
+		String s = "Th15 53nt3nce ha5 5f1ve w0rd5";
+	
+		// 1
+		System.out.println("\n1. For a mass of 3 kg to accelerate to 4 m/s/s, you need " +
+					force(3, 4)+" Newtons.");
+		// 2
+		System.out.println("\n2. The smallest value in the array:");
+		printIntArray(a);
+		System.out.println("is " + getMin(a));
+		// 3
+		System.out.println("\n3. The sum of the numbers in the array:");
+		printDoubleArray(d);
+		System.out.println("is "+ sum(d));
+		// 4
+		System.out.println("\n4. These two arrays are equal.");
+		printIntArray(a);
+		printIntArray(b);
+		System.out.println("That is " + areEqual(a, b));
+	
+		System.out.println("\nThese two arrays are equal.");
+		printIntArray(a);
+		printIntArray(c);
+		System.out.println("That is " + areEqual(a, c));
+		// 5
+		System.out.println("\n5. The array before sorting.");
+		printDoubleArray(d);
+		System.out.println("\nThe array after sorting.");
+		printDoubleArray(sort(d));
+		// 6
+		System.out.println("\n6. The sentence \""+s+"\" has "+countWords(s)+" words.");
+		// 7
+		System.out.println("\n7. It has an average word length of "+averageWordLength(s)+
+					" letters.");
+		// 8
+		System.out.println("\n8. Without numbers, it looks like this: "+removeDigits(s));
+		System.out.println("\nNow it has an average word length of "+
+					averageWordLength(removeDigits(s))+" letters.\n\n\n");
+	}
+	private static void printIntArray(int[] a)
+	{
+		for(int i = 0; i < a.length; i++)
+		{
+			System.out.print("["+a[i]+"] ");
+		}
+		System.out.println();
+	}
+
+	private static void printDoubleArray(double[] a)
+	{
+		for(int i = 0; i < a.length; i++)
+		{
+			System.out.print("["+a[i]+"] ");
+		}
+		System.out.println();
+	}
+	
+		// Add your method definitions here.
+}</pre>
+
+<!-- ========Worksheet and AssignmentPrograms================= -->
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<br/><h4>Calculator</h4>
+	<p>
+		The calculator program accepts strings such as "3 + 42" and "7 - 5", and calculates a solution.  The program completes the equation and the cursor moves to the next line to accept more input.  The user may type "quit" to end the program.
+	</p>
+	<p>Sample Run</p>
+	<div class="codeblock2">
+3 + 4 = 7
+18 - 5 = 13
+quit
+Press any key to continue . . .
+	</div>
+	
+	<br/><h4>MathQuiz</h4>
+	<p>
+	The MathQuiz program generates a math quiz with addition, subtraction, multiplication, and/or division questions.  The user may choose any or all of the four question types.  The user may also choose the number of questions in the quiz and the level of difficulty.
+	<br/>For addition and subtraction, the level is the number of digits in the operands.
+	<br/>For multiplication, the first operand is level digits.  The second is one less, but at least one digit.
+	<br/>For division, the first operand has one more digit than level.  The second has one less, but at least one digit.
+	<br/>All numbers used (in questions and answers) are ints, so the division problems do not require a remainder as part of the answer.  The program keeps track of right and wrong answers and assigns a score at the end of the quiz.
+	
+	<br/><br/>The following method signatures are given as a guide.  The checkAnswer() method returns an int (0 or 1) to indicate whether the question was answered correctly or not.
+	<p>
+	<div class="codeblock2">
+private static int generateAddition(int level)
+private static int generateSubtraction(int level)
+private static int generateMultiplication(int level)
+private static int generateDivision(int level)
+private static int checkAnswer(int x, int y)
+	</div>
+	<p>Sample Run</p>
+	<div class="codeblock2">
+Time for a Math Quiz.
+What level of difficulty would you like? <strong>2</strong>
+
+What type of questions would you like?
+(1) Addition
+(2) Subtraction
+(3) Multiplication
+(4) Division
+(5) All
+<strong>5</strong>
+
+How many questions would you like? <strong>4</strong>
+
+Question 1: What is 835 / 5? <strong>167</strong>
+Yes.  That is correct.
+
+Question 2: What is 61 - 92? <strong>-31</strong>
+Yes.  That is correct.
+
+Question 3: What is 43 x 5? <strong>215</strong>
+Yes.  That is correct.
+
+Question 4: What is 15 x 1? <strong>11</strong>
+Sorry.  That's not quite right.
+The correct answer is 15
+
+You got 3 out of 4 right.
+That's a 75%.
+	</div>
+	<br/><h4>ShoppingCart</h4>
+	<p>
+		The ShoppingCart program lets you put things in a cart, take things out of the cart, and proceed to checkout.  The main() method starts by declaring a new String array with no elements (length 0).
+	</p>
+	
+	<div class="codeblock2">String[] cart = new String[0];</div>
+	<p>
+		From here, the array is passed to different methods, which return a new array when needed.  The following methods are suggested.  The showCart() method prints a list of the items in the cart.
+	</p>
+	<div class="codeblock2">
+private static String[] addToCart(String[] cart)
+private static String[] removeFromCart(String[] cart)
+private static void checkOut(String[] cart)
+private static void showCart(String[] cart)
+	</div>
+	<p>SampleRun</p>
+<!----------------------------->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6" >
+      <pre>
+Welcome to Shopping Express!!!
+     We sell all the things you don't need.
+
+There are no items in your cart.
+What would you like to do?
+Add to cart (a)
+Remove item (r)
+Check out (c)
+<strong>a</strong>
+
+Enter name of new item:<strong>Pants</strong>
+
+Your Cart currently contains 1 items.
+1 Pants
+
+
+What would you like to do?
+Add to cart (a)
+Remove item (r)
+Check out (c)
+<strong>a</strong>
+
+Enter name of new item:Paint <strong>Brush</strong>
+
+Your Cart currently contains 2 items.
+1 Pants
+2 Paint Brush
+
+
+What would you like to do?
+Add to cart (a)
+Remove item (r)
+Check out (c)
+<strong>a</strong>
+
+Enter name of new item:<strong>Fungus</strong>
+      </pre>
+    </div>
+    <div class="col-sm-6" >
+      <pre>
+Your Cart currently contains 3 items.
+1 Pants
+2 Paint Brush
+3 Fungus
+
+
+What would you like to do?
+Add to cart (a)
+Remove item (r)
+Check out (c)
+<strong>r</strong>
+
+Which item should be removed?
+Enter a number from 1 to 3
+<strong>2</strong>
+
+Your Cart currently contains 2 items.
+1 Pants
+2 Fungus
+
+
+What would you like to do?
+Add to cart (a)
+Remove item (r)
+Check out (c)
+<strong>c</strong>
+
+Enter price for Pants:<strong>4.95</strong>
+Enter quantity for Pants:<strong>1</strong>
+Enter price for Fungus:<strong>2.00</strong>
+Enter quantity for Fungus:<strong>2</strong>
+
+Your Receipt:
+
+1 Pants for $4.95 each     $4.95
+2 Fungus for $2.0 each     $4.0
+
+TOTAL:    $8.95
+
+
+Thank you for choosing Shopping Express!!!
+Come back again when you have more money.
+      </pre>
+    </div>
+  </div>
+</div>
+<!----------------------------->	
+</div>

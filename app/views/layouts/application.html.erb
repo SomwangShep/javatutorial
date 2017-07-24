@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myrecipes</title>
+    <title>Java Tutorial</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
@@ -13,9 +13,11 @@
     <%= render 'layouts/navigation' %>
     <%= render 'layouts/messages' %>
     
+    <div id="bg">
     <div class="container">
       <%= yield %>
+      <%= render 'layouts/footer' %>
     </div>
-    <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>

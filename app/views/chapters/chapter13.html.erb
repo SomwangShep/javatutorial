@@ -1,0 +1,815 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#Classes">Classes</a></td><td><a href="#Constructors">Constructors</a></td><td><a href="#AccessorsandMutators">Accessors and Mutators</a></td><td><a href="#MethodOverloading">Method Overloading</a></td><td><a href="#StaticVariables">Static Variables</a></td></tr>
+		<tr><td><a href="#StaticMethods">Static Methods</a></td><td><a href="#DataStructureClasses">Data Structure Classes</a></td><td><a href="#ListsStacksandQueues">Lists, Stacks, and Queues</a></td><td colspan="2"><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 13 - Defining Classes</h1>
+  <p>This chapter contains the following sections:</p>
+  <ul class="text-primary">
+	<li>Classes</li>
+	<li>Constructors</li>
+	<li>Accessors and Mutators</li>
+	<li>Method overloading</li>
+	<li>Variable initialization</li>
+	<li>Static variables</li>
+	<li>Data structure classes</li>
+  </ul>
+  <h2 id="Classes">
+  	Classes
+  </h2>
+  <p>
+  	A <code>class</code> is a way to generalize the data structure and behavior of a group of objects.  A class is a blank template that specifies global variable names, and contains methods.  An object is a specific instance of a class.  That means each object has a full set of the class global variables, and the variables have values.
+  </p>
+  <p>
+  	The methods in a class can use and modify the object global variables, but each object can only see its own variables.  For example, let’s create a class called Value that holds a single value.  We will include methods that allow us to set the value to a number, get the current value, and multiply the value by 3.
+  </p>
+  <p>
+  	Once the class has been defined, we can create as many objects of the class as we like.
+  </p>
+  <p style="text-align: center;"><%= image_tag "c13_p1.jpg"%></p>
+  <p>
+  	A class definition is the code specifying the variables and methods to be used.  Below is the definition for the Value class.
+  </p>
+  <pre>
+ public class Value
+{
+	private int val;
+
+	public void setValue(int v)
+	{
+		val = v;
+	}
+
+	public int getValue()
+	{
+		return val;
+	}
+
+	public void tripleValue()
+	{
+		val = val * 3;
+	}
+}</pre>
+<p>
+	Until now, we have only included static variables and methods in our class definitions.  Now we will use classes in a more useful way.  However, we do still need to define a class with a static main() method to test our new Value class.
+</p>
+<pre>
+public class ValueTester
+{
+	public static void main(String[] args)
+	{
+		Value value1 = new Value();
+		Value value2 = new Value();
+		Value value3 = new Value();
+
+		value1.setValue(5);
+		value2.setValue(2);
+		value3.setValue(7);
+
+		System.out.println(value1.getValue());
+		System.out.println(value2.getValue());
+		System.out.println(value3.getValue());
+	}
+}</pre>
+<p>
+	Many objects can be made using a single class.  Each class contains the format for the data to be stored and methods allowing interaction with and manipulation of the data.  Using classes, similar sets of data can be stored and processed the same way.  All String objects belong to the same class.  
+</p>
+<p>
+	All String objects contain a sequence of characters that can be searched, and manipulated in various ways.  Each class defines a type that a reference variable can point to.  Many classes already exist in the Java Development Kit, such as String Scanner, and Random, and we can make new objects of these classes.  We can also define new classes, such as Value.
+</p>
+<p>When we call a method, it must be called on an object.</p>
+<pre>value1.tripleValue();</pre>
+<p>
+	Since the tripleValue() method is called on the object <code>value1</code>, only the number stored in that object is changed.
+</p>
+<h2 id="Constructors">
+	Constructors
+</h2>
+<p>
+	A constructor is a method that runs when a new object of a class is created.  If the class definition does not include a constructor, a default empty constructor is used.  When we created new objects of the Value class, we called this default empty constructor.
+</p>
+<pre>Value value1 = new <strong>Value()</strong>;</pre>
+<p>This runs the invisible default constructor in the Value class.</p>
+<pre>public Value()
+{
+}</pre>
+<p>The constructor takes no arguments, and contains no code, so it doesn’t do anything.</p>
+<p>
+	The constructor also returns no value.  A constructor never returns a value, and specifying a return type, even void, will cause the method to not be seen as a constructor, and it will not run when the object is created.
+</p>
+<p>We could include a constructor in our class definition.</p>
+<pre>
+public class Value
+{
+	public Value()
+	{
+		val = 10;
+	}
+. . .</pre>
+<p>
+	This would initialize the value of val to 10 each time a new Value object is created.  Since our constructor does not have any arguments, it replaces the default constructor.  
+</p>
+<p>To create a new Value object, we call our no argument constructor.</p>
+<pre>Value value1 = new <strong>Value()</strong>;</pre>
+<p>
+	It might be more useful to set the value while calling the constructor.  We can write a constructor that takes an argument.  
+</p>
+<pre>
+public Value(int v)
+{
+	val = v;
+}</pre>
+<p>Now to create a new Value object we specify a value as an argument to the constructor.</p>
+<pre>Value value1 = new <strong>Value(5)</strong>;</pre>
+<p>
+	Once we have defined a constructor, the default constructor is replaced, so we can no longer create a new Value object without supplying an argument.  We could include both constructors as is explained in method overloading.
+</p>
+<p>
+	Our constructor could do more interesting things, such as assign a random number from 1 to 10 to our value when the object is created.
+</p>
+<pre>
+public Value()
+{
+	Random random = new Random()
+	val = random.nextInt(10) + 1;
+}</pre>
+
+<h2 id="AccessorsandMutators">
+	Accessors and Mutators
+</h2>
+<p>
+	The simplest methods in a class are accessors and mutators.  Most classes contain global variables that are used in some way by other classes.  It is good programming practice to make these global variables private in scope, and use methods to get and set the values.  
+</p>
+<p>
+	A method that returns the value of a global variable is called an accessor.  Accessors are commonly referred to informally as “getters” because they get and return a value.
+</p>
+<p>
+	A method that can change the value of a global variable is called a mutator.  Mutators are commonly referred to informally as “setters” because they are used to set a value.
+</p>
+<pre>
+public class Value
+{
+	<strong>// Global Variable</strong>
+	private int val;
+
+	<strong>// Accessor</strong>
+	public int getValue()
+	{
+		return val;
+	}
+
+	<strong>// Mutator</strong>
+	public void setValue(int v)
+	{
+		val = v;
+	}
+}</pre>
+
+<h2 id="MethodOverloading">
+	Method Overloading
+</h2>
+<p>
+	We have seen method overloading in existing Java classes.  A method is overloaded if there are multiple versions.  That is, if there are two or more methods that have the same name.
+</p>
+<pre>
+public int addNumbers(int a, int b)
+
+public double addNumbers(double a, double b)
+
+public int addNumbers(int a, int b, int c)</pre>
+<p>
+	The three methods above are all called addNumbers().  The first method adds two <code>ints</code> together.  The second adds two <code>doubles</code>.  The third adds three <code>ints</code>.
+</p>
+<p>
+	Method signatures must be unique, so two or more methods can not have identical signatures.  However, they can have the same name as long as they have different argument lists.
+</p>
+<h2 id="StaticVariables">
+	Static Variables
+</h2>
+<p>
+	A class can contain <code>static</code> variables.  When a variable is declared to be <code>static</code>, each object of the class does not get a separate memory space for the variable value.  All objects share a single memory space regardless of the number of objects created, if any.  
+</p>
+<pre>
+public class Value
+{
+	<strong>// Static Global Variable</strong>
+	public static int val;
+}</pre>
+<p>The variable is accessed by preceding the variable name with the class name and a dot.</p>
+<pre>
+public static void main(String[] args)
+{
+int Number = Value.val;
+}</pre>
+
+<h2 id="StaticMethods">
+	Static Methods
+</h2>
+<p>
+	A class can also contain <code>static</code> methods.  A <code>static</code> method is called on the class rather than an object of the class.  Since no particular object has been specified, the method can not see any of the normal class variables.  A <code>static</code> method can see <code>static</code> variables.
+</p>
+<pre>
+public class UtilityMethods
+{
+	public static int addNumbers(int a, int b)
+	{
+		return a + b;
+	}
+}</pre>
+<p>The static method is used by calling it on the class.</p>
+<pre>
+public static void main(String[] args)
+{
+	int Number = UtilityMethods.addNumbers(4, 5);
+}</pre>
+
+<h2 id="DataStructureClasses">
+	Data Structure Classes
+</h2>
+<p>
+	Often a Java class acts as a data structure.  The class has variables to hold data, and methods to access and manipulate the data.  For example, the String class has space to store the character sequence of the String.  It also has methods that manipulate the sequence and return information about it.
+</p>
+<p>
+	Simple data structure classes often represent real-world objects, and include only accessors and mutators.  For example, we could create a Person class.  Each object would represent a single person.  We would use different variables depending upon the intended use of the class.
+</p>
+<p>
+	The Person class below represents people in offices in a building.  It has a constructor that sets the values of all the global variables.  This ensures that a new object can not be created without setting all variable values.  The class also has accessors that return the variable values.  Note that this class offers no way to change the value of any of the variables once the object is created.
+</p>
+<pre>
+public class Person
+{
+	private String name;
+	private int floor;
+	private int officeNumber;
+	
+	// Constructor
+	public Person(String iname, int ifloor, int iofficeNumber)
+	{
+		name = iname;
+		floor = ifloor;
+		officeNumber = iofficeNumber;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public int getFloor()
+	{
+		return floor;
+	}
+	
+	public int getOfficeNumber()
+	{
+		return officeNumber;
+	}
+}</pre>
+
+<h2 id="ListsStacksandQueues">
+	Lists, Stacks, and Queues
+</h2>
+<p>
+	A class can represent more complicated data structures, such as lists, stacks, and queues.  
+</p>
+<h3>Lists</h3>
+<p>
+	A list is similar to an array.  It is a data structure that holds multiple values of the same type.  A list contains methods for adding new values to the list, removing values from the list, and getting the size of the list.  A list also might have other methods that do things such as searching and sorting.  
+</p>
+<p>
+	Each item in the list has an index, just like an array.  However, unlike a simple array, a list manages itself.  When a new value is added, the list automatically makes itself larger to hold the new value.  When a value is removed, the list makes itself smaller, and closes the gap where the removed value was.
+</p>
+<p>
+	A list class that holds ints might use an array to store all of the values, and have the methods shown below.
+<p>
+
+<table>
+	<tr><th>IntList</th></tr>
+	<tr><td>- int[] a</td></tr>
+	<tr><td>
+		+ int get(int index)<br/>
+		+ void add(int n)<br/>
+		+ int size()<br/>
+		+ void removeIndex(int index)
+	</td></tr>
+</table>
+<p>
+	The get() method returns the value at the index <code>index</code>.  The value is not removed from the list.
+</p>
+<p>
+	The add() method adds the value <code>n</code> to the list, changing the list size accordingly.
+</p>
+<p>
+	The size() method return the number of values currently held in the list.
+</p>
+<p>
+	The removeIndex() method removes the value at the index index, changing the list size accordingly.
+</p>
+
+<h3>Stacks</h3>
+<p>
+	A stack is another type of data structure that holds multiple values, but the values are accessed differently from the way they are in a list.  This structure is useful in certain circumstances.
+</p>
+<p>
+	When values are added to a stack, they are placed on the top of the stack.  When values are removed, they are taken from the top of the stack.  It might be helpful to picture a stack of plates in a restaurant.  As the plates are washed, they are placed on the top of the stack.  When clean plates are needed, they are taken from the top of the stack.  To get to the bottom plate, all of the other plates must be taken.
+</p>
+<p>
+	This data structure enforces a certain order on the adding and removing of data, and is often referred to as a LIFO structure (Last In First Out).
+</p>
+<p>
+	A stack class that holds ints might use an array to store all of the values, and have the methods shown below.
+</p>
+<table>
+	<tr><th>IntStack</th></tr>
+	<tr><td>- int[] a</td></tr>
+	<tr><td>
+		+ void push(int n)<br/>
+		+ int pop()<br/>
+		+ int peek()<br/>
+		+ int size()
+	</td></tr>
+</table>
+<p>
+	The push() method puts the value n on the top of the stack.
+</p>
+<p>
+	The pop() method returns the value at the top of the stack and removes it.
+</p>
+<p>
+	The peek() method returns the value at the top of the stack, but does not remove it from the stack.
+</p>
+<p>
+	The size() method returns the number of values currently contained in the stack.
+</p>
+
+<h3>Queues</h3>
+<p>
+	A Queue is another commonly used data structure.  When values are added to a queue, they are placed at the top, or tail of the queue.  When values are removed, they are taken from the bottom, or head of the queue.
+</p>
+<p>
+	A Queue is considered a FIFO (First In First Out) data structure.  The values are put in a waiting line, and the first values that go in are the first that come out.  A familiar example of a queue is a printer queue.  As users send printing jobs to a printer, they are placed in a queue.  The first jobs that are sent are done first.  A less technical example is a line at a grocery store.  The first person to get in line is served first, the the next person in line.
+</p>
+<p>
+	A queue class that holds ints might use an array to store all of the values, and have the methods shown below.
+</p>
+<table>
+	<tr><th>IntQueue</th></tr>
+	<tr><td>- int[] a</td></tr>
+	<tr><td>
+		+ void add(int n)<br/>
+		+ int poll()<br/>
+		+ int peek()<br/>
+		+ int size()
+	</td></tr>
+</table>
+<p>
+	The add() method puts the value n on the tail of the queue.
+</p>
+<p>
+	The poll() method returns the value at the head of the queue and removes it.
+</p>
+<p>
+	The peek() method returns the value at the head of the queue, but does not remove it from the queue.
+</p>
+<p>
+	The size() method returns the number of values currently contained in the queue.
+</p>
+<h4>Example – IntList</h4>
+<p>
+	The IntList class below uses an array to store ints.  The array starts off with a length of zero.  
+</p>
+<pre>private int[] a = new int[0];</pre>
+<p>
+	Each time a value is added, a new array is created that is one element longer, and the values from the old array are copied into it, along with the new value.  Then, the old array is discarded.  
+</p>
+<pre>
+public void add(int n)
+{
+	int[] b = new int[a.length + 1];
+	for(int i = 0; i < a.length; i++)
+	{
+		b[i] = a[i];
+	}
+	b[b.length-1] = n;
+	a = b;
+}</pre>
+<p>
+	Likewise, when a value is removed, a new, smaller array is created to hold the values.  
+</p>
+<p>
+	The block below shows the variables and methods contained in the IntList class.
+</p>
+<table>
+	<tr><th>IntList</th></tr>
+	<tr><td>- int[] a</td></tr>
+	<tr><td>
+		+ int get(int index)<br/>
+		+ void add(int n)<br/>
+		+ int size()<br/>
+		+ void removeIndex(int index)<br/>
+		+ void remove(int n)<br/>
+		+ void removeAll(int n)<br/>
+		+ void printList()
+	</td></tr>
+</table>
+<p>
+	The get() method returns the value at the given index.  The value is not removed from the list.
+</p>
+<p>
+	The add() method adds a new value to the list.  The value is placed at the bottom of the list so that it has the highest index.  Adding a value does not change the indices of the other values in the list.
+</p>
+<p>
+	The size() method returns the number of values currently stored in the list.
+</p>
+<p>
+	The removeIndex() method is used to remove the value at a given index.  When the value is removed, the array is resized to close the gap.  This changes the indices of all elements higher on the list.
+</p>
+<p>
+	The remove() method searches the list for the first occurrence of the value n, and removes it from the list.  It does so by finding the index of the first match, and calling the removeIndex() method.
+</p>
+<p>
+	The removeAll() method searches the list and removes all occurrences of the value n.  Again, it uses the removeIndex() method to remove each value.  Not that this avoids using duplicate code in the class.
+</p>
+<p>
+	The printList() method prints a list of all the stored values to the console.  This makes it easier to test the class.
+</p>
+<br/>
+<p>
+	Let’s write a program that can be used to test our IntList class.  We want to do the following things for our test, and print the values in the list and size of the list after each:
+</p>
+<ul>
+	<li>Create an IntList object</li>
+	<li>Add seven numbers to the list</li>
+	<li>Remove a value based on an index</li>
+	<li>Remove a value based on the number to remove</li>
+	<li>Remove all matching values from the list</li>
+	<li>Get the value at a particular index.</li>
+</ul>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-7">
+ <pre>
+public class ListTester
+{
+	public static void main(String[] args)
+	{
+		IntList list = new IntList();
+
+		System.out.println("List has size " + list.size());
+
+		System.out.println("\nAdding numbers...");
+
+		list.add(43);
+		list.add(21);
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(2);
+		list.add(2);
+		list.printList();
+		System.out.println("List now has size " + list.size());
+
+		System.out.println("Remove number at index 2");
+		list.removeIndex(2);
+
+		list.printList();
+		System.out.println("List now has size " + list.size());
+
+		System.out.println("Remove number 21");
+		list.remove(21);
+
+		list.printList();
+		System.out.println("List now has size " + list.size());
+
+		System.out.println("Remove all number 2s");
+		list.removeAll(2);
+
+		list.printList();
+		System.out.println("List now has size " + list.size());
+
+		System.out.println("Get the number at index 1");
+		System.out.println(list.get(1));
+
+		list.printList();
+		System.out.println("List now has size " + list.size());
+	}
+}</pre>
+    </div>
+    <div class="col-sm-5">
+    <pre>
+<h4>ListTester Program Output</h4>
+
+List has size 0
+
+Adding numbers...
+The list currently contains:
+43
+21
+1
+2
+3
+2
+2
+List now has size 7
+Remove number at index 2
+The list currently contains:
+43
+21
+2
+3
+2
+2
+List now has size 6
+Remove number 21
+The list currently contains:
+43
+2
+3
+2
+2
+List now has size 5
+Remove all number 2s
+The list currently contains:
+43
+3
+List now has size 2
+Get the number at index 1
+3
+The list currently contains:
+43
+3
+List now has size 2
+Press any key to continue . . .</pre>
+    </div>
+  </div>
+</div>
+<pre>
+<strong>public class IntList</strong>
+{
+	private int[] a = new int[0];
+
+	<strong>public int get(int index)</strong>
+	{
+		return a[index];
+	}
+
+	<strong>public void add(int n)</strong>
+	{
+		int[] b = new int[a.length + 1];
+		for(int i = 0; i < a.length; i++)
+		{
+			b[i] = a[i];
+		}
+		b[b.length-1] = n;
+		a = b;
+	}
+
+	<strong>public int size()</strong>
+	{
+		return a.length;
+	}
+
+	<strong>public void removeIndex(int index)</strong>
+	{
+		int[] b = new int[a.length-1];
+
+		for(int i = 0; i < index; i++)
+		{
+			b[i] = a[i];
+		}
+		for(int i = index+1; i < a.length; i++)
+		{
+			b[i-1] = a[i];
+		}
+		a = b;
+	}
+	
+	<strong>public void remove(int n)</strong>
+	{
+		for(int i = 0; i < a.length; i++)
+		{
+			if(a[i] == n)
+			{
+				removeIndex(i);
+				return;
+			}
+		}
+	}
+
+	<strong>public void removeAll(int n)</strong>
+	{
+		for(int i = 0; i < a.length; i++)
+		{
+			if(a[i] == n)
+			{
+				removeIndex(i);
+				i--;
+			}
+		}
+	}
+
+	<strong>public void printList()</strong>
+	{
+		System.out.println("The list currently contains:");
+		for(int i = 0; i < a.length; i++)
+		{
+			System.out.println(a[i]);
+		}
+	}
+}</pre>
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<p>
+		Implement each class according to the given specifications.  Write a test program for each that uses all of the class methods.
+	</p>
+<!----------------------------->
+  <div class="row">
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>Employee</th></tr>
+      	<tr><td>
+				- String name<br/>
+				- int employeeID<br/>
+				- double salary<br/>
+      	</td></tr>
+      	<tr><td>
+				+ void setName(String s)<br/>
+				+ String getName()<br/>
+				+ void setID(int id)<br/>
+				+ int getID()<br/>
+				+ void setSalary(double amount)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+				+ double getSalary()
+      	</td></tr>
+      </table>
+    </div>
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>Car</th></tr>
+      	<tr><td>
+				- String manufacturer<br/>
+				- String model<br/>
+				- double price
+      	</td></tr>
+      	<tr><td>
+				+ void setManufacturer(String m)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+				+ String getManufacturer()<br/>
+				+ void setModel(String m)<br/>
+				+ String getModel()<br/>
+				+ void setPrice(double p)<br/>
+				+ double getPrice()
+      	</td></tr>
+      </table>
+    </div>
+  </div>
+	<br/>
+  <div class="row">
+    <div class="col-sm-6" >
+    	<table>
+    		<tr><th>BankAccount</th></tr>
+    		<tr><td>
+				- String[] authorizedPersons<br/>
+				- int accountNumber<br/>
+				- double balance
+    		</td></tr>
+    		<tr><td>
+				+ void setAuthorizedPersons(String[] s)<br/>
+				+ String[] getAuthorizedPersons()<br/>
+				+ void setAccountNumber(int n)<br/>
+				+ int getAccountNumber()<br/>
+				+ void setBalance(double b)<br/>
+				+ double getBalance()
+    		</td></tr>    		
+    	</table>
+    </div>
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>DoubleList</th></tr>
+      	<tr><td>
+      		- double[] a
+      	</td></tr>
+      	<tr><td>
+					+ double get(int index)<br/>
+					+ void add(double n)<br/>
+					+ int size()<br/>
+					+ void removeIndex(int index)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	</td></tr>      	
+      </table>
+    </div>
+
+  </div>
+	<br/>
+  <div class="row">
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>StringList</th></tr>
+      	<tr><td>
+      		- String[] a
+      	</td></tr>
+      	<tr><td>
+					+ String get(int index)<br/>
+					+ void add(String s)<br/>
+					+ int size()<br/>
+					+ void removeIndex(int index)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	</td></tr>      	
+      </table>
+    </div>
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>IntStack</th></tr>
+      	<tr><td>
+      		- int[] a
+      	</td></tr>
+      	<tr><td>
+					+ void push(int n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ int pop()<br/>
+					+ int peek()<br/>
+					+ int size()
+      	</td></tr>      	
+      </table>
+    </div>
+  </div>	
+  <br/>
+  <div class="row">
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>DoubleStack</th></tr>
+      	<tr><td>
+      		- double[] a
+      	</td></tr>
+      	<tr><td>
+					+ void push(double n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ double pop()<br/>
+					+ double peek()<br/>
+					+ int size()
+      	</td></tr>      	
+      </table>
+    </div>
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>BooleanStack</th></tr>
+      	<tr><td>
+      		- boolean[] a
+      	</td></tr>
+      	<tr><td>
+					+ void push(boolean n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ boolean pop()<br/>
+					+ boolean peek()<br/>
+					+ int size()
+      	</td></tr>      	
+      </table>
+    </div>
+  </div>  
+  <br/>
+  <div class="row">
+    <div class="col-sm-6" >
+    	<table>
+    		<tr><th>IntQueue</th></tr>
+    		<tr><td>
+    			- int[] a
+    		</td></tr>
+    		<tr><td>
+					+ void add(int n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ int poll()<br/>
+					+ int peek()<br/>
+					+ int size()
+    		</td></tr>    		
+    	</table>
+    </div>
+    <div class="col-sm-6" >
+      <table>
+      	<tr><th>CharQueue</th></tr>
+      	<tr><td>
+      		- char[] a
+      	</td></tr>
+      	<tr><td>
+					+ void add(char n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ char poll()<br/>
+					+ char peek()<br/>
+					+ int size()
+      	</td></tr>      	
+      </table>
+    </div>
+  </div>  
+  <br/>
+  <div class="row">
+    <div class="col-sm-12" >
+      <table>
+      	<tr><th>StringQueue</th></tr>
+      	<tr><td>
+      		- String[] a
+      	</td></tr>
+      	<tr><td>
+					+ void add(String n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					+ String poll()<br/>
+					+ String peek()<br/>
+					+ int size()
+      	</td></tr>      	
+      </table>
+    </div>
+  </div>  
+  
+<!----------------------------->
+</div>

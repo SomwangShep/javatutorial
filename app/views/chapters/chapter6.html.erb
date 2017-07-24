@@ -1,0 +1,820 @@
+<!-- ========================================================= -->	
+	<table id="jumpTbl">
+		<tr><td><a href="#Variations">Variations</a></td><td><a href="#CommonErrors">Common Errors</a></td><td><a href="#SequenceGenerationandSeriesSummation">Sequence Generation and Series Summation</a></td><td><a href="#PrintingShapes">Printing Shapes</a></td><td><a href="#Worksheet8">Worksheet 8: For Loops</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
+	</table>
+<!-- ========================================================= -->	
+  <h1> Chapter 6 - For Loops</h1>
+  <p>
+  	A <code>for</code> loop is a special form of a while loop.  We often need a repetition structure that counts as the loop below does.
+  </p>
+  <pre>
+int count = 1;
+while(count < 6)
+{
+	// Useful code
+
+	count = count + 1;
+}</pre>
+  <p>
+  	A counting variable (called <code>count</code> in this example), is initialized to some value.  The code inside repeats as long as the count is less than some value.  At the end of each loop the count is incremented so that it counts from the initial value up to some maximum.  In the example above, the <code>count</code> variable counts from 1 to 5.
+  </p>
+  <p>
+  	The <code>for</code> structure allows us to specify the loop properties in one place.  The following code is equivalent to the code above.
+  </p>
+  <pre>
+int count;
+for(count = 1; count < 6; count = count + 1)
+{
+	// Useful code	
+}</pre>
+  <p>
+  	A variable must be created to be used as an count variable.  The same variable can be used for multiple <code>for</code> loops since it will be initialized at the start of each.  It is common to use the letter i for a counting variable.  
+  </p>
+  <p>
+  	Three things go in the parentheses of a <code>for</code> loop and they are separated by semicolons.
+  </p>
+  <p style="text-align: center;"><%= image_tag "c6_p1.jpg"%></p>
+  <p>
+  	When a <code>for</code> loop is encountered in program execution, the count variable is set to the given initialization value.  This only happens before the first pass through the loop.    
+  </p>
+  <p>
+  	Next, the condition is checked.  If the condition is <code>true</code>, the code inside the loop runs.  
+  </p>
+  <p>
+  	When the code in the block has executed, the loop operation is performed changing the counting variable.
+  </p>
+  <p>
+  	The condition is checked again, and if it is <code>true</code>, the loop runs again.  When the condition becomes <code>false</code>, the loop does not run again, and the program continues.  If the condition never becomes <code>false</code>, an infinite loop results.
+  </p>
+  <p>
+  	The program below calculates and prints the squares of the numbers from 0 through 5.
+  </p>
+  <pre>
+public class Squares
+{
+	public static void main(String[] args)
+	{
+		int i;
+		int square;
+
+		<strong>for(i = 0; i < 6; i = i + 1)</strong>
+		{
+			square = i * i;
+			System.out.println(i + " * " + i + " = " + square);
+		}
+	}
+}</pre>
+	<p style="text-align: center;"><%= image_tag "c6_p2.jpg"%></p>
+	
+	<h2 id="Variations">
+		Variations
+	</h2>
+	<p>
+		The counting variable can be created inside the <code>for</code> statement, but then the variable only exists inside the loop.
+	</p>
+	<pre>
+for(<strong>int i = 0;</strong> i < 5; i = i + 1)
+{
+	System.out.println(i);
+}
+System.out.println(<strong>i</strong>);  <span style="color:red;">// This won't compile</span></pre>
+	<p>
+		To count to any particular number, the condition can use either < or <= depending on the constant chosen.
+	</p>
+	<pre style="color:blue;">
+for(i = 1; i < 6; i = i + 1)
+
+for(i = 1; i <= 5; i = i + 1)</pre>
+	<p>
+		Both of the above will run five times.  Which to use is a matter of preference.
+	</p>
+	<p>
+		Any condition, however complex, may be used as long as it can be evaluated as <code>true</code> or <code>false</code>.
+	</p>
+	<pre style="color:blue;">
+for(i = 1; <strong>i < 2 && x != 7 || s.equals("Beans")</strong>; i = i + 1)</pre>
+	<p>
+		The loop operation can be any assignment statement that provides the desired result.
+	</p>
+	<pre style="color:blue;">
+for(i = 1; i < 50; <strong>i = i * 3 + 2</strong>)</pre>
+	<p>
+		The loop operation can be any assignment statement, but it is most common to simply increment the index.  It is also common to use the increment operator (++) for this task.
+	</p>
+	<pre style="color:blue;">
+for(i = 1; i < 6; <strong>i++</strong>)</pre>
+	<p>
+		As with the <code>while</code> loop, the <code>break</code> statement causes the current <code>for</code> loop to exit immediately.  The program continues after the loop.
+	</p>
+	<pre>
+for(i = 0; i < 25; i++)
+{
+	input = in.nextInt();
+	total = total + input;
+
+	if(input == 0)
+	{
+		<strong>break;</strong>
+	}
+}</pre>
+	<p>
+		<code>For</code> loops can be nested like <code>if</code> statements and <code>while</code> loops.  Separate counting variables must be used for each loop.  The inside loop runs many times for each run of the outside loop.
+	</p>
+	<pre>
+for(i = 0; i < 25; i++)
+{
+	for(j = 0; j < 50; j++)
+	{
+		System.out.println(i + " , " + j);
+	}
+}</pre>
+	
+	<h2 id="CommonErrors">
+		Common Errors
+	</h2>
+	<p>
+		Like <code>while</code> and <code>if</code> statements, <code>for</code> statements do not end with a semicolon.  Doing so will cause the program to do nothing until the loop ends.
+	</p>
+	<p>
+		The loop must have a condition that will allow the loop to run some number of times and then end.  If the condition is always <code>true</code>, the loop will never end.
+	</p>
+	<pre>
+for(int i = 0; <strong>i >= 0</strong>; i++)  <span style="color:red;">// Don't do this</span>
+{
+	System.out.println(i);
+}</pre>
+	<p>
+		If the condition is never <code>true</code>, the loop will not run at all.
+	</p>
+	<pre>
+for(int i = 0; <strong>i == 5</strong>; i++)  <span style="color:red;">// Don't do this</span>
+{
+	System.out.println(i);
+}</pre>
+	<p>
+		As always, an assignment statement can not be used as a condition.
+	</p>
+	<pre>
+for(int i = 0; <strong>i = 5</strong>; i++)  <span style="color:red;">// Don't do this</span>
+{
+	System.out.println(i);
+}</pre>
+	
+	<h2 id="SequenceGenerationandSeriesSummation">
+		Sequence Generation and Series Summation
+	</h2>
+	<p>
+		<code>For</code> loops are often used to generate a sequence of numbers.  For example, the following loop generates even numbers.
+	</p>
+	<pre>
+for(int i = 0; i < 50; i = i + 2)
+{
+	System.out.println(i);
+}</pre>
+	<p>
+		The loop below generates the odd numbers from -9 to 9.
+	</p>
+	<pre>
+for(int i = -9; i <= 9; i = i + 2)
+{
+	System.out.println(i);
+}</pre>
+	<p>
+		The loop below generates the sequence 1, 2, 3, and repeats it 5 times.  
+	</p>
+	<pre>
+for(i = 0; i < 15; i++)
+{
+	System.out.println(<strong>i % 3 + 1</strong>);
+}</pre>
+	<p>
+		The factorial of an integer is the product of that integer and all smaller integers starting with 1.  In mathematics, an exclamation point after a number means to take the factorial. The value of 0! is 1.
+	</p>
+	<p>
+		Some  examples:
+	</p>
+	<pre>
+0! = 1
+1! = 1
+2! = 2 x 1  =  2
+3! = 3 x 2 x 1  =  6
+4! = 4 x 3 x 2 x 1  =  24
+5! = 5 x 4 x 3 x 2 x 1	  =  120</pre>
+	<p>
+		A <code>for</code> loop is an ideal structure for multiplying consecutive integers.  The program below asks the user for a number.  It then calculates the factorial of that number.
+	</p>
+	<pre>
+import java.util.Scanner;
+
+public class Factorial
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int number = 0;
+		int product = 1;
+
+		System.out.println("#### Factorial Calculator ####\n");
+		System.out.print("Enter an integer:");
+		number = keyboard.nextInt();
+
+		for(int i = 1; i <= number; i++)
+		{
+			product = product * i;
+		}
+
+		System.out.println(number + "! is " + product);
+	}
+}</pre>	
+	<p style="text-align: center;"><%= image_tag "c6_p6.jpg"%></p>
+	<p>
+		A <code>for</code> loop is also a useful structure for summing the numbers in a series.  For example, the series below is equal to 1 if an infinite number of terms are used.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p7.jpg"%></p>
+	<p>
+		The code below adds a number of terms equal to <code>terms</code>, which is set to 5.
+	</p>
+	<pre>
+int terms = 5;
+double sum = 0;
+double denominator = 2;
+
+for(int i = 0; i < terms; i++)
+{
+	sum = sum + 1/denominator;
+	denominator = denominator * 2;
+}</pre>
+	<p>
+		For a finite number of terms, the more terms used the closer we get to the correct sum.
+	</p><pre>
+1 term   - 0.5
+2 terms  - 0.75
+3 terms  - 0.875
+4 terms  - 0.9375
+5 terms  - 0.96875
+6 terms  - 0.984375
+7 terms  - 0.9921875
+8 terms  - 0.99609375
+9 terms  - 0.998046875
+10 terms - 0.9990234375
+11 terms - 0.99951171875
+12 terms - 0.999755859375
+13 terms - 0.9998779296875
+14 terms - 0.99993896484375
+15 terms - 0.999969482421875</pre>
+	<p>
+		We can see that the sum gets closer and closer to 1 as more terms are added.  
+	</p>
+	
+	<h2 id="PrintingShapes">
+		Printing Shapes
+	</h2>
+	<p>
+		Nested for loops can be used to print shapes.  The example below draws a square one asterisk at a time.  The inner loop prints one line of the square consisting of 10 asterisks.  The outer loop makes the inner loop run 10 times and adds a newline character at the end of each line.
+	</p>
+<!-- table -->
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-sm-8">
+    <pre>
+public class Square
+{
+	public static void main(String[] args)
+	{
+		for(int i = 1; i <= 10; i++)
+		{
+			for(int j = 1; j <= 10; j++)
+			{
+				System.out.print("* ");
+			}
+			System.out.println();
+		}
+	}
+}</pre>
+
+    </div>
+    <div class="col-sm-4">
+    <pre>
+<strong>		Program Output:</strong>
+		
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+
+
+</pre>
+    </div>
+  </div>
+</div>
+
+<!-- End table -->	
+	
+	<p>
+		With a little cleverness, we can print other shapes.  The program below has an <code>if</code> statement inside the nested <code>for</code> loops.  If the condition is true, an asterisk is printed.  Otherwise spaces are printed.  The condition <code>is i + j > 10</code>, which results in a right triangle.
+	</p>
+<!----- table -->
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-sm-8">
+    <pre>
+public class RightTriangle
+{
+	public static void main(String[] args)
+	{
+		for(int i = 1; i <= 10; i++)
+		{
+			for(int j = 1; j <= 10; j++)
+			{
+				if(i + j > 10)
+				{
+					System.out.print("* ");
+				}
+				else
+				{
+					System.out.print("  ");
+				}
+			}
+			System.out.println();
+		}
+	}
+}</pre>
+
+    </div>
+    <div class="col-sm-4">
+    <pre>
+<strong>	Program Output:</strong>
+
+
+
+	
+	                  *
+	                * *
+	              * * *
+	            * * * *
+	          * * * * *
+	        * * * * * *
+	      * * * * * * *
+	    * * * * * * * *
+	  * * * * * * * * *
+	* * * * * * * * * *
+
+
+
+
+
+
+</pre>
+    </div>
+  </div>
+</div>
+
+<!-- End table -->	
+<p>
+	Some creativity is required in software design.  There are often many ways to do the same thing.  For example, the following program prints the same triangle as the program above.
+</p>
+<!----- table -->
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-sm-8">
+    <pre>
+public class RightTriangle
+{
+	public static void main(String[] args)
+	{
+		for(int i = 1; i <= 10; i++)
+		{
+			for(int j = 10; j >= 1; j--)
+			{
+				if(j <= i)
+				{
+					System.out.print("* ");
+				}
+				else
+				{
+					System.out.print("  ");
+				}
+			}
+			System.out.println();
+		}
+	}
+}</pre>
+
+    </div>
+    <div class="col-sm-4">
+    <pre>
+<strong>	Program Output:</strong>
+
+
+
+	
+	                  *
+	                * *
+	              * * *
+	            * * * *
+	          * * * * *
+	        * * * * * *
+	      * * * * * * *
+	    * * * * * * * *
+	  * * * * * * * * *
+	* * * * * * * * * *
+
+
+
+
+
+
+</pre>
+    </div>
+  </div>
+</div>
+
+<!-- End table -->	
+
+
+	<h3>
+		Example: Baseball scoreboard
+	</h3>
+	<p>
+		In this example, the user enters the number of runs both teams scored for each inning of a baseball game.  After the ninth inning, the program declares a winner.   A for <code>loop</code> is used to repeat a block of code nine times.  The loop index variable is called <code>inning</code>.  It is initialized to 1 at the beginning of the loop, which increments <code>inning</code> after each pass, and loops as long as <code>inning</code> is less than or equal to 9.
+	</p>
+	<pre>
+import java.util.Scanner;
+
+public class Baseball
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int input = 0;
+		int visitorScore = 0;
+		int homeScore = 0;
+		int inning = 0;
+
+		System.out.println("*****Baseball Scoreboard*****");
+
+		for(inning = 1; inning <= 9; inning++)
+		{
+			System.out.println("\n\nInning " + inning);
+			System.out.println("Enter runs for visiting team:");
+			input = keyboard.nextInt();
+			visitorScore = visitorScore + input;
+
+			System.out.println("Enter runs for home team:");
+			input = keyboard.nextInt();
+			homeScore = homeScore + input;
+		}
+		System.out.println("Game Over!!!");
+
+		if(visitorScore > homeScore)
+		{
+			System.out.println("\n\nVisitors win.");
+		}
+		if(visitorScore < homeScore)
+		{
+			System.out.println("\n\nHome team wins.");
+		}
+		if(visitorScore == homeScore)
+		{
+			System.out.println("\n\nTie game.");
+		}
+	}
+} </pre>
+		
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+<div id="Worksheet8">
+	<h3>Worksheet 8: For Loops</h3>
+	<ol>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int y = 0;
+int i = 5;
+
+for (i = 1; i < 6; i++)
+{
+    y = y + 3;
+}
+System.out.println("y = " + y);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+for (int i = 0; i < 5; i++)
+{
+    System.out.print("a");
+}
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+for (int i = 0; i < 8; i++)
+{
+    System.out.print(i * 3);
+}
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = 3;
+int y = 2;
+int i = -1;
+int j = -1;
+
+for (i = -1; i > -3; i--)
+{
+    
+    for (j = -1; j >= -5; j--)
+    {
+        x = x + 2;
+        y = i - 3;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = -2;
+int y = 5;
+int i = -5;
+int j = 1;
+
+for (i = -5; i <= -2; i++)
+{
+    x = x - 3;
+    y = i + 1;
+    j = y - 3;
+    
+    if (j > -6)
+    {
+        x = x - 2;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+			</div>
+		</li>		
+	</ol>
+	<p>
+		6 – 10.  Draw flow diagrams for the 5 programs above.
+	</p>
+	
+</div>
+
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<br/>
+	<h4>Shapes</h4>
+	<p>Write programs that print the following shapes:</p>
+	
+<!----------------------------->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3" >
+    	<pre>
+		a.
+		
+		* * * * * * * * *
+		* * * * * * * *
+		* * * * * * *
+		* * * * * *
+		* * * * *
+		* * * *
+		* * *
+		* *
+		*
+
+</pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		b.
+		
+		* * * * * * * * *
+		  * * * * * * * *
+		    * * * * * * *
+		      * * * * * *
+		        * * * * *
+		          * * * *
+		            * * *
+		              * *
+		                *
+                </pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		c.
+		
+		*
+		* *
+		* * *
+		* * * *
+		* * * * *
+		* * * * * *
+		* * * * * * *
+		* * * * * * * *
+		* * * * * * * * *
+		* * * * * * * * * *</pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		d.
+		
+		        *
+		        *
+		        *
+		        *
+		* * * * * * * * *
+		        *
+		        *
+		        *
+		        *
+        </pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3" >
+    	<pre>
+		e.
+		
+		  * * * * * * *
+		*   * * * * *   *
+		* *   * * *   * *
+		* * *   *   * * *
+		* * * *   * * * *
+		* * *   *   * * *
+		* *   * * *   * *
+		*   * * * * *   *
+		  * * * * * * *</pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		f.
+		
+		* * * * * * * * *
+		* * * * * * * * *
+		* * * * * * * * *
+		      * * *
+		      * * *
+		      * * *
+		      * * *
+		      * * *
+		      * * *</pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		g.
+		
+		          *
+		        * * *
+		      * * * * *
+		    * * * * * * *
+		  * * * * * * * * *
+		* * * * * * * * * * *
+
+
+
+</pre>
+    </div>
+    <div class="col-sm-3" >
+    	<pre>
+		h.
+		
+		        * *
+		      * * * *
+		    * * * * * *
+		  * * * * * * * *
+		* * * * * * * * * *
+		* * * * * * * * * *
+		  * * * * * * * *
+		    * * * * * *
+		      * * * *
+		        * *</pre>
+    </div>
+  </div>  
+</div><!-- end container -->
+<!----------------------------->
+<h4>ShapeMaker</h4>
+<p>
+	This program asks the user to choose a shape type (square or triangle).  The user also chooses the width of the shape.  The program prints the shape requested by the user, then asks if another shape is desired.  The program checks for reasonable inputs where appropriate.
+	</p>Sample Run:
+	<div class="codeblock2">
+ShapeMaker!!!
+
+Choose a shape (square or triangle): <strong>traingel</strong>
+Choose a shape (square or triangle): <strong>triangle</strong>
+How wide would you like the triangle? <strong>5</strong>
+
+    *
+   * *
+  * * *
+ * * * *
+* * * * *
+
+Would you like to print another shape (yes or no)? <strong>no</strong>
+Thank you, come again.
+	</div>
+
+	<br/>
+	<h4>Multiplication Table</h4>
+	<p>Write a program that prints a multiplication table as shown below.</p>
+	<div class="codeblock2">
+*********  Multiplication Table  *********
+
+X   1   2   3   4   5   6   7   8   9  10
+1   1   2   3   4   5   6   7   8   9  10
+2   2   4   6   8  10  12  14  16  18  20
+3   3   6   9  12  15  18  21  24  27  30
+4   4   8  12  16  20  24  28  32  36  40
+5   5  10  15  20  25  30  35  40  45  50
+6   6  12  18  24  30  36  42  48  54  60
+7   7  14  21  28  35  42  49  56  63  70
+8   8  16  24  32  40  48  56  64  72  80
+9   9  18  27  36  45  54  63  72  81  90
+10 10  20  30  40  50  60  70  80  90  100
+	</div>
+	<h4>Convergence</h4>
+	<p>The series below sums to 1 when an infinite number of terms is used.</p>
+	<p style="text-align: center;"><%= image_tag "c6_p16.jpg"%></p>
+	<p>
+		As more terms are added to the sum, the sum gets closer and closer to 1.  Since the computer can only represent numbers to a limited precision, at some point, the sum is so close to 1 that the computer must represent it as 1.  Write a program that can figure out how many terms are needed before the sum is so close to 1 that your computer can't tell the difference. 
+	</p>
+	
+	<br/>
+	<h4>PiSeries</h4>	
+	<p>The value of pi can be approximated using the series shown below.</p>
+	<p style="text-align: center;"><%= image_tag "c6_p16_02.jpg"%></p>
+	<p>Write a program that calculates the value of pi using at least 50 terms of the series.  The value of pi to 8 decimal places is 3.14159265.</p>
+	<br/>
+	<h4>ESeries</h4>
+	<p>
+		The value of e (the base of the natural logarithm) can be approximated using the series shown below.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p16_03.jpg"%></p>
+	<p>
+		Write a program that calculates the value of e using at least 50 terms of the series.  The value of e to 8 decimal places is 2.71828183.
+	</p>
+	<br/>
+	<h4>Exponential</h4>
+	<p>The function e<sup>x</sup> can be approximated with the series below.</p>
+	<p style="text-align: center;"><%= image_tag "c6_p17.jpg"%></p>
+	<p>
+		Write a program that asks the user for a value for x (a double), and calculates the value of e<sup>x</sup>.  The program should allow the user to enter new values until a 0 is entered, ending the program.  Use the values below to test your program.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p17_02.jpg"%></p>
+	<br/>
+	<h4>NaturalLog</h4>
+	<p>
+		The natural log of x can be approximated using the series below, provided that the value of x is between 0 and 2.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p17_03.jpg"%></p>
+	<p>
+		Write a program that asks the user for a value for x (a double), and calculates the value of ln x.  The program should allow the user to enter new values until a 0 is entered, ending the program.  Use the values below to test your program.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p17_04.jpg"%></p>
+	<br/>
+	<h4>Sine</h4>
+	<p>The trigonometric sine of x can be approximated using the series below.</p>
+	<p style="text-align: center;"><%= image_tag "c6_p18.jpg"%></p>
+	<p>
+		Write a program that asks the user for a value for x (a double), and calculates the value of sin x.  The program should allow the user to enter new values until a -1 is entered, ending the program.  Use the values below to test your program.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p18_02.jpg"%></p>
+	<br/>
+	<h4>Cosine</h4>
+	<p>The trigonometric cosine of x can be approximated using the series below.</p>
+	<p style="text-align: center;"><%= image_tag "c6_p18_03.jpg"%></p>
+	<p>
+		Write a program that asks the user for a value for x (a double), and calculates the value of cos x.  The program should allow the user to enter new values until a -1 is entered, ending the program.  Use the values below to test your program.
+	</p>
+	<p style="text-align: center;"><%= image_tag "c6_p18_04.jpg"%></p>
+	<br/>
+	<h4>Summer</h4>
+	<p>
+		This program sums consecutive integers.  The user is prompted to enter a starting integer and an ending integer.  If the starting integer is not lower than the ending integer, the program will complain, and ask the user to enter two new numbers.  Then the program will sum all integers between the two given numbers, including the two given numbers.
+	</p>Sample Run:
+	<div class="codeblock2">
+Hello.  I will calculate the sum of a series
+of consecutive integers.
+Please enter the starting number:
+<strong>4</strong>
+Please enter the ending number:
+<strong>2</strong>
+2 is smaller than 4.
+The ending number must be bigger than the starting number.
+Please enter the starting number:
+<strong>4</strong>
+Please enter the ending number:
+<strong>7</strong>
+The sum is 22.
+	</div>
+	
+</div><!-- end AssignmentPrograms -->

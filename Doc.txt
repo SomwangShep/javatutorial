@@ -1,5 +1,6 @@
 rails s -b $IP -p $PORT
 http://recipee-somwang.c9users.io:8080/
+http://javatutorial-somwang.c9users.io:8080/
 ----------------------------------------------
 git add -A
 git commit -m "Build home page"
