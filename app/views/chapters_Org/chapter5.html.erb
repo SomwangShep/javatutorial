@@ -1,6 +1,6 @@
 <!-- ========================================================= -->	
 	<table id="jumpTbl">
-		<tr><td><a href="#InputValidation">Input Validation</a></td><td><a href="#SolvingLoopProblems">Solving Loop Problems</a></td><td><a href="#FlowDiagrams">Flow Diagrams</a></td></tr>
+		<tr><td><a href="#InputValidation">Input Validation</a></td><td><a href="#SolvingLoopProblems">Solving Loop Problems</a></td><td><a href="#FlowDiagrams">Flow Diagrams</a></td><td><a href="#Worksheet7">Worksheet 7: While Loops</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
 	</table>
 <!-- ========================================================= -->	
   <h1> Chapter 5 - While Loops </h1>
@@ -212,3 +212,205 @@ x = 64</pre>
 		A <code>while</code> loop can be depicted by a flow diagram in much the same way as an <code>if/else</code> structure.  A diamond shape is used to represent the <code>while</code> condition.  The diamond has a <code>true</code> branch and a <code>false</code> branch.  The <code>true</code> branch leads to the code block and loops back to the diamond.  The false branch exits the loop.
 	</p>
 	<p style="text-align: center;"><%= image_tag "c5_p7.jpg"%></p>
+<!-- ========Worksheet and AssignmentPrograms================= -->
+<div id="Worksheet7">
+	<h3>Worksheet 7: While Loops</h3>
+	<ol>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = 10;
+int i = 5;
+
+while (i <= 7)
+{
+    if(x > 0)
+    {
+        i++;
+        x = x - 3;
+    }
+}
+
+System.out.println("x = " + x);
+System.out.println("i = " + i);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int y = -2;
+int i = -4;
+
+while (i > -9)
+{
+    i--;
+    y = y + i;
+}
+
+System.out.println("y = " + y);
+System.out.println("i = " + i);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int a = 12;
+int j = 0;
+
+while (j < 10)
+{
+    j = j + 2;
+    a = a – 3 + j;
+}
+
+System.out.println("a = " + a);
+System.out.println("j = " + j);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int i = 0;
+int z = 0;
+
+while(z < 12)
+{
+	z = z + 3;
+	i = i + 3;
+	if(i > 4)
+	{
+		i = i – 2;
+	}
+	else
+	{
+		i = i + 1;
+	}
+}
+
+System.out.println("i = " + i);
+System.out.println("z = " + z);
+			</div>
+		</li>
+		<li>What is the output of this block of code?
+			<div class="codeblock2">
+int x = 1;
+int y = -1;
+int i = 1;
+int j = 4;
+
+while (i < 5)
+{
+    i = i + 2;
+    x = i - 1;
+    j = 4;
+    
+    while (j < 6)
+    {
+        j++;
+        x = x + 2;
+        y = x + 3;
+        x = y - 2;
+    }
+}
+
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+			</div>
+		</li>		
+	</ol>
+	<p>
+		6 – 10.  Draw flow diagrams for the five programs above.
+	</p>
+</div>
+
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<h4>Adder</h4>
+	<p>
+		This program prompts the user to enter values (doubles).  The user can enter any number of values.  The user can stop entering values by typing 0.  The program then adds up all the numbers entered and displays the sum.
+	</p>Sample Run:
+	<div class="codeblock2">
+Enter a number (0 to quit):
+<strong>2.1</strong>
+Enter a number (0 to quit):
+<strong>3.4</strong>
+Enter a number (0 to quit):
+<strong>4.2</strong>
+Enter a number (0 to quit):
+<strong>0</strong>
+
+The sum of the numbers entered is 9.7.
+	</div>
+	
+	<br/>
+	<h4>WordAdder</h4>
+	<p>
+		This program allows the user to enter words.  Each word is followed by pressing the Enter key.  When the user types "done", the program lists all the words typed with spaces between.
+	</p>Sample Run:
+	<div class="codeblock2">
+Please enter a word (type done when finished):
+<strong>this</strong>
+Please enter a word (type done when finished):
+<strong>is</strong>
+Please enter a word (type done when finished):
+<strong>a</strong>
+Please enter a word (type done when finished):
+<strong>test</strong>
+Please enter a word (type done when finished):
+<strong>done</strong>
+
+You typed:
+this is a test
+	</div>
+	
+	<h4>NumberFinder</h4>
+	<p>
+		This program prompts the user for a number.  It then counts up until it finds the next number that is evenly divisible by 37.
+	</p>Sample Run:
+<div class="codeblock2">
+Please enter a number:
+<strong>546</strong>
+The next number that is evenly divisible by 37 is 555.
+</div>
+<br/>
+<h4>BoatBuilder</h4>
+<p>
+	This program sells the user a boat.  There are 3 boat sizes; small medium, and large.  For an extra fee, a motor can be attached.  Oars cost extra.  After seeing the final price, including a 12% fancy tax, the user can opt to build another boat, or quit.  The program checks user inputs, to make sure they are valid.  You may assume the user will enter the right data type (int, String,…).
+</p>Sample Run:
+<div class="codeblock2">
+Hi!  Welcome to BoatBuilder.  We're ready to build your boat.
+What size boat would you like?
+(1) Small $537.00
+(2) Medium $1243.00
+(3) Large $2422.00
+<strong>4</strong>
+Please enter a number from 1 to 3.
+<strong>1</strong>
+Small it is.
+Would you like a motor for $400.00? (y or n)
+<strong>bunnies!!!!</strong>
+Please enter y or n.
+<strong>y</strong>
+All right.  We'll have that motor installed right away.
+How many oars would you like? ($50.00 each)
+<strong>-27</strong>
+Please enter a positive integer.
+<strong>2</strong>
+We'll put 2 oars in your boat.
+
+Your total, with fancy tax, comes to: $1161.44
+
+Would you like to build another boat? (y or n)
+...
+</div>
+	<br/>
+	<h4>LoanCalculator</h4>
+	<p>
+		This program calculates the monthly payment for a loan.  The user enters the amount that will be borrowed, and the amount that will be paid each month.  The program calculates the number of years and months it will take to repay the loan, and the total amount paid including interest.  For each month money is still owed, the program adds 0.5% interest to the current balance, then subtracts the monthly payment.
+	</p>Sample Run:
+	<div class="codeblock2">
+Loan Calculator
+How much money would you like to borrow? <strong>50000</strong>
+How much will you pay back each month? <strong>800</strong>
+Your loan will take 6 years and 4 months to pay back.
+You will have paid a total of $60800.0
+But you get $699.0756382470654 back because you overpaid.
+	</div>
+	
+</div>

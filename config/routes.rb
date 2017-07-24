@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   resources :messages, only: [:create]
   
   get '/chapter1', to: 'chapters#chapter1'
+  get '/chapter1_1', to: 'chapters#chapter1_1'
+  
   get '/chapter2', to: 'chapters#chapter2'
   get '/chapter3', to: 'chapters#chapter3'
   get '/chapter4', to: 'chapters#chapter4'

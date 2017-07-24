@@ -2,6 +2,7 @@
 	<table id="jumpTbl">
 		<tr><td><a href="#RelationalOperators">Relational Operators</a></td><td><a href="#ComparingStrings">Comparing Strings</a></td><td><a href="#LogicalOperators">Logical Operators</a></td><td><a href="#TheORoperator">The || operator (OR)</a></td><td><a href="#TheNOToperator">The ! operator (NOT)</a></td></tr>
 		<tr><td><a href="#Conditions">Conditions</a></td><td><a href="#OrderofOperations">Order of Operations</a></td><td><a href="#IfStatements">If Statements</a></td><td><a href="#ElseStatements">Else Statements</a></td><td><a href="#NestedIfStatements">Nested If Statements</a></td></tr>
+		<tr><td colspan="2"><a href="#Worksheet4">Worksheet 4: Conditions</a></td><td colspan="2"><a href="#Worksheet5">Worksheet 5: If Statements</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
 	</table>
 <!-- ========================================================= -->	
   <h1> Chapter 3 – If Statements </h1>
@@ -434,3 +435,387 @@ public class Quadrants
 		}
 	}
 }</pre>
+
+<!-- ========Workshet and AssignmentPrograms================= --> 
+<div id="Worksheet4">
+  <h4>Worksheet 4: Conditions</h4>
+  <ol>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+boolean flag = true;
+int y = -5;
+int z = -2;
+
+y == z || flag && b
+      </div>
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+int y = 0;
+
+-5 <= y || (check || false)
+      </div>      
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean flag = false;
+int x = -4;
+int y = -1;
+
+!(flag || x < y)
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+boolean flag = true;
+
+(check || false) || !check && false && flag
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = true;
+int x = 3;
+
+x >= 5 || b && 1 > -x
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+int x = 2;
+int y = -2;
+
+b && !b || !b && (x >= y && -2 >= y)
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = false;
+int y = 2;
+int z = 1;
+
+-4 == y && !(y > z && 0 < 3) && true && !check
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean check = true;
+boolean b = true;
+boolean flag = true;
+
+!(!check && flag) && !check && b
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean flag = true;
+int x = 5;
+
+false && 2 != x && false || flag && true
+      </div>    
+    </li>
+    <li>Is the following condition true or false?
+      <div class="codeblock2">
+boolean b = false;
+boolean flag = true;
+int x = -4;
+int y = -3;
+int z = -2;
+
+z != z && b && x != y || flag
+      </div>    
+    </li>
+  </ol>
+  
+</div>
+
+<div id="Worksheet5">
+  <h4>Worksheet 5: If Statements</h4>
+  <ol>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -3;
+int y = -1;
+
+if(y > 0)
+{
+    y = x - 1;
+}
+else
+{
+    if(y <= 4 || x == -2)
+    {
+        x = y + 2;
+        y = y - 2;
+    }
+    else
+    {
+        y = y - 2;
+        System.out.println("May the force be with you");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -2;
+int y = 2;
+
+if(x >= -2)
+{
+    x = x – 2;
+    if(y <= 2 && x < -3)
+    {
+        y = x + 3;
+    }
+    else
+    {
+        System.out.println("Waffles are tasty");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y)        
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -1;
+int y = 1;
+
+if(x > 4 && x == -3)
+{
+    if(x < 4 || x < 3)
+    {
+        x = x - 2;
+        y = 2;
+    }
+}
+else
+{
+    y = y + 1;
+    if(x < -3 || y > -2)
+    {
+        x = y - 1;
+        y = -2;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 4;
+int y = 2;
+
+if(x != 2)
+{
+    if(x <= 3)
+    {
+        x = -2;
+        y = 2;
+    }
+    else
+    {
+        x = x - 2;
+        y = y + 1;
+    }
+    x = x + 2;
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 5;
+int y = 0;
+
+if(y == 5 || y > -2)
+{
+    x = x + 3;
+    System.out.println("I am Roger the Shrubber");
+}
+else
+{
+    if(y == 0 && x >= 3)
+    {
+        x = -1;
+        System.out.println("I'll buy that for a dollar");
+    }
+    else
+    {
+        x = x - 3;
+        y = y - 1;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 3;
+int y = 2;
+
+if(y >= -5 && y >= -3)
+{
+    if(y != 2)
+    {
+        x = -3;
+    }
+    else
+    {
+        x = -1;
+        y = x - 3;
+    }
+}
+else
+{
+    x = x + 3;
+    y = 3;
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = 2;
+int y = 1;
+
+if(y != 5)
+{
+    if(y != 1 || y < -2)
+    {
+        x = y - 3;
+        y = 2 + x;
+    }
+    y = y + 2;
+}
+else
+{
+    if(y >= 3)
+    {
+        x = -3;
+        y = 2;
+    }
+    else
+    {
+        y = x + 2;
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>
+    <li>What is the output of this block of code?
+      <div class="codeblock2">
+int x = -4;
+int y = 1;
+
+if(x != -4 || x < 1)
+{
+    if(x < -4)
+    {
+        x = -2;
+        System.out.println("What would Kirk do?");
+    }
+    else
+    {
+        x = y + 1;
+        y = x + 1;
+        System.out.println("What would Picard do?");
+    }
+}
+System.out.println("x = " + x);
+System.out.println("y = " + y);
+      </div>
+    </li>    
+  </ol>
+  
+</div>
+
+<div id="AssignmentPrograms">
+  <h3>Assignment Programs</h3>
+  <h4>EvenOrOdd</h4>
+  <p>
+    This program asks the user to enter a number.  The program determines whether the number is even or odd, and displays the result.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Please enter a number: 7
+The number 7 is odd.
+  </div>
+  
+  <h4>RightTriangleTester</h4>
+  <p>
+    This program asks the user to enter the lengths for the three sides of a triangle.  The program determines whether or not the triangle is a right triangle or not.  The program asks the user for the lengths of a, b, and c, where c is the longest side.  Recall that for any right triangle a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Enter the length of side a: <strong>3</strong>
+Enter the length of side b: <strong>4</strong>
+Enter the length of side c: <strong>5</strong>
+Yes.  That is a right triangle.
+  </div>
+  
+  <h4>Grader</h4>
+  <p>
+    This program asks the user for 5 exam grades.  It then calculates the average and assigns a letter grade.  The program assigns an A to any grade 90 or above, a B to any grade 80 to 90, and so on.
+  </p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Enter grade for Exam 1: <strong>75</strong>
+Enter grade for Exam 2: <strong>85</strong>
+Enter grade for Exam 3: <strong>75</strong>
+Enter grade for Exam 4: <strong>65</strong>
+Enter grade for Exam 5: <strong>75</strong>
+
+Your grade is a C.
+  </div>
+  
+  <h4>TelephoneCall</h4>
+  <p>The cost to call some location is calculated as follows.</p>
+  $1.50 - Connection and first 3 minutes<br/>
+  $0.75 - for each additional minute during the day<br/>
+  $0.30 - for each additional minute at night.<br/>
+  <p>Write a program that asks the user if the call is a day or night call, and for how many minutes the call will last.  The program calculates the cost for the call.</p>
+  <br/>Sample Run:
+  
+  <div class="codeblock2">
+This is the Operator.
+Will this be a day or night call? (d or n): <strong>d</strong>
+For how many minutes will the call last?: <strong>13</strong>
+
+Your call will cost $9.0
+  </div>
+  <h4>PostOffice </h4>
+  <p>Write a program that calculates postage.  The program asks the user if the package is staying in state (yes or no).  The program also asks the user the weight of the package (in pounds), and priority (1, 2, or 3).  The program calculates and displays the cost for shipping.</p>
+  Shipping in state is <br/>
+  $5 per pound at priority 1<br/>
+  $3 per pound at priority 2<br/>
+  $1 per pound at priority 3<br/>
+  <p>Out of state shipping is double.</p>
+  <br/>Sample Run:
+  <div class="codeblock2">
+Welcome to the Post Office!
+
+Will your package be staying in state? (yes or no)
+no
+Enter the weight in pounds: 23
+Choose a priority. (1, 2, 3): 2
+
+Thank you.
+Your package will cost $138.0 to ship.
+  </div>
+
+  
+</div>
+  

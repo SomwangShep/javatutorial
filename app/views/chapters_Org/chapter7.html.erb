@@ -2,6 +2,7 @@
 	<table id="jumpTbl">
 		<tr><td><a href="#ArrayInitialization">Array Initialization</a></td><td><a href="#SwappingElements">Swapping Elements</a></td><td><a href="#ThelengthParameterofArrays">The length Parameter of Arrays</a></td><td><a href="#UsingForLoopswithArrays">Using For Loops with Arrays</a></td><td><a href="#ApplicationsofArrays">Applications of Arrays</a></td></tr>
 		<tr><td><a href="#Resizing">Resizing</a></td><td><a href="#Search">Search</a></td><td><a href="#FindMaximum">Find Maximum (or Minimum)</a></td><td><a href="#ComparingTwoArrays">Comparing Two Arrays</a></td><td><a href="#Sorting">Sorting</a></td></tr>
+		<tr><td colspan="3"><a href="#Worksheet9">Worksheet 9: Array Manipulation</a></td><td colspan="2"><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
 	</table>
 <!-- ========================================================= -->	
   <h1> Chapter 7 - Arrays</h1>
@@ -417,3 +418,114 @@ for(i = 0; i < data.length-1; i++)
 	data[index] = temp;
 }</pre>
 <p style="text-align: center;"><%= image_tag "c7_p15.jpg"%></p>  	
+
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+
+<div id="Worksheet9">
+	<h3>Worksheet 9: Array Manipulation</h3>
+	<ol>
+		<li>Write a line of code that creates a new array of booleans called "flag".  The array will hold 52 values.</li>
+		<li>Write the code to initialize the values of flag to true.</li>
+		<li>Write a line of code that creates a new array of ints called "number".  The array will hold 23 values.</li>
+		<li>Write the code to initialize the values of number to the odd numbers, starting with 1.</li>
+		<li>Write the code to swap the 5<sup>th</sup> element with the 7<sup>th</sup> element in an array of doubles called "stuff".</li>
+		<li>Write the code to swap all odd elements with the even elements in a String array called "billygoat".  The array has an even number of elements.  Swap the first with the second, and the third with the fourth, and so on.</li>
+		<li>Write the code to find the largest value in an array of doubles called "charlie".</li>
+		<li>Write the code to find the smallest value in an array of ints called "stan".</li>
+		<li>Write the code to sum all the elements in an array of ints called "doris".</li>
+		<li>Write the code to find the first index where the element is equal to false in an array of booleans called "switch".</li>
+		<li>Write the code to search an array of doubles called "data", for the number x.  The code prints the first index where x is found, or a message saying it isn't in there.</li>
+		<li>Write the code to copy all of the elements in the String array "name" to the string array "student".</li>
+		<li>Write the code to copy all of the elements in the double array "a" to the double array "b".</li>
+		<li>Write the code to sort the int array "count" from lowest to highest.</li>
+		<li>Write the code to sort the double array "price" from highest to lowest.</li>
+		<li>Write the code to count the number of elements in the boolean array "waffle" that are true.</li>
+	</ol>
+	
+	
+	
+	
+	
+</div>
+
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<br/>
+	<h4>Stats</h4>
+	<p>
+		This program allows a user to enter any number of doubles.  The user types in zero to stop entering numbers.  The program then finds the largest, and smallest numbers entered, calculates the sum and average, and prints all the numbers from lowest to highest.
+	</p>Sample Run:
+	<div class = "codeblock2">
+Please enter number 1:
+<strong>3.4</strong>
+Please enter number 2:
+<strong>8.2</strong>
+Please enter number 3:
+<strong>7</strong>
+Please enter number 4:
+<strong>1.9</strong>
+Please enter number 5:
+<strong>6.8</strong>
+Please enter number 6:
+<strong>0</strong>
+
+The smallest number entered was 1.9
+The largest number entered was 8.2
+The sum of all numbers is 27.3
+The average of the numbers is 5.46
+1.9
+3.4
+6.8
+7
+8.2
+	</div>
+	
+	<br/>
+	<h4>Cash Register</h4>
+	<p>
+		This program asks the user to enter prices for items.  The user enters a price of 0 to stop.  The program then prints a receipt including a list of items bought arranged from least to most expensive, a subtotal, and a total that includes 5% tax.
+	</p>Sample Run:
+	<div class = "codeblock2">
+Welcome to J-Mart.
+Enter price for item 1: <strong>5</strong>
+Enter price for item 2: <strong>3.99</strong>
+Enter price for item 3: <strong>4.25</strong>
+Enter price for item 4: <strong>0</strong>
+
+Your order contains the following items:
+3.99
+4.25
+5.0
+
+Subtotal: 13.24
+
+Adding 5% tax…
+
+Total: 13.902
+	</div>
+	
+	<br/>
+	<h4>Fancy Register</h4>
+	<p>
+		Write a program that asks the user for the name price and quantity of an unknown number of items.  The program accepts input until the user enters a price of "done".  The program applies a 7% fancy tax and prints a receipt sorted in ascending order by price.
+	</p>Sample Run:
+	<div class = "codeblock2">
+Enter name of item 1:<strong>Cheese </strong>
+Enter price of item 1:<strong>5.00</strong>
+Enter quantity of item 1:<strong>1</strong>
+
+Enter name of item 2:<strong>Toothbrush</strong>
+Enter price of item 2:<strong>1.95</strong>
+Enter quantity of item 2:<strong>2</strong>
+
+Enter name of item 3:<strong>done</strong>
+
+Your order includes:
+
+2 Toothbrush for 1.95 each
+1 Cheese for 5.00 each
+
+Your total with tax is 9.52
+	</div>
+	
+</div>

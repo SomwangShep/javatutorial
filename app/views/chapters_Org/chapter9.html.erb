@@ -1,6 +1,6 @@
 <!-- ========================================================= -->	
 	<table id="jumpTbl">
-		<tr><td><a href="#StringMethods">String Methods</a></td><td><a href="#StringMethodsGroupedByCategory">String Methods Grouped By Category</a></td></tr>
+		<tr><td><a href="#StringMethods">String Methods</a></td><td><a href="#StringMethodsGroupedByCategory">String Methods Grouped By Category</a></td><td><a href="#Worksheet11">Worksheet 11: String Methods</a></td><td><a href="#AssignmentPrograms">Assignment Programs</a></td></tr>
 	</table>
 <!-- ========================================================= -->	
   <h1> Chapter 9 - Strings</h1>
@@ -474,3 +474,218 @@ if(!word.substring(i, i + 1).equals(word.substring(length - i - 1, length - i)))
 {
 	palendrome = false;
 }</pre>
+
+<!-- ========Worksheet and AssignmentPrograms================= --> 
+<div id="Worksheet11">
+	<h3>Worksheet 11: String Methods</h3>
+	<ol>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s3 = "So Elvis has left the building.";
+
+s3.indexOf("u")
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+int x = 7;
+String s4 = "Ask me no questions and I'll tell you no lies ";
+
+s4.substring(x, 15)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+int z = 25;
+int x = 2;
+String s4 = "If you immediately know the candle light is fire";
+
+s4.substring(x + 3, z - 3)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s2 = "Sharing is Caring";
+
+s2.contains("i")
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String word = "bunnies";
+
+"e".equals(word)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s4 = "Actions speak louder than words";
+
+s4.substring(10).length()
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s1 = "Beam me up, Scotty";
+String letter1 = "i";
+
+s1.contains(letter1)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s3 = "All good things must come to an end";
+String letter2 = "e";
+
+s3.indexOf(letter2)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s4 = "I'll make him an offer he can't refuse.";
+String s3 = "To be or not to be, that is the question.";
+
+s3.charAt(s4.substring(5).substring(17).length())
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s3 = "I'm Sorry Dave.  I'm afraid I can't do that.";
+
+s3.charAt(s3.indexOf("o") + 5)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s4 = "i am Roger the Shrubber";
+String s3 = "I'll make him an offer he can't refuse.";
+String letter2 = "a";
+
+s4.charAt(s3.indexOf(letter2))
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s3 = "i am Roger the Shrubber";
+
+s3.indexOf("a")
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s4 = "the Black Knight always triumphs!";
+
+s4.contains("all")
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+int x = 4;
+String s3 = "She sells sea shells down by the sea shore";
+
+s3.charAt(s3.substring(x).substring(18).length() + 3)
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+int x = 1;
+String s4 = "Ask me no questions and I'll tell you no lies ";
+String s3 = "To be or not to be, that is the question.";
+
+s3.charAt(s4.substring(x, 12).length())
+			</div>
+		</li>
+		<li>What is returned by this method call?
+			<div class="codeblock2">
+String s4 = "i am Roger the Shrubber";
+String s3 = "By Grabthar's hammer!... what a savings";
+
+s3.charAt(s4.indexOf("e"))
+			</div>
+		</li>
+	</ol>
+	
+</div>
+
+<div id="AssignmentPrograms">
+	<h3>Assignment Programs</h3>
+	<br/>
+	<h4>PasswordChecker</h4>
+	<p>
+		This program tests a suggested password for acceptability following the rules:
+		<br/>A password must have between 6 and 12 characters.
+		<br/>A password must contain at least one lowercase letter.
+		<br/>A password must contain at least one uppercase letter.
+		<br/>A password must contain at least one digit (number).
+	</p>
+	<br/>
+	<h4>RootMyText</h4>
+	<p>
+		This program asks the user to type a sentence.  It takes all of the digits in the sentence, takes the square root of each and adds them together.  Then it prints the whole number part to the console.
+	</p>Sample run
+	<div class="codeblock2">
+Please enter a sentence.
+<em>If you 8 what I 8 b4, you would go back to ba6 2.</em>
+I’ve processed your sentence, and derived the number 11.
+	</div>
+	<br/>
+	<h4>AnagramChecker</h4>
+	<p>
+		An anagram is a phrase made by rearranging the letters of another phrase.  Spaces punctuation and capitalization are ignored.  Examples are:
+	</p>
+	<p>
+		Eleven plus two  and  Twelve plus one
+		<br/>A decimal point  and  I'm a dot in place
+	</p>
+	<p>
+		This program must accept two Strings and determine if they are anagrams of each other.
+	</p>
+	<br/>
+	<h4>Hangman</h4>
+	<p>
+		This program contains ten eight-letter words for the user to guess at.  To make things simpler, you may choose ten words that have no redundant letters.  The program chooses one of these words and lets the user guess letters.  The user gets 15 guesses.  If the user guesses a letter that is in the word, that letter is filled in.
+	</p>
+	<p style="text-align: center;">----r---</p>
+	<p>
+		If the user gets all the letters within 15 guesses, they are given a congratulatory message.  If, after 15 guesses the word is not complete, the users is informed appropriately, and told what the word was.
+	</p>Sample run
+	<div class="codeblock2">
+Welcome to Hangman!
+
+I've picked an 8 letter word for you.
+You have to guess all of the letters in the word.
+You get 15 guesses.
+
+
+--------
+
+Choose a letter for guess 1
+<strong>e</strong>
+
+-----e--
+
+Choose a letter for guess 2
+<strong>t</strong>
+
+-----e--
+
+Choose a letter for guess 3
+<strong>a</strong>
+
+-----e--
+...
+
+Choose a letter for guess 14
+<strong>b</strong>
+
+-roblems
+
+Choose a letter for guess 15
+<strong>z</strong>
+
+-roblems
+
+Ha Ha You stink!  The word was problems
+	</div>
+	
+</div>

@@ -1,15 +1,11 @@
 <div class="jumbotron" style="background-color: #DAA520; ">
 <h1 style="text-align: center;color: rgb(84,141,212);text-decoration: underline;">Welcome to JTuta</h1>
 <h2 style="text-align: center;color: rgb(84,141,212)">A free one-semester course in Java Programming</h2>
-<hr/>
-  <div class="row">
-    <div class="col-sm-4" >
-       <h3 >Content Manager:</h3> 
-         <p>Mike Dalton, PH.D., Electrical Engineering</hp>
-       <h3 >Senior Web Developer:</h3> 
-         <p>Somwang Shepherd</p>
-    </div>
-    <div class="col-sm-4" >
+<p style="text-align: right;">
+  <strong>Content Manager:</strong> Mike Dalton, PH.D., Electrical Engineering<br/>
+  <strong>Senior Web Developer:</strong> Somwang Shepherd
+</p>
+    <h4>Chapters:</h4>
     <div class="panel-group" id="accordion"><!-- start Collapse -->
       <!-- =============collapse1 ====================-->
       <div class="panel panel-default">
@@ -21,7 +17,7 @@
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
             <ul>
-              <li><%= link_to "Section1 - A Java Program", chapter1_1_path %></li>
+              <li><%= link_to "Section1", chapter1_path %></li>
               <li><%= link_to "Section2", chapter1_path %></li>
               <li><%= link_to "Section3", chapter1_path %></li>
               <li><%= link_to "Section4", chapter1_path %></li>
@@ -173,16 +169,16 @@
         <div id="collapse9" class="panel-collapse collapse">
           <div class="panel-body">
             <ul>
-              <li><%= link_to "Strings", chapter9_path %></li>
+              <li><%= link_to "Section1", chapter9_path %></li>
+              <li><%= link_to "Section2", chapter9_path %></li>
+              <li><%= link_to "Section3", chapter9_path %></li>
+              <li><%= link_to "Section4", chapter9_path %></li>
+              <li><%= link_to "Section5", chapter9_path %></li>
             </ul>             
           </div>
         </div>
       </div>  
     </div> <!-- end class="panel-group" -->
-    </div>
-    <div class="col-sm-4" >
-      <p>*Completion of this course does not necessarily provide credit at any particular institution.  However, we believe it will provide you with the knowledge and fluency that will allow you move forward into the next stage of programming at any institution.</p>
-    </div>
-  </div>
-
+<!-- ==================================== foot ====================================== -->
+  Completion of this course does not necessarily provide credit at any particular institution.  However, we believe it will provide you with the knowledge and fluency that will allow you move forward into the next stage of programming at any institution.
 </div>
