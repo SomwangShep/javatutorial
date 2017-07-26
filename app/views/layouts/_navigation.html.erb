@@ -21,6 +21,11 @@
           <li><%= link_to "New Posts", new_recipe_path %></li>
           <li><%= link_to "Chat", chat_path %></li>
         <% end %>
+        <!-- =============== display all user ================= -->
+        <% if logged_in? && current_chef.admin? %>
+           <li><%= link_to "Chefs", chefs_path %></li>
+        <% end %>
+        <!-- ================================================== -->        
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
