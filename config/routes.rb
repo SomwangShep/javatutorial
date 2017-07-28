@@ -25,21 +25,40 @@ Rails.application.routes.draw do
   
   resources :messages, only: [:create]
   
-  get '/chapter1', to: 'chapters#chapter1'
   get '/chapter1_1', to: 'chapters#chapter1_1'
+  get '/chapter1_2', to: 'chapters#chapter1_2'
+  get '/chapter1_3', to: 'chapters#chapter1_3'
+  get '/chapter1_4', to: 'chapters#chapter1_4'
   
-  get '/chapter2', to: 'chapters#chapter2'
-  get '/chapter3', to: 'chapters#chapter3'
-  get '/chapter4', to: 'chapters#chapter4'
-  get '/chapter5', to: 'chapters#chapter5'
+  get '/chapter2_1', to: 'chapters#chapter2_1'
+  get '/chapter2_2', to: 'chapters#chapter2_2'
+  get '/chapter2_3', to: 'chapters#chapter2_3'
+  
+  get '/chapter3_1', to: 'chapters#chapter3_1'
+  get '/chapter3_2', to: 'chapters#chapter3_2'
+  
+  get '/chapter4_1', to: 'chapters#chapter4_1'
+  get '/chapter4_2', to: 'chapters#chapter4_2'
+  get '/chapter4_3', to: 'chapters#chapter4_3'
+  get '/chapter4_4', to: 'chapters#chapter4_4'
+  get '/chapter4_5', to: 'chapters#chapter4_5'
+  
+  get '/chapter5_1', to: 'chapters#chapter5_1'
+  get '/chapter5_2', to: 'chapters#chapter5_2'
+  
   get '/chapter6', to: 'chapters#chapter6'
+  get '/chapter6_1', to: 'chapters#chapter6_1'
+  get '/chapter6_2', to: 'chapters#chapter6_2'
+  
   get '/chapter7', to: 'chapters#chapter7'
-  get '/chapter8', to: 'chapters#chapter8'
-  get '/chapter9', to: 'chapters#chapter9'
-  get '/chapter10', to: 'chapters#chapter10'
-  get '/chapter11', to: 'chapters#chapter11'
-  get '/chapter12', to: 'chapters#chapter12'
-  get '/chapter13', to: 'chapters#chapter13'
-  get '/chapter14', to: 'chapters#chapter14'
+  get '/chapter7_1', to: 'chapters#chapter7_1'
+  get '/chapter7_2', to: 'chapters#chapter7_2'
+  get '/chapter7_3', to: 'chapters#chapter7_3'
+  
+  get '/chapter8_1', to: 'chapters#chapter8_1'
+  get '/chapter8_2', to: 'chapters#chapter8_2'
+  
+  get '/chapter9_1', to: 'chapters#chapter9_1'
+  get '/chapter9_2', to: 'chapters#chapter9_2'
   
 end

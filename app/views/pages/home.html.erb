@@ -3,7 +3,8 @@
 <h1 style="text-align: center;color: rgb(84,141,212);text-decoration: underline;margin: 10px">Welcome to JTuta</h1>
 <h2 style="text-align: center;color: rgb(84,141,212); margin: 10px;">A free one-semester course in Java Programming</h2>
 <hr/ style="margin: 10px;">
-  <div class="row">
+
+  <div class="row" style="background-color: #DAA520; ">
     <div class="col-sm-4" >
        <h3 >Content Manager:</h3> 
          <p>Mike Dalton, PH.D., Electrical Engineering</hp>
@@ -21,12 +22,25 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter1_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1 - A Java Program", chapter1_1_path %></li>
-              <li><%= link_to "Section2", chapter1_path %></li>
-              <li><%= link_to "Section3", chapter1_path %></li>
-              <li><%= link_to "Section4", chapter1_path %></li>
-              <li><%= link_to "Section5", chapter1_path %></li>
+              <li>A Java Program</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter1_2_path %></li></em></strong>
+            <ul>
+              <li>Variable</li>
+              <li>String Concatenation</li>
+            </ul>
+             <strong><em><%= link_to "Section 3", chapter1_3_path %></li></em></strong>
+             <ul>
+              <li>The Escape Character and Escape Sequences</li>
+              <li>System.out(println()/print())</li>
+              <li>Java Reserved Words</li>
+              </ul>
+              <strong><em><%= link_to "Section 4", chapter1_4_path %></li></em></strong>
+             <ul>
+              <li>Syntax Errors</li>
+              <li>Ascii Art</li>
             </ul>
           </div>
         </div>
@@ -40,12 +54,26 @@
         </div>
         <div id="collapse2" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter2_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter2_path %></li>
-              <li><%= link_to "Section2", chapter2_path %></li>
-              <li><%= link_to "Section3", chapter2_path %></li>
-              <li><%= link_to "Section4", chapter2_path %></li>
-              <li><%= link_to "Section5", chapter2_path %></li>
+              <li>Types</li>
+              <li>Creating Variables</li>
+              <li>Assignment Statements</li>
+              <li>Mathematical Operations</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter2_2_path %></li></em></strong>
+            <ul>
+              <li>Type Casting</li>
+              <li>Mathematical Shortcuts</li>
+              <li>Order of Operations</li>
+              <li>Strings</li>
+            </ul>
+            <strong><em><%= link_to "Section 3", chapter2_3_path %></li></em></strong>
+            <ul>
+              <li>User Input</li>
+              <li>Scanner methods</li>
+              <li>Program Execution</li>
+              <li>Calculating Programs</li>
             </ul>          
           </div>
         </div>
@@ -59,12 +87,21 @@
         </div>
         <div id="collapse3" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter3_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter3_path %></li>
-              <li><%= link_to "Section2", chapter3_path %></li>
-              <li><%= link_to "Section3", chapter3_path %></li>
-              <li><%= link_to "Section4", chapter3_path %></li>
-              <li><%= link_to "Section5", chapter3_path %></li>
+              <li>Relational Operators</li>
+              <li>Comparing Strings</li>
+              <li>Logical Operators</li>
+              <li>The || operator (OR)</li>
+              <li>The ! operator (NOT)</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter3_2_path %></li></em></strong>
+            <ul>
+              <li>Conditions</li>
+              <li>Order of Operations</li>
+              <li>If Statements</li>
+              <li>Else Statements</li>
+              <li>Nested If Statements</li>
             </ul>             
           </div>
         </div>
@@ -78,12 +115,32 @@
         </div>
         <div id="collapse4" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter4_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter4_path %></li>
-              <li><%= link_to "Section2", chapter4_path %></li>
-              <li><%= link_to "Section3", chapter4_path %></li>
-              <li><%= link_to "Section4", chapter4_path %></li>
-              <li><%= link_to "Section5", chapter4_path %></li>
+              <li>Readability</li>
+              <li>Formatting and Indentation</li>
+              <li>Variable Names</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter4_2_path %></li></em></strong>
+            <ul>
+              <li>Comments</li>
+              <li>Code Cramming</li>
+            </ul>
+            <strong><em><%= link_to "Section 3", chapter4_3_path %></li></em></strong>
+            <ul>
+              <li>Magic Numbers</li>
+              <li>Duplicate Code</li>
+            </ul>
+            <strong><em><%= link_to "Section 4", chapter4_4_path %></li></em></strong>
+            <ul>
+              <li>Prompting For Input</li>
+              <li>Program Design</li>
+              <li>Errors</li>
+              <li>Exceptions</li>
+            </ul>
+            <strong><em><%= link_to "Section 5", chapter4_5_path %></li></em></strong>
+            <ul>
+              <li>Flow Diagrams</li>
             </ul>             
           </div>
         </div>
@@ -97,12 +154,15 @@
         </div>
         <div id="collapse5" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter5_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter5_path %></li>
-              <li><%= link_to "Section2", chapter5_path %></li>
-              <li><%= link_to "Section3", chapter5_path %></li>
-              <li><%= link_to "Section4", chapter5_path %></li>
-              <li><%= link_to "Section5", chapter5_path %></li>
+              <li>While Loops</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter5_2_path %></li></em></strong>
+            <ul>
+              <li>Input Validation</li>
+              <li>Solving Loop Problems</li>
+              <li>Flow Diagrams</li>
             </ul>             
           </div>
         </div>
@@ -116,12 +176,16 @@
         </div>
         <div id="collapse6" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter6_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter6_path %></li>
-              <li><%= link_to "Section2", chapter6_path %></li>
-              <li><%= link_to "Section3", chapter6_path %></li>
-              <li><%= link_to "Section4", chapter6_path %></li>
-              <li><%= link_to "Section5", chapter6_path %></li>
+              <li>For Loops</li>
+              <li>Variations</li>
+              <li>Common Errors</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter6_2_path %></li></em></strong>
+            <ul>
+              <li>Sequence Generation and Series Summation</li>
+              <li>Printing Shapes</li>
             </ul>             
           </div>
         </div>
@@ -135,12 +199,21 @@
         </div>
         <div id="collapse7" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter7_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter7_path %></li>
-              <li><%= link_to "Section2", chapter7_path %></li>
-              <li><%= link_to "Section3", chapter7_path %></li>
-              <li><%= link_to "Section4", chapter7_path %></li>
-              <li><%= link_to "Section5", chapter7_path %></li>
+              <li>Array Initialization</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter7_2_path %></li></em></strong>
+            <ul>
+              <li>Swapping Elements</li>
+              <li>The length Parameter of Arrays</li>
+              <li>Using For Loops with Arrays</li>
+              <li>Applications of Arrays</li>
+            </ul>
+            <strong><em><%= link_to "Section 3", chapter7_3_path %></li></em></strong>
+            <ul>
+              <li>Storing Data</li>
+              <li>Sorting</li>
             </ul>             
           </div>
         </div>
@@ -154,12 +227,25 @@
         </div>
         <div id="collapse8" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter8_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Section1", chapter8_path %></li>
-              <li><%= link_to "Section2", chapter8_path %></li>
-              <li><%= link_to "Section3", chapter8_path %></li>
-              <li><%= link_to "Section4", chapter8_path %></li>
-              <li><%= link_to "Section5", chapter8_path %></li>
+              <li>Creating Objects</li>
+              <li>Methods</li>
+              <li>Method Descriptions</li>
+              <li>Scanner (java.util.Scanner)</li>
+              <li>Random (java.util.Random)</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter8_2_path %></li></em></strong>
+            <ul>
+              <li>Static Methods</li>
+              <li>Math (java.lang.Math)</li>
+              <li>Arrays (java.util.Arrays)</li>
+              <li>Integer (java.lang.Integer)</li>
+              <li>Double (java.lang.Double)</li>
+              <li>Character (java.lang.Character)</li>
+              <li>JOptionPane (javax.swing.JOptionPane)</li>
+              <li>String (java.lang.String)</li>
+              <li>Thread (java.lang.Thread)</li>
             </ul>             
           </div>
         </div>
@@ -173,8 +259,29 @@
         </div>
         <div id="collapse9" class="panel-collapse collapse">
           <div class="panel-body">
+            <strong><em><%= link_to "Section 1", chapter9_1_path %></li></em></strong>
             <ul>
-              <li><%= link_to "Strings", chapter9_path %></li>
+              <li>String</li>
+              <li>boolean equals(String s)</li>
+              <li>boolean contains(String s)</li>
+              <li>int length()</li>
+              <li>boolean equalsIgnoreCase(String s)</li>
+              <li>String toLowerCase()</li>
+              <li>String toUpperCase()</li>
+              <li>String trim()</li>
+              <li>char charAt(int index);</li>
+              <li>String substring</li>
+              <li>int indexOf(String substring)</li>
+              <li>int indexOf(String substring, int beginIndex)</li>
+              <li>String[] split(String separator)</li>
+              <li>char[] toCharArray()</li>
+              <li>String replaceAll(String original, String replacement)</li>
+              <li>boolean startsWith(String s)</li>
+              <li>boolean endsWith(String s)</li>
+            </ul>
+            <strong><em><%= link_to "Section 2", chapter9_2_path %></li></em></strong>
+            <ul>
+              <li>String Methods Grouped By Category</li>
             </ul>             
           </div>
         </div>
@@ -185,5 +292,4 @@
       <p>*Completion of this course does not necessarily provide credit at any particular institution.  However, we believe it will provide you with the knowledge and fluency that will allow you move forward into the next stage of programming at any institution.</p>
     </div>
   </div>
-
-</div>
+</div><!-- end Jumbotorn -->
