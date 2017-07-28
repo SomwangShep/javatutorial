@@ -16,7 +16,7 @@ class ChefsController < ApplicationController
     if @chef.save
       session[:chef_id] = @chef.id
       cookies.signed[:chef_id] = @chef.id #this was incorrectly done in the video
-      flash[:success] = "Welcome #{@chef.chefname} to MyRecipes App!"
+      flash[:success] = "Welcome #{@chef.chefname} to Java Tutorial App!"
       redirect_to chef_path(@chef)
     else
       render 'new'
@@ -42,7 +42,7 @@ class ChefsController < ApplicationController
   def destroy
     if !@chef.admin?
       @chef.destroy
-      flash[:danger] = "Chef and all associated recipes have been deleted!"
+      flash[:danger] = "User and all associated recipes have been deleted!"
       redirect_to chefs_path
     end
   end
