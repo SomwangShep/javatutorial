@@ -46,11 +46,9 @@ Rails.application.routes.draw do
   get '/chapter5_1', to: 'chapters#chapter5_1'
   get '/chapter5_2', to: 'chapters#chapter5_2'
   
-  get '/chapter6', to: 'chapters#chapter6'
   get '/chapter6_1', to: 'chapters#chapter6_1'
   get '/chapter6_2', to: 'chapters#chapter6_2'
   
-  get '/chapter7', to: 'chapters#chapter7'
   get '/chapter7_1', to: 'chapters#chapter7_1'
   get '/chapter7_2', to: 'chapters#chapter7_2'
   get '/chapter7_3', to: 'chapters#chapter7_3'
