@@ -7,9 +7,11 @@
   <h1> Introduction - Section 1</h1>
   <div class = "center">
     Section 1 |
-    <%= link_to "Section 2 |", chapter1_2_path %>
+     <span class="closed-box"><%= link_to "Section 2 |", chapter1_2_path %></span>
+     <span class="open-box"><%= link_to "Section 2 |", chapter1_2_path %></span>
     <%= link_to "Section 3 |", chapter1_3_path %>
     <%= link_to "Section 4", chapter1_4_path %>
+    
   </div>
   <h2>A Java Program</h2>
   <p>
@@ -184,10 +186,28 @@ System.out.println("We're Knights of the round table")
    System.out.println("Our shows are formidable");System.out.println ("But often times we're given rhymes");
 System.out.println("that are quite unsingable");}		}</pre>
 
-<!--<p style="text-align: center;"><button id="newBtn" type="button" class="btn btn-default btn-warning">Test your skill</button></p> -->
   <div class = "center">
     Section 1 |
     <%= link_to "Section 2 |", chapter1_2_path %>
     <%= link_to "Section 3 |", chapter1_3_path %>
     <%= link_to "Section 4", chapter1_4_path %>
   </div>
+  
+<!-- =================================== Start quiz ================================= -->
+<p style="text-align: center;"><button id="newBtn" type="button" class="btn btn-default btn-warning">Test your skill</button></p>
+
+<div id="quiztag">
+  <pre>
+int x = 5;
+int y = 2;
+int z = 7;
+String s1 = "five";
+String s2 = "x";</pre>
+<p>What does the following statement print?</p>
+  <pre>
+System.out.println("x equals " + x);</pre>
+  	<p><label> <input type="radio" name="VariableQ1" value="x equalsx" > x equalsx</label></p>
+  	<p><label> <input type="radio" name="VariableQ1" value="x equals x" > x equals x</label></p>
+  	<p><label> <input id="correct1" type="radio" name="VariableQ1" value="x equals 5" > x equals 5</label></p>
+  	<p><label> <input type="radio" name="VariableQ1" value="x equals5" > x equals5</label></p>
+</div>

@@ -28,7 +28,7 @@ function submitMessage(event){
 }
 
 $(document).on('keypress', '[data-behavior~=room_speaker]', function(event) {
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13) { //13 = enter
     submitMessage(event);
   }
 });

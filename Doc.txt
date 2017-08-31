@@ -9,3 +9,6 @@ git push
 sam@gmail.com
 psw:password
 role:admin
+
+-----------------------mouseOver------------------------
+https://teamtreehouse.com/community/ruby-on-rails-how-to-switch-images-onmouseover-while-keeping-path
