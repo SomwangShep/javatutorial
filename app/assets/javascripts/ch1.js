@@ -1,14 +1,17 @@
-$(document).ready(function() {
+$(document).ready(function(){
 
-  $(".closed-box").mouseenter(function() {
-      $(".open-box").show();
-      $(".closed-box").hide();
-      $(this).hide();
-  });
-
-  $(".open-box").mouseout(function() {
-    $(".closed-box").show();
-    $(".open-box").hide();
-    $(this).hide();
-  });
+  // $("a").on({
+  //     mouseenter: function(){
+  //         // $(this).addClass("intro");
+  //         $(this).css("background-color", "yellow");
+  //     }, 
+  //     mouseleave: function(){
+  //         // $(this).removeClass("intro");
+  //         $(this).css("background-color", "yellow");
+  //     }, 
+  //     click: function(){
+  //         $(this).css("background-color", "yellow");
+  //     } 
+  // });
+    
 });
