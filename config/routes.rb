@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "pages#home"
+  # root "pages#home"
+  root 'welcome#index'
+  
   get 'pages/home', to: 'pages#home'
   
   #resources :recipes
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"  
+  
+  get '/signup2', to: 'chapters#chapter1_1'
   
   resources :ingredients, except: [:destroy]
   
