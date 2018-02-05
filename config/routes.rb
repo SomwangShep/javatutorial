@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root "pages#home"
+  devise_for :users
+  # root "pages#home"
+  root 'welcome#index'
+  
   get 'pages/home', to: 'pages#home'
   
   #resources :recipes
