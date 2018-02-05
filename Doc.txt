@@ -5,6 +5,16 @@ http://javatutorial-somwang.c9users.io:8080/
 git add -A
 git commit -m "Build home page"
 git push
+git push heroku master
+----------------------------------------------
+git init
+git status
+git add -A
+git commit -m "Comment"
+git pusg
+git push heroku master
+heroku run rails db:migrate
+
 ----------------------------------------------
 sam@gmail.com
 psw:password
@@ -12,3 +22,12 @@ role:admin
 
 -----------------------mouseOver------------------------
 https://teamtreehouse.com/community/ruby-on-rails-how-to-switch-images-onmouseover-while-keeping-path
+
+
+--------------------------------------- Themes ------------------------------------------------
+change to code editor color - View/Themes
+change menu on the right 
+  - get it run then click gear icon to get Preferences
+  - under 'user setting' click 'reset to default', this will set tool bat at left to white anbd code editor to black
+  - under 'THEMS' there is 'Flat Theme' and 'Classice Theme' you just choose any of these color
+  
