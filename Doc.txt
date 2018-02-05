@@ -11,7 +11,7 @@ git init
 git status
 git add -A
 git commit -m "Comment"
-git pusg
+git push
 git push heroku master
 heroku run rails db:migrate
 
@@ -31,3 +31,13 @@ change menu on the right
   - under 'user setting' click 'reset to default', this will set tool bat at left to white anbd code editor to black
   - under 'THEMS' there is 'Flat Theme' and 'Classice Theme' you just choose any of these color
   
+--------------
+$ git merge --abort
+$ git checkout master
+$ rake db:drop db:create db:migrate
+$ git checkout -- db/schema.rb
+$ git checkout my_feature_branch
+$ rake db:migrate
+$ git add db/schema.rb
+$ git commit -m 'Updated schema'
+$ git merge master
